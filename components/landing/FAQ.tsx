@@ -6,7 +6,7 @@ const items = [
   {
     question: "How does claudje collect competitor data?",
     answer:
-      "claudje uses AI to analyze publicly available information: websites, pricing pages, review platforms, company registries, social media profiles, and search trends. No scraping of private data, no hacking — just structured analysis of what's already out there.",
+      "claudje uses AI to analyze publicly available information: websites, pricing pages, review platforms, company registries, social media profiles, and search trends. No scraping of private data, no hacking. Just structured analysis of what's already out there.",
   },
   {
     question: "When will I get my first report?",
@@ -21,12 +21,12 @@ const items = [
   {
     question: "Is this legal?",
     answer:
-      "Absolutely. claudje only analyzes publicly available information — the same data anyone could find by visiting your competitors' websites, reading their reviews, or checking the Chamber of Commerce. We just do it systematically and deliver the insights to you.",
+      "Absolutely. claudje only analyzes publicly available information. The same data anyone could find by visiting your competitors' websites, reading their reviews, or checking the Chamber of Commerce. We just do it systematically and deliver the insights to you.",
   },
   {
     question: "What format are the reports in?",
     answer:
-      "Reports are delivered as clean, structured emails with data tables and AI-generated summaries for each category. No logins, no dashboards — everything arrives in your inbox, ready to read.",
+      "Reports are delivered as clean, structured emails with data tables and AI-generated summaries for each category. No logins, no dashboards. Everything arrives in your inbox, ready to read.",
   },
   {
     question: "How do I cancel?",

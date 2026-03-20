@@ -5,9 +5,9 @@ html {
 }
 
 @theme inline {
-  /* Dark brown primary */
-  --color-brown: #3B2314;
-  --color-brown-light: #4A2E1B;
+  /* Dark brown primary — Aston Martin espresso/bronze */
+  --color-brown: #2C1810;
+  --color-brown-light: #3A2519;
 
   /* Cream / beige backgrounds */
   --color-cream: #FAF6F0;
@@ -19,6 +19,11 @@ html {
   --color-gold-light: #D4BA8A;
   --color-gold-dark: #B8954F;
 
+  /* Silver / aluminum accent */
+  --color-silver: #B0B5BC;
+  --color-silver-light: #C8CCD2;
+  --color-silver-dark: #8E939A;
+
   /* Text */
   --color-text-primary: #2C1810;
   --color-text-muted: #7A6B5E;
@@ -28,6 +33,7 @@ html {
   /* Borders */
   --color-border-warm: #E0D5C5;
   --color-border-on-dark: rgba(250, 246, 240, 0.15);
+  --color-border-silver: rgba(176, 181, 188, 0.3);
 
   /* Fonts */
   --font-heading: var(--font-dm-serif);
@@ -62,4 +68,15 @@ body {
 .btn-shimmer:hover {
   background: var(--color-gold-light);
   animation: none;
+}
+
+/* Report carousel page turn */
+@keyframes pageSlideOut {
+  0% { transform: translateX(0); opacity: 1; }
+  100% { transform: translateX(-40px); opacity: 0; }
+}
+
+@keyframes pageSlideIn {
+  0% { transform: translateX(40px); opacity: 0; }
+  100% { transform: translateX(0); opacity: 1; }
 }

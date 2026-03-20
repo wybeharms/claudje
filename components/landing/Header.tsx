@@ -120,7 +120,7 @@ export default function Header() {
             : "-translate-y-6 pointer-events-none opacity-0"
         }`}
       >
-        <nav className="flex items-center gap-1 rounded-full bg-white/80 px-2 py-2 shadow-lg shadow-black/10 backdrop-blur-md">
+        <nav className="flex items-center gap-1 rounded-full border border-border-silver bg-white/80 px-2 py-2 shadow-lg shadow-black/10 backdrop-blur-md">
           {NAV_LINKS.map((link) => (
             <a
               key={link.href}

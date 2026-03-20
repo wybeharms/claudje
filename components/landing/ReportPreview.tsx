@@ -12,7 +12,7 @@ const tabs = [
     ),
     mock: [
       { competitor: "Baker's Delight", metric: "Sourdough loaf", value: "€4.50", change: "+€0.30" },
-      { competitor: "Bread & Co.", metric: "Sourdough loaf", value: "€4.20", change: "—" },
+      { competitor: "Bread & Co.", metric: "Sourdough loaf", value: "€4.20", change: "-" },
       { competitor: "Golden Crust", metric: "Sourdough loaf", value: "€3.95", change: "-€0.15" },
     ],
     summary:
@@ -28,7 +28,7 @@ const tabs = [
     mock: [
       { competitor: "SmileDental", metric: "New page detected", value: '"Invisalign Specials"', change: "New" },
       { competitor: "CityDentist", metric: "Homepage updated", value: "Added video testimonials", change: "Changed" },
-      { competitor: "DentalCare Plus", metric: "No changes", value: "—", change: "—" },
+      { competitor: "DentalCare Plus", metric: "No changes", value: "-", change: "-" },
     ],
     summary:
       "SmileDental launched an Invisalign promotions page targeting the same keywords you rank for. CityDentist added video testimonials to their homepage, likely to improve conversion. Consider creating a competing offer page or refreshing your own testimonial content.",
@@ -46,7 +46,7 @@ const tabs = [
       { competitor: "PipePro", metric: "Employee count", value: "34", change: "+6" },
     ],
     summary:
-      "DrainMasters reported 18% revenue growth in their latest filing — they're scaling fast. PipePro added 6 employees, possibly expanding into your service area. QuickFix added a new director, which could signal a strategic shift or investment round.",
+      "DrainMasters reported 18% revenue growth in their latest filing. They're scaling fast. PipePro added 6 employees, possibly expanding into your service area. QuickFix added a new director, which could signal a strategic shift or investment round.",
   },
   {
     label: "Reviews",
@@ -61,7 +61,7 @@ const tabs = [
       { competitor: "Premium Motors", metric: "New reviews", value: "12 this week", change: "Active" },
     ],
     summary:
-      "CarDeals24's rating dropped to 3.9 — three recent reviews mention slow delivery times. Premium Motors is actively soliciting reviews (12 new this week), likely running a post-purchase email campaign. AutoHaus continues to climb. Your 4.3 rating has been stable; a review push could help you match AutoHaus.",
+      "CarDeals24's rating dropped to 3.9. Three recent reviews mention slow delivery times. Premium Motors is actively soliciting reviews (12 new this week), likely running a post-purchase email campaign. AutoHaus continues to climb. Your 4.3 rating has been stable; a review push could help you match AutoHaus.",
   },
   {
     label: "Social Activity",
@@ -76,7 +76,7 @@ const tabs = [
       { competitor: "FlexGym", metric: "LinkedIn posts", value: "4 this week", change: "Active" },
     ],
     summary:
-      "Iron Temple is hiring a Head of Marketing — expect a brand push in the coming months. FitZone gained 180 LinkedIn followers, likely from a viral post about their new group classes. FlexGym is maintaining high posting frequency. Your LinkedIn presence is quieter; consider a content schedule to stay visible.",
+      "Iron Temple is hiring a Head of Marketing. Expect a brand push in the coming months. FitZone gained 180 LinkedIn followers, likely from a viral post about their new group classes. FlexGym is maintaining high posting frequency. Your LinkedIn presence is quieter; consider a content schedule to stay visible.",
   },
   {
     label: "Search Trends",
@@ -91,7 +91,7 @@ const tabs = [
       { competitor: "FreshMaids", metric: "Brand searches", value: "620/mo", change: "-8%" },
     ],
     summary:
-      "GreenClean's brand search volume jumped 22% — likely driven by a recent PR campaign or seasonal push. FreshMaids is losing mindshare with an 8% decline. Your brand search volume is stable at 740/mo. The gap with GreenClean is widening; consider investing in brand awareness to stay competitive.",
+      "GreenClean's brand search volume jumped 22%, likely driven by a recent PR campaign or seasonal push. FreshMaids is losing mindshare with an 8% decline. Your brand search volume is stable at 740/mo. The gap with GreenClean is widening; consider investing in brand awareness to stay competitive.",
   },
 ];
 
@@ -106,10 +106,11 @@ export default function ReportPreview() {
     >
       <div className="mx-auto max-w-5xl">
         <h2 className="text-center font-heading text-3xl md:text-4xl">
-          What&apos;s in a report
+          What&apos;s in a Report
         </h2>
-        <p className="mt-3 text-center text-text-muted">
-          Six categories of intelligence, delivered automatically.
+        <p className="mx-auto mt-3 max-w-2xl text-center text-text-muted">
+          Every report is fully customizable to your business. You get qualitative insights
+          backed by a deep dive across six categories.
         </p>
 
         {/* Tab bar */}
@@ -176,12 +177,9 @@ export default function ReportPreview() {
             </table>
           </div>
 
-          {/* AI summary */}
+          {/* Insight */}
           <div className="mt-6 rounded-lg bg-cream/60 p-4">
-            <p className="text-xs font-medium uppercase tracking-wider text-text-muted">
-              AI Summary
-            </p>
-            <p className="mt-2 text-sm leading-relaxed text-text-primary">
+            <p className="text-sm leading-relaxed text-text-primary">
               {tab.summary}
             </p>
           </div>

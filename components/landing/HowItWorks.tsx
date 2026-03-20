@@ -1,21 +1,21 @@
 const steps = [
   {
     number: "1",
-    title: "Tell us who to watch",
+    title: "Tell Us Who to Watch",
     description:
-      "List up to 5 or 10 competitors you want to track. Any industry, any size — if they have a web presence, we can monitor them.",
+      "List up to 5 or 10 competitors. Any industry, any size.",
   },
   {
     number: "2",
-    title: "We research them with AI",
+    title: "Our Agents Get to Work",
     description:
-      "Our AI scrapes pricing pages, monitors web changes, pulls company registry data, reads reviews, and tracks social activity and search trends.",
+      "Our agents keep track of websites, reviews, LinkedIn, and pricing. Then synthesize it into clear, qualitative insights.",
   },
   {
     number: "3",
-    title: "You get a report",
+    title: "You Get a Clear Report",
     description:
-      "A clear, structured report lands in your inbox — weekly or daily. No dashboards to check, no software to learn. Just actionable intelligence.",
+      "What changed, what it means, and what to watch. In your inbox, weekly or daily.",
   },
 ];
 
@@ -24,7 +24,7 @@ export default function HowItWorks() {
     <section id="how-it-works" className="bg-cream px-6 py-20 lg:px-8">
       <div className="mx-auto max-w-5xl">
         <h2 className="text-center font-heading text-3xl md:text-4xl">
-          How it works
+          How It Works
         </h2>
         <p className="mt-3 text-center text-text-muted">
           Three steps. No software to install.
@@ -32,8 +32,8 @@ export default function HowItWorks() {
 
         <div className="mt-14 grid gap-10 md:grid-cols-3 md:gap-8">
           {steps.map((step) => (
-            <div key={step.number} className="text-center md:text-left">
-              <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-gold/15 font-heading text-xl text-gold md:mx-0">
+            <div key={step.number} className="text-center">
+              <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-gold/15 font-heading text-xl text-gold">
                 {step.number}
               </div>
               <h3 className="mt-4 text-lg font-semibold">{step.title}</h3>

@@ -13,8 +13,10 @@ export default function Home() {
       <Header />
       <main>
         <Hero />
+        <div className="mx-auto max-w-5xl px-6"><div className="h-px bg-border-silver" /></div>
         <HowItWorks />
         <ReportPreview />
+        <div className="mx-auto max-w-5xl px-6"><div className="h-px bg-border-silver" /></div>
         <WhoItsFor />
         <Pricing />
         <FAQ />
