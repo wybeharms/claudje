@@ -1,6 +1,7 @@
 import Header from "@/components/landing/Header";
 import Hero from "@/components/landing/Hero";
 import HowItWorks from "@/components/landing/HowItWorks";
+import WhyClaudje from "@/components/landing/WhyClaudje";
 import ReportPreview from "@/components/landing/ReportPreview";
 import WhoItsFor from "@/components/landing/WhoItsFor";
 import Pricing from "@/components/landing/Pricing";
@@ -15,6 +16,8 @@ export default function Home() {
         <Hero />
         <div className="mx-auto max-w-5xl px-6"><div className="h-px bg-border-silver" /></div>
         <HowItWorks />
+        <div className="mx-auto max-w-5xl px-6"><div className="h-px bg-border-silver" /></div>
+        <WhyClaudje />
         <ReportPreview />
         <div className="mx-auto max-w-5xl px-6"><div className="h-px bg-border-silver" /></div>
         <WhoItsFor />

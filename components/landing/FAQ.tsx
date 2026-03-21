@@ -29,6 +29,11 @@ const items = [
       "Reports are delivered as clean, structured emails with data tables and AI-generated summaries for each category. No logins, no dashboards. Everything arrives in your inbox, ready to read.",
   },
   {
+    question: "How is this different from using ChatGPT?",
+    answer:
+      "claudje uses the same AI models as ChatGPT and Claude, but deploys a team of specialized sub-agents with their own skills and paid tool access. Each agent handles a different part of the research: Google Maps reviews, Chamber of Commerce filings, LinkedIn activity, and more. A chatbot summarizes the first page of Google.\n\nclaudje cross-references real data from multiple sources into one complete report.",
+  },
+  {
     question: "How do I cancel?",
     answer:
       "Email us anytime. No contracts, no lock-in. Monitoring stops at the end of your current billing period.",
