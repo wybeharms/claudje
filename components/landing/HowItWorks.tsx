@@ -43,6 +43,15 @@ export default function HowItWorks() {
             </div>
           ))}
         </div>
+
+        <div className="mt-12 flex items-center justify-center gap-3 rounded-xl bg-gold/5 px-6 py-4">
+          <svg className="h-5 w-5 flex-shrink-0 text-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+            <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
+          </svg>
+          <p className="text-sm text-text-muted">
+            Every report is <span className="font-medium text-brown">reviewed by a human analyst</span> before delivery. AI does the heavy lifting, humans ensure quality.
+          </p>
+        </div>
       </div>
     </section>
   );

@@ -8,8 +8,7 @@ const NAV_LINKS = [
   { label: "FAQ", href: "#faq" },
 ];
 
-const CTA_HREF =
-  "mailto:info@claudje.com?subject=claudje%20-%20Get%20Started";
+const CTA_HREF = "/get-started";
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -48,7 +47,13 @@ export default function Header() {
           </nav>
 
           {/* Desktop CTA */}
-          <div className="hidden md:block">
+          <div className="hidden items-center gap-4 md:flex">
+            <a
+              href="/login"
+              className="text-sm text-text-on-dark-muted transition-colors hover:text-text-on-dark"
+            >
+              Login
+            </a>
             <a
               href={CTA_HREF}
               className="btn-shimmer rounded-lg px-5 py-2 text-sm font-medium text-brown transition-colors"

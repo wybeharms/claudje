@@ -1,5 +1,5 @@
 const CTA_HREF =
-  "mailto:info@claudje.com?subject=claudje%20-%20Get%20Started";
+  "/get-started";
 
 export default function Footer() {
   return (
