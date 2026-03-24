@@ -40,6 +40,13 @@ export default function AdminPage() {
   const [newWebsite, setNewWebsite] = useState("");
   const [creating, setCreating] = useState(false);
 
+  // Add user form
+  const [showAddUser, setShowAddUser] = useState(false);
+  const [newUserEmail, setNewUserEmail] = useState("");
+  const [newUserCustomerId, setNewUserCustomerId] = useState("");
+  const [newUserRole, setNewUserRole] = useState<"customer" | "admin">("customer");
+  const [addingUser, setAddingUser] = useState(false);
+
   useEffect(() => {
     if (!isAdmin) return;
     async function load() {
@@ -101,6 +108,37 @@ export default function AdminPage() {
       // Silently fail
     } finally {
       setCreating(false);
+    }
+  }
+
+  async function handleAddUser(e: React.FormEvent) {
+    e.preventDefault();
+    setAddingUser(true);
+    try {
+      const res = await fetch("/api/portal/admin/users", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email: newUserEmail,
+          customerId: newUserCustomerId,
+          role: newUserRole,
+        }),
+      });
+      if (res.ok) {
+        setNewUserEmail("");
+        setNewUserCustomerId("");
+        setNewUserRole("customer");
+        setShowAddUser(false);
+        const userRes = await fetch("/api/portal/admin/users");
+        if (userRes.ok) {
+          const json = await userRes.json();
+          setUsers(json.users ?? []);
+        }
+      }
+    } catch {
+      // Silently fail
+    } finally {
+      setAddingUser(false);
     }
   }
 
@@ -204,7 +242,46 @@ export default function AdminPage() {
 
       {/* Users Tab */}
       {tab === "users" && (
-        <div className="rounded-2xl border border-[var(--color-border-warm)] bg-white overflow-hidden">
+        <div className="space-y-3">
+          {showAddUser ? (
+            <div className="rounded-2xl border border-[var(--color-border-warm)] bg-white p-6">
+              <h2 className="mb-4 text-lg font-bold text-[var(--color-text-primary)]">Add User</h2>
+              <form onSubmit={handleAddUser} className="flex flex-col gap-4">
+                <div>
+                  <label className="mb-1 block text-sm font-medium text-[var(--color-text-primary)]">Email</label>
+                  <input type="email" value={newUserEmail} onChange={(e) => setNewUserEmail(e.target.value)} required className="w-full rounded-lg border border-[var(--color-border-warm)] bg-[var(--color-cream)] px-4 py-2.5 text-sm outline-none focus:border-[var(--color-accent)] focus:ring-1 focus:ring-[var(--color-accent)]" />
+                </div>
+                <div>
+                  <label className="mb-1 block text-sm font-medium text-[var(--color-text-primary)]">Organization ID</label>
+                  <input type="text" value={newUserCustomerId} onChange={(e) => setNewUserCustomerId(e.target.value)} required placeholder="e.g. acme-bv" className="w-full rounded-lg border border-[var(--color-border-warm)] bg-[var(--color-cream)] px-4 py-2.5 text-sm outline-none focus:border-[var(--color-accent)] focus:ring-1 focus:ring-[var(--color-accent)]" />
+                </div>
+                <div>
+                  <label className="mb-1 block text-sm font-medium text-[var(--color-text-primary)]">Role</label>
+                  <select value={newUserRole} onChange={(e) => setNewUserRole(e.target.value as "customer" | "admin")} className="w-full rounded-lg border border-[var(--color-border-warm)] bg-[var(--color-cream)] px-4 py-2.5 text-sm outline-none focus:border-[var(--color-accent)] focus:ring-1 focus:ring-[var(--color-accent)]">
+                    <option value="customer">Customer</option>
+                    <option value="admin">Admin</option>
+                  </select>
+                </div>
+                <div className="flex gap-3">
+                  <button type="submit" disabled={addingUser} className="rounded-lg bg-[var(--color-accent)] px-5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-[var(--color-accent-dark)] disabled:opacity-50">
+                    {addingUser ? "Adding..." : "Add user"}
+                  </button>
+                  <button type="button" onClick={() => setShowAddUser(false)} className="rounded-lg border border-[var(--color-border-warm)] px-5 py-2.5 text-sm font-medium text-[var(--color-text-muted)] transition-colors hover:bg-[var(--color-cream)]">
+                    Cancel
+                  </button>
+                </div>
+              </form>
+            </div>
+          ) : (
+            <button
+              onClick={() => setShowAddUser(true)}
+              className="inline-flex items-center gap-1.5 rounded-lg border border-dashed border-[var(--color-border-warm)] px-4 py-2 text-sm font-medium text-[var(--color-text-muted)] transition-colors hover:border-[var(--color-accent)] hover:text-[var(--color-accent)]"
+            >
+              <Plus className="h-3.5 w-3.5" />
+              Add user
+            </button>
+          )}
+          <div className="rounded-2xl border border-[var(--color-border-warm)] bg-white overflow-hidden">
           <table className="w-full text-sm">
             <thead>
               <tr className="border-b border-[var(--color-border-warm)] bg-[var(--color-cream)]">
@@ -244,6 +321,7 @@ export default function AdminPage() {
               ))}
             </tbody>
           </table>
+          </div>
         </div>
       )}
 
