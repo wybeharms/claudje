@@ -11,7 +11,7 @@ const items = [
   {
     question: "When will I get my first report?",
     answer:
-      "Within 48 hours of sharing your competitor list. We set up monitoring, run the first analysis, and deliver a complete report to your inbox.",
+      "Within 24 hours of sharing your competitor list. We set up monitoring, run the first analysis, and deliver a complete report to your inbox.",
   },
   {
     question: "Can I change which competitors I track?",
@@ -26,7 +26,7 @@ const items = [
   {
     question: "What format are the reports in?",
     answer:
-      "Reports are delivered as clean, structured emails with data tables and AI-generated summaries for each category. No logins, no dashboards. Everything arrives in your inbox, ready to read.",
+      "Reports are delivered to your inbox as structured emails with data tables and AI-generated summaries for each category. You also get access to a portal where you can view past reports, change your competitors, and manage your preferences.",
   },
   {
     question: "How is this different from using ChatGPT?",

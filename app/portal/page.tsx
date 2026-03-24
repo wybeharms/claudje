@@ -99,7 +99,7 @@ export default function DashboardPage() {
           Your first report is being prepared
         </h1>
         <p className="mb-8 text-[var(--color-text-muted)]">
-          Our research team is analyzing your competitors. You&apos;ll receive your first report within 7 days.
+          Our research team is analyzing your competitors. You&apos;ll receive your first report within 24 hours.
         </p>
 
         <div className="mb-8 rounded-2xl border border-[var(--color-border-warm)] bg-white p-6">
@@ -115,7 +115,7 @@ export default function DashboardPage() {
 
           <div className="flex items-center gap-2 text-sm text-[var(--color-text-muted)]">
             <Clock className="h-4 w-4" />
-            <span>Expected delivery: ~7 days</span>
+            <span>Expected delivery: ~24 hours</span>
           </div>
         </div>
 
