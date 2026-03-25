@@ -140,8 +140,8 @@ export function FlyingEagle({
         </g>
       </g>
 
-      {/* Head — white */}
-      <ellipse cx="72" cy="24" rx="6" ry="5" fill="#FAF6F0" />
+      {/* Head — bright white with subtle outline for contrast on cream bg */}
+      <ellipse cx="72" cy="24" rx="6" ry="5" fill="#FFFFFF" stroke="#3A2519" strokeWidth="0.5" />
       {/* Eye */}
       <circle cx="74" cy="23" r="1.2" fill="#2C1810" />
       <circle cx="74.3" cy="22.7" r="0.4" fill="#FAF6F0" />
@@ -156,7 +156,7 @@ export function FlyingEagle({
 }
 
 /**
- * Sidebar eagle — gold variant with subtle light background
+ * Sidebar eagle — brown variant (matches favicon) on near-white background
  * for visibility on the dark brown sidebar.
  */
 export function SidebarEagle({
@@ -172,10 +172,10 @@ export function SidebarEagle({
       style={{
         width: size + 8,
         height: size + 8,
-        backgroundColor: "rgba(250, 246, 240, 0.15)",
+        backgroundColor: "rgba(255, 255, 255, 0.9)",
       }}
     >
-      <ClaudjeBird size={size} light />
+      <ClaudjeBird size={size} />
     </span>
   );
 }

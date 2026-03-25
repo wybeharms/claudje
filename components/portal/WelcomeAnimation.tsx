@@ -11,16 +11,24 @@ export default function WelcomeAnimation({ competitors }: WelcomeAnimationProps)
   const comps = competitors.slice(0, 5);
   const [activeIndex, setActiveIndex] = useState(-1);
 
+  // Sync pill highlights with back-and-forth flight path
   useEffect(() => {
     const cycleDuration = 10000;
-    const interval = cycleDuration / comps.length;
+    const totalTicks = comps.length * 2;
+    const tickInterval = cycleDuration / totalTicks;
+    let tick = 0;
 
     const timer = setInterval(() => {
-      setActiveIndex((prev) => {
-        const next = prev + 1;
-        return next >= comps.length ? 0 : next;
-      });
-    }, interval);
+      const current = tick % totalTicks;
+      if (current < comps.length) {
+        // Left-to-right pass
+        setActiveIndex(current);
+      } else {
+        // Right-to-left pass (reverse)
+        setActiveIndex(comps.length - 1 - (current - comps.length));
+      }
+      tick++;
+    }, tickInterval);
 
     setActiveIndex(0);
     return () => clearInterval(timer);
@@ -32,7 +40,7 @@ export default function WelcomeAnimation({ competitors }: WelcomeAnimationProps)
       <div className="relative h-32 w-full overflow-hidden">
         <div className="eagle-flight absolute">
           <div className="eagle-bob">
-            <FlyingEagle size={120} />
+            <FlyingEagle size={96} />
           </div>
         </div>
       </div>
@@ -76,12 +84,13 @@ export default function WelcomeAnimation({ competitors }: WelcomeAnimationProps)
         }
 
         @keyframes eagleFly {
-          0%   { left: -12%; top: 35%; }
-          20%  { left: 18%;  top: 8%;  }
-          40%  { left: 42%;  top: 32%; }
-          60%  { left: 62%;  top: 5%;  }
-          80%  { left: 82%;  top: 28%; }
-          100% { left: 108%; top: 35%; }
+          0%    { transform: translateX(5%) scaleX(1) scale(1); top: 25%; }
+          24%   { transform: translateX(38%) scaleX(1) scale(0.82); top: 8%; }
+          49%   { transform: translateX(75%) scaleX(1) scale(1); top: 22%; }
+          50%   { transform: translateX(75%) scaleX(-1) scale(1); top: 22%; }
+          75%   { transform: translateX(38%) scaleX(-1) scale(0.82); top: 5%; }
+          99%   { transform: translateX(5%) scaleX(-1) scale(1); top: 20%; }
+          100%  { transform: translateX(5%) scaleX(1) scale(1); top: 25%; }
         }
 
         @keyframes eagleBob {
