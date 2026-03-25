@@ -33,6 +33,7 @@ export async function GET(req: NextRequest) {
       companyName: context.companyName,
       website: context.website,
       contactName: context.contactName,
+      phone: context.phone,
       industry: context.industry,
       companyDescription: context.companyDescription,
       competitors: context.competitors,
@@ -51,22 +52,22 @@ export async function PUT(req: NextRequest) {
   const role = session.user.role ?? "customer";
   const isAdmin = role === "admin";
   let customerId = session.user.customerId ?? "";
-  if (isAdmin) {
-    const body = await req.json();
-    if (body.customerId) customerId = body.customerId;
+
+  const body = await req.json();
+
+  if (isAdmin && body.customerId) {
+    customerId = body.customerId;
   }
 
   if (!customerId) {
     return NextResponse.json({ error: "No customer ID" }, { status: 400 });
   }
-
-  const body = await req.json();
   const existing = await getJsonFromS3<Record<string, unknown>>(
     `${customerId}/onboarding/context.json`
   );
 
   const allowedFields = [
-    "companyName", "website", "contactName", "industry",
+    "companyName", "website", "contactName", "phone", "industry",
     "companyDescription", "competitors", "reportModules", "additionalContext",
   ];
 

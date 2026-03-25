@@ -2,7 +2,8 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { Plus, X, ChevronDown, Upload } from "lucide-react";
+import { signIn } from "next-auth/react";
+import { Plus, X } from "lucide-react";
 
 const DEFAULT_MODULES = [
   { id: "pricing-products", label: "Pricing & Products" },
@@ -17,6 +18,20 @@ interface Competitor {
   website: string;
 }
 
+function getPasswordStrength(pw: string): { score: number; label: string; color: string } {
+  let score = 0;
+  if (pw.length >= 8) score++;
+  if (pw.length >= 12) score++;
+  if (/[A-Z]/.test(pw)) score++;
+  if (/[a-z]/.test(pw)) score++;
+  if (/[0-9]/.test(pw)) score++;
+  if (/[^A-Za-z0-9]/.test(pw)) score++;
+
+  if (score <= 2) return { score, label: "Weak", color: "#EF4444" };
+  if (score <= 4) return { score, label: "Fair", color: "#EAB308" };
+  return { score, label: "Strong", color: "#22C55E" };
+}
+
 export default function GetStartedPage() {
   const [step, setStep] = useState(1);
   const [loading, setLoading] = useState(false);
@@ -28,18 +43,12 @@ export default function GetStartedPage() {
   const [companyName, setCompanyName] = useState("");
   const [website, setWebsite] = useState("");
   const [password, setPassword] = useState("");
+  const [phone, setPhone] = useState("");
 
   // Step 2
   const [competitors, setCompetitors] = useState<Competitor[]>([
     { name: "", website: "" },
   ]);
-
-  // Step 3 (optional customization)
-  const [showCustomize, setShowCustomize] = useState(false);
-  const [modules, setModules] = useState(DEFAULT_MODULES.map((m) => m.id));
-  const [additionalContext, setAdditionalContext] = useState("");
-  const [uploadedFiles, setUploadedFiles] = useState<string[]>([]);
-  const [uploading, setUploading] = useState(false);
 
   function addCompetitor() {
     if (competitors.length < 5) {
@@ -57,48 +66,6 @@ export default function GetStartedPage() {
     const updated = [...competitors];
     updated[index] = { ...updated[index], [field]: value };
     setCompetitors(updated);
-  }
-
-  function toggleModule(id: string) {
-    setModules((prev) =>
-      prev.includes(id) ? prev.filter((m) => m !== id) : [...prev, id]
-    );
-  }
-
-  async function handleFileUpload(e: React.ChangeEvent<HTMLInputElement>) {
-    const files = e.target.files;
-    if (!files || files.length === 0) return;
-
-    setUploading(true);
-    const newFiles: string[] = [];
-
-    for (const file of Array.from(files)) {
-      try {
-        const res = await fetch("/api/portal/upload", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            filename: file.name,
-            contentType: file.type || "application/octet-stream",
-          }),
-        });
-
-        if (res.ok) {
-          const { url } = await res.json();
-          await fetch(url, {
-            method: "PUT",
-            headers: { "Content-Type": file.type || "application/octet-stream" },
-            body: file,
-          });
-          newFiles.push(file.name);
-        }
-      } catch {
-        // Skip failed uploads
-      }
-    }
-
-    setUploadedFiles((prev) => [...prev, ...newFiles]);
-    setUploading(false);
   }
 
   function canProceedStep1() {
@@ -121,6 +88,7 @@ export default function GetStartedPage() {
           contactName,
           email,
           password,
+          phone,
           companyName,
           website: website.startsWith("http") ? website : `https://${website}`,
           competitors: competitors
@@ -129,9 +97,9 @@ export default function GetStartedPage() {
               name: c.name,
               website: c.website.startsWith("http") ? c.website : `https://${c.website}`,
             })),
-          reportModules: modules,
-          additionalContext,
-          uploadedFiles,
+          reportModules: DEFAULT_MODULES.map((m) => m.id),
+          additionalContext: "",
+          uploadedFiles: [],
           plan: "starter",
         }),
       });
@@ -144,11 +112,28 @@ export default function GetStartedPage() {
         return;
       }
 
-      // Redirect to Stripe Checkout or directly to portal
+      // Auto-login if auth token was returned
+      if (data.authToken) {
+        const signInResult = await signIn("credentials", {
+          authToken: data.authToken,
+          redirect: false,
+        });
+
+        if (signInResult?.ok) {
+          if (data.checkoutUrl) {
+            window.location.href = data.checkoutUrl;
+          } else {
+            window.location.href = "/portal?setup=complete";
+          }
+          return;
+        }
+      }
+
+      // Fallback: redirect to Stripe or login page
       if (data.checkoutUrl) {
         window.location.href = data.checkoutUrl;
       } else {
-        window.location.href = "/portal?setup=complete";
+        window.location.href = "/login?registered=1";
       }
     } catch {
       setError("Something went wrong. Please try again.");
@@ -250,6 +235,34 @@ export default function GetStartedPage() {
                     onChange={(e) => setPassword(e.target.value)}
                     placeholder="Minimum 8 characters"
                     minLength={8}
+                    className="w-full rounded-lg border border-[var(--color-border-warm)] bg-[var(--color-cream)] px-4 py-2.5 text-sm outline-none transition-colors focus:border-[var(--color-accent)] focus:ring-1 focus:ring-[var(--color-accent)]"
+                  />
+                  {password && (
+                    <div className="mt-2">
+                      <div className="h-1.5 w-full rounded-full bg-[var(--color-cream-dark)]">
+                        <div
+                          className="h-1.5 rounded-full transition-all duration-300"
+                          style={{
+                            width: `${(getPasswordStrength(password).score / 6) * 100}%`,
+                            backgroundColor: getPasswordStrength(password).color,
+                          }}
+                        />
+                      </div>
+                      <p className="mt-1 text-xs" style={{ color: getPasswordStrength(password).color }}>
+                        {getPasswordStrength(password).label}
+                      </p>
+                    </div>
+                  )}
+                </div>
+                <div>
+                  <label className="mb-1 block text-sm font-medium text-[var(--color-text-primary)]">
+                    Phone number <span className="font-normal text-[var(--color-text-muted)]">(optional)</span>
+                  </label>
+                  <input
+                    type="tel"
+                    value={phone}
+                    onChange={(e) => setPhone(e.target.value)}
+                    placeholder="+31 6 12345678"
                     className="w-full rounded-lg border border-[var(--color-border-warm)] bg-[var(--color-cream)] px-4 py-2.5 text-sm outline-none transition-colors focus:border-[var(--color-accent)] focus:ring-1 focus:ring-[var(--color-accent)]"
                   />
                 </div>
@@ -358,89 +371,24 @@ export default function GetStartedPage() {
                 </ul>
               </div>
 
-              {/* Report fields */}
+              {/* Report modules */}
               <div className="mb-4">
-                <p className="text-sm text-[var(--color-text-muted)]">
-                  Your weekly report covers: <span className="font-medium text-[var(--color-text-primary)]">Pricing & Products, Online Reviews, Web & Digital Activity, Company Registry, and Market Position & SEO.</span>
-                </p>
+                <p className="mb-2 text-xs font-medium text-[var(--color-text-muted)]">Your weekly report covers:</p>
+                <div className="flex flex-wrap gap-2">
+                  {DEFAULT_MODULES.map((mod) => (
+                    <span
+                      key={mod.id}
+                      className="rounded-full bg-[var(--color-accent)]/10 px-3 py-1 text-xs font-medium text-[var(--color-accent-dark)]"
+                    >
+                      {mod.label}
+                    </span>
+                  ))}
+                </div>
               </div>
 
-              {/* Expandable customization */}
-              <button
-                onClick={() => setShowCustomize(!showCustomize)}
-                className="mb-4 flex items-center gap-1.5 text-sm text-[var(--color-accent)] transition-colors hover:text-[var(--color-accent-dark)]"
-              >
-                <ChevronDown className={`h-4 w-4 transition-transform ${showCustomize ? "rotate-180" : ""}`} />
-                Want to customize?
-              </button>
-
-              {showCustomize && (
-                <div className="mb-6 space-y-4 rounded-xl border border-[var(--color-border-warm)] p-4">
-                  {/* Module toggles */}
-                  <div>
-                    <p className="mb-2 text-sm font-medium text-[var(--color-text-primary)]">Report modules</p>
-                    <div className="flex flex-wrap gap-2">
-                      {DEFAULT_MODULES.map((mod) => (
-                        <button
-                          key={mod.id}
-                          onClick={() => toggleModule(mod.id)}
-                          className={`rounded-full px-3 py-1 text-xs font-medium transition-colors ${
-                            modules.includes(mod.id)
-                              ? "bg-[var(--color-accent)] text-white"
-                              : "bg-[var(--color-cream)] text-[var(--color-text-muted)] hover:bg-[var(--color-cream-dark)]"
-                          }`}
-                        >
-                          {mod.label}
-                        </button>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Additional context */}
-                  <div>
-                    <label className="mb-1 block text-sm font-medium text-[var(--color-text-primary)]">
-                      Tell us more
-                    </label>
-                    <p className="mb-2 text-xs text-[var(--color-text-muted)]">
-                      What matters most? What should we focus on? The more context you share, the better your reports.
-                    </p>
-                    <textarea
-                      value={additionalContext}
-                      onChange={(e) => setAdditionalContext(e.target.value)}
-                      rows={3}
-                      placeholder="e.g., Focus on pricing changes in gluten-free products..."
-                      className="w-full rounded-lg border border-[var(--color-border-warm)] bg-[var(--color-cream)] px-4 py-2.5 text-sm outline-none transition-colors focus:border-[var(--color-accent)] focus:ring-1 focus:ring-[var(--color-accent)]"
-                    />
-                  </div>
-
-                  {/* File upload */}
-                  <div>
-                    <label className="mb-1 block text-sm font-medium text-[var(--color-text-primary)]">
-                      Upload documents
-                    </label>
-                    <p className="mb-2 text-xs text-[var(--color-text-muted)]">
-                      Competitor lists, market research, or anything that helps us understand your business.
-                    </p>
-                    <label className="flex cursor-pointer items-center gap-2 rounded-lg border border-dashed border-[var(--color-border-warm)] px-4 py-3 text-sm text-[var(--color-text-muted)] transition-colors hover:bg-[var(--color-cream)]">
-                      <Upload className="h-4 w-4" />
-                      {uploading ? "Uploading..." : "Choose files"}
-                      <input
-                        type="file"
-                        multiple
-                        onChange={handleFileUpload}
-                        className="hidden"
-                      />
-                    </label>
-                    {uploadedFiles.length > 0 && (
-                      <div className="mt-2 space-y-1">
-                        {uploadedFiles.map((f, i) => (
-                          <p key={i} className="text-xs text-[var(--color-text-muted)]">{f}</p>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-                </div>
-              )}
+              <p className="mb-6 text-xs text-[var(--color-text-muted)]">
+                This is your starting point — you can customize everything from your dashboard.
+              </p>
 
               {/* Human in the loop */}
               <div className="mb-6 flex items-center gap-3 rounded-xl bg-[var(--color-accent)]/5 p-4">
@@ -450,7 +398,7 @@ export default function GetStartedPage() {
                   </svg>
                 </div>
                 <p className="text-xs text-[var(--color-text-muted)]">
-                  Our research team personally reviews every report before delivery.
+                  We personally set up your intelligence pipeline and ensure every report meets our quality bar.
                 </p>
               </div>
 

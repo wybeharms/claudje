@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
-import { createCognitoUserWithPassword } from "@/lib/cognito";
+import { createCognitoUserWithPassword, authenticateUser, parseIdToken } from "@/lib/cognito";
+import { createAuthToken } from "@/lib/auth-token";
 import { putJsonToS3 } from "@/lib/s3";
 import { getStripe } from "@/lib/stripe";
 import { sendNotificationEmail } from "@/lib/ses";
@@ -23,6 +24,7 @@ export async function POST(req: NextRequest) {
     additionalContext,
     uploadedFiles,
     plan,
+    phone,
   } = body;
 
   if (!email || !password || !companyName || !website || !contactName) {
@@ -93,6 +95,7 @@ export async function POST(req: NextRequest) {
       website,
       contactName,
       email,
+      phone: phone || "",
       industry: industry || "",
       companyDescription: companyDescription || "",
       competitors: competitors || [],
@@ -122,10 +125,23 @@ export async function POST(req: NextRequest) {
       textBody: `New customer signed up!\n\nCompany: ${companyName}\nContact: ${contactName}\nEmail: ${email}\nWebsite: ${website}\nPlan: ${selectedPlan}\nCompetitors: ${(competitors || []).length}\nOrg ID: ${orgId}\n\nNext step: run /new-customer ${orgId} in the customers repo.`,
     }).catch(() => {});
 
+    // 5. Auto-authenticate for seamless login
+    let authToken: string | null = null;
+    try {
+      const authResult = await authenticateUser(email, password);
+      if ("success" in authResult) {
+        const user = parseIdToken(authResult.idToken);
+        authToken = createAuthToken(user);
+      }
+    } catch {
+      // Non-critical — user can still log in manually
+    }
+
     return NextResponse.json({
       success: true,
       checkoutUrl: checkoutUrl || null,
       organizationId: orgId,
+      authToken,
     });
   } catch (err: unknown) {
     const message =

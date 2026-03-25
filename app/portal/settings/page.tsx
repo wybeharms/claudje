@@ -21,6 +21,7 @@ interface SettingsData {
   companyName: string;
   website: string;
   contactName: string;
+  phone: string;
   industry: string;
   companyDescription: string;
   competitors: Competitor[];
@@ -196,6 +197,12 @@ export default function SettingsPage() {
               <input type="text" value={data.contactName || ""} onChange={(e) => updateField("contactName", e.target.value)} className="w-full rounded-lg border border-[var(--color-border-warm)] bg-[var(--color-cream)] px-4 py-2.5 text-sm outline-none focus:border-[var(--color-accent)] focus:ring-1 focus:ring-[var(--color-accent)]" />
             </div>
             <div>
+              <label className="mb-1 block text-sm font-medium text-[var(--color-text-primary)]">
+                Phone number <span className="font-normal text-[var(--color-text-muted)]">(optional)</span>
+              </label>
+              <input type="tel" value={data.phone || ""} onChange={(e) => updateField("phone", e.target.value)} placeholder="+31 6 12345678" className="w-full rounded-lg border border-[var(--color-border-warm)] bg-[var(--color-cream)] px-4 py-2.5 text-sm outline-none focus:border-[var(--color-accent)] focus:ring-1 focus:ring-[var(--color-accent)]" />
+            </div>
+            <div>
               <label className="mb-1 block text-sm font-medium text-[var(--color-text-primary)]">Industry</label>
               <input type="text" value={data.industry || ""} onChange={(e) => updateField("industry", e.target.value)} placeholder="e.g., Food & Beverage" className="w-full rounded-lg border border-[var(--color-border-warm)] bg-[var(--color-cream)] px-4 py-2.5 text-sm outline-none focus:border-[var(--color-accent)] focus:ring-1 focus:ring-[var(--color-accent)]" />
             </div>
@@ -211,7 +218,7 @@ export default function SettingsPage() {
         {tab === "competitors" && data && (
           <div className="flex flex-col gap-4">
             <p className="text-sm text-[var(--color-text-muted)]">
-              Manage the competitors you want us to monitor (up to 5 on Starter).
+              Manage the competitors you want us to monitor. Starter plan supports up to 5.
             </p>
             {data.competitors.map((comp, i) => (
               <div key={i} className="flex gap-2">
@@ -224,11 +231,25 @@ export default function SettingsPage() {
                 )}
               </div>
             ))}
-            {data.competitors.length < 5 && (
+            {data.competitors.length < 5 ? (
               <button onClick={addCompetitor} className="flex items-center gap-1.5 text-sm text-[var(--color-accent)] hover:text-[var(--color-accent-dark)]">
                 <Plus className="h-4 w-4" />
                 Add competitor
               </button>
+            ) : (
+              <div className="flex items-center gap-2 rounded-lg bg-[var(--color-cream)] px-3 py-2.5">
+                <Plus className="h-4 w-4 flex-shrink-0 text-[var(--color-text-muted)]" />
+                <span className="text-sm text-[var(--color-text-muted)]">
+                  You&apos;ve reached the 5-competitor limit.{" "}
+                  <button
+                    onClick={() => setTab("billing")}
+                    className="text-[var(--color-accent)] hover:text-[var(--color-accent-dark)]"
+                  >
+                    Upgrade to Pro
+                  </button>{" "}
+                  for more.
+                </span>
+              </div>
             )}
           </div>
         )}

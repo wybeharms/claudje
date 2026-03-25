@@ -1,9 +1,11 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useSearchParams } from "next/navigation";
 import { usePortal } from "@/components/portal/PortalContext";
 import Link from "next/link";
-import { FileText, Clock, Settings, Users } from "lucide-react";
+import { FileText, Settings, Users } from "lucide-react";
+import WelcomeAnimation from "@/components/portal/WelcomeAnimation";
 
 interface Report {
   id: string;
@@ -24,6 +26,8 @@ interface OnboardingData {
 
 export default function DashboardPage() {
   const { customerId, isAdmin, isViewingCustomer } = usePortal();
+  const searchParams = useSearchParams();
+  const isSetupComplete = searchParams.get("setup") === "complete";
   const [reports, setReports] = useState<Report[]>([]);
   const [onboarding, setOnboarding] = useState<OnboardingData | null>(null);
   const [loading, setLoading] = useState(true);
@@ -99,25 +103,22 @@ export default function DashboardPage() {
           Your first report is being prepared
         </h1>
         <p className="mb-8 text-[var(--color-text-muted)]">
-          Our research team is analyzing your competitors. You&apos;ll receive your first report within 24 hours.
+          We&apos;re setting up your intelligence pipeline. Your first report will arrive within 24 hours.
         </p>
 
-        <div className="mb-8 rounded-2xl border border-[var(--color-border-warm)] bg-white p-6">
-          <div className="mb-4 flex items-center gap-3">
-            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[var(--color-accent)]/10">
-              <Users className="h-5 w-5 text-[var(--color-accent)]" />
-            </div>
-            <div>
-              <p className="text-sm font-medium text-[var(--color-text-primary)]">Human-reviewed intelligence</p>
-              <p className="text-xs text-[var(--color-text-muted)]">Every report is personally reviewed by our research team</p>
-            </div>
+        {/* Welcome animation (on first visit from onboarding) or static card */}
+        {isSetupComplete && onboarding?.competitors && onboarding.competitors.length > 0 ? (
+          <div className="mb-8">
+            <WelcomeAnimation competitors={onboarding.competitors} />
           </div>
-
-          <div className="flex items-center gap-2 text-sm text-[var(--color-text-muted)]">
-            <Clock className="h-4 w-4" />
-            <span>Expected delivery: ~24 hours</span>
+        ) : (
+          <div className="mb-8 rounded-2xl border border-[var(--color-border-warm)] bg-white p-6">
+            <p className="text-sm font-medium text-[var(--color-text-primary)]">Your pipeline is being configured</p>
+            <p className="mt-1 text-xs text-[var(--color-text-muted)]">
+              We personally set up your analysis and quality-check every report.
+            </p>
           </div>
-        </div>
+        )}
 
         {onboarding && (
           <div className="rounded-2xl border border-[var(--color-border-warm)] bg-white p-6">

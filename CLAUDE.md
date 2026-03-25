@@ -21,17 +21,18 @@
   - `app/page.tsx` — landing page
   - `app/login/` — login page
   - `app/forgot-password/` — password reset
-  - `app/get-started/` — 3-step onboarding wizard + Stripe checkout
+  - `app/get-started/` — 3-step onboarding wizard (auto-login after signup, Stripe placeholder)
   - `app/portal/` — auth-gated portal (dashboard, reports, settings, admin)
   - `app/api/` — API routes (auth, signup, stripe webhooks, portal endpoints)
 - `components/landing/` — landing page section components
-- `components/portal/` — portal shell, sidebar, header, context provider
+- `components/portal/` — portal shell, sidebar, header, context provider, ClaudjeBird mascot, WelcomeAnimation
 - `components/signup/` — onboarding wizard components
 - `lib/` — auth, cognito, s3, stripe, auth-token utilities
 
 ## Design System
 - Colors: Dark brown `#2C1810` + cream/beige backgrounds + gold accents `#C9A96E`
 - Fonts: DM Serif Display (headings) + Plus Jakarta Sans (body)
+- Mascot: Geometric gold hawk silhouette (favicon.svg, ClaudjeBird component)
 - All color tokens defined as CSS custom properties in `globals.css` @theme block
 
 ## CTA Strategy
@@ -46,7 +47,7 @@ Login link in header → `/login`
 ## S3 Data Structure
 ```
 {customer_id}/
-├── onboarding/context.json     ← company info, competitors, preferences, Stripe IDs
+├── onboarding/context.json     ← company info, phone, competitors, preferences, Stripe IDs
 ├── onboarding/{uploads}        ← customer-uploaded files
 └── reports/
     ├── index.json              ← report manifest
@@ -57,7 +58,8 @@ Login link in header → `/login`
 ```
 
 ## Key Patterns (from Claudester)
-- Auth: NextAuth v5 Credentials provider → Cognito AdminInitiateAuth → HMAC-signed auth token
+- Auth: NextAuth v5 Credentials provider → Cognito AdminInitiateAuth → HMAC-signed auth token (60s expiry)
+- Onboarding auto-login: signup API authenticates user immediately after Cognito creation, returns authToken, client calls signIn() — user lands directly in portal
 - S3: lib/s3.ts with getJson, putJson, getText, getUploadUrl, getDownloadUrl helpers
 - Portal: PortalShell (sidebar + header + content), PortalContext (customerId, role, isAdmin)
 - Admin: customer context switching via localStorage
