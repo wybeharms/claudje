@@ -49,6 +49,30 @@ const dataSources = [
       </svg>
     ),
   },
+  {
+    name: "G2",
+    icon: (
+      <svg viewBox="0 0 24 24" className="h-5 w-5" fill="currentColor">
+        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15h-2v-2h2v2zm0-4h-2V7h2v6zm4 4h-2v-2h2v2zm0-4h-2V7h2v6z" />
+      </svg>
+    ),
+  },
+  {
+    name: "Glassdoor",
+    icon: (
+      <svg viewBox="0 0 24 24" className="h-5 w-5" fill="currentColor">
+        <path d="M6 2h12v2H8v16h10v2H6V2zm12 4v12h-2V6h2z" />
+      </svg>
+    ),
+  },
+  {
+    name: "SimilarWeb",
+    icon: (
+      <svg viewBox="0 0 24 24" className="h-5 w-5" fill="currentColor">
+        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z" />
+      </svg>
+    ),
+  },
 ];
 
 export default function WhyClaudje() {
@@ -78,39 +102,40 @@ export default function WhyClaudje() {
           </div>
 
           <p>
-            claudje runs on the same frontier AI models from OpenAI and
-            Anthropic that power ChatGPT and Claude. The most advanced AI
-            available.
+            claudje uses <strong>the same AI</strong> that powers ChatGPT and
+            Claude.
           </p>
           <p>
-            When you ask ChatGPT to research a competitor, it searches the web,
-            skims the top results, and gives you a summary. That&rsquo;s it.
+            When you ask a chatbot to research a competitor, it searches the
+            web, skims the top results, and gives you a summary.{" "}
+            <strong>That&rsquo;s it.</strong>
           </p>
           <p>
-            claudje deploys a team of specialized sub-agents, each with their
-            own skills and paid tool access. One agent pulls real customer
-            reviews from Google Maps. Another queries the Chamber of Commerce
-            for company filings. Others monitor LinkedIn for new hires and job
-            postings, track Trustpilot ratings, and compare pricing pages over
-            time.
+            claudje deploys <strong>a team of specialized agents</strong> with{" "}
+            <strong>paid tool access</strong>. They pull real reviews from
+            Google Maps, query the Chamber of Commerce, monitor LinkedIn, track
+            Trustpilot and G2 ratings, and more.
           </p>
           <p className="font-medium text-text-primary">
-            We pay for access to these sources so you don&rsquo;t have to. A
-            chatbot can&rsquo;t do that on your behalf.
+            <strong>
+              We pay for access to these sources so you don&rsquo;t have to.
+            </strong>{" "}
+            A chatbot can&rsquo;t do that on your behalf.
           </p>
           <p>
-            The result: market research that is deeper, more accurate, and more
-            actionable than anything a chatbot can produce. Updated every week,
-            for less than what you spend on coffee.
+            The result: research that is <strong>deeper</strong>,{" "}
+            <strong>more accurate</strong>, and{" "}
+            <strong>more actionable</strong> than anything a chatbot can
+            produce. Updated every week, for less than what you spend on coffee.
           </p>
         </div>
 
-        <div className="mx-auto mt-10 max-w-xl">
-          <div className="grid grid-cols-3 gap-4 sm:grid-cols-6">
+        <div className="mx-auto mt-10 max-w-3xl">
+          <div className="flex flex-wrap items-start justify-center gap-x-6 gap-y-4">
             {dataSources.map((source) => (
               <div
                 key={source.name}
-                className="flex flex-col items-center gap-1.5"
+                className="flex w-16 flex-col items-center gap-1.5"
               >
                 <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-cream-dark text-text-muted">
                   {source.icon}

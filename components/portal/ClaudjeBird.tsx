@@ -5,9 +5,9 @@ interface ClaudjeBirdProps {
 }
 
 /**
- * Standing eagle — front-facing, wings spread.
- * Used for favicon, sidebar, static placements.
- * Gold (#C9A96E) on transparent (caller provides background).
+ * Standing eagle — front-facing, wings fully spread with feather tips.
+ * Gold (#C9A96E) on transparent background.
+ * Used for favicon and general branding placements.
  */
 export default function ClaudjeBird({
   size = 48,
@@ -23,44 +23,71 @@ export default function ClaudjeBird({
       className={className}
       style={style}
     >
-      {/* Left wing — spread out */}
-      <path d="M8,30 Q4,22 2,16 Q6,18 12,17 Q10,20 14,24 Q12,26 14,30 Z" fill="#C9A96E" />
-      <path d="M14,30 Q16,26 18,24 L20,30 Z" fill="#B8954F" />
-      {/* Right wing — spread out */}
-      <path d="M56,30 Q60,22 62,16 Q58,18 52,17 Q54,20 50,24 Q52,26 50,30 Z" fill="#C9A96E" />
-      <path d="M50,30 Q48,26 46,24 L44,30 Z" fill="#B8954F" />
+      {/* Left wing — large spread with feather tips */}
+      <path
+        d="M24,28 L16,20 L8,10 L4,6 L6,12 L1,10 L4,18 L1,16 L6,24 L14,28 Z"
+        fill="#C9A96E"
+      />
+      <path d="M24,28 L14,22 L10,20 L14,24 Z" fill="#B8954F" opacity="0.5" />
+
+      {/* Right wing — large spread with feather tips */}
+      <path
+        d="M40,28 L48,20 L56,10 L60,6 L58,12 L63,10 L60,18 L63,16 L58,24 L50,28 Z"
+        fill="#C9A96E"
+      />
+      <path d="M40,28 L50,22 L54,20 L50,24 Z" fill="#B8954F" opacity="0.5" />
+
       {/* Body */}
-      <path d="M24,28 Q22,32 22,40 Q24,46 32,48 Q40,46 42,40 Q42,32 40,28 Z" fill="#C9A96E" />
-      {/* Chest feather detail */}
-      <path d="M27,34 Q32,38 37,34 Q32,42 27,34 Z" fill="#B8954F" opacity="0.5" />
+      <path
+        d="M24,28 Q22,34 23,40 Q25,48 32,50 Q39,48 41,40 Q42,34 40,28 Z"
+        fill="#C9A96E"
+      />
+      <path
+        d="M28,34 Q32,38 36,34 Q32,42 28,34 Z"
+        fill="#B8954F"
+        opacity="0.4"
+      />
+
       {/* Neck */}
-      <path d="M26,24 Q26,28 24,30 L40,30 Q38,28 38,24 Z" fill="#C9A96E" />
+      <path d="M28,20 Q28,24 24,28 L40,28 Q36,24 36,20 Z" fill="#C9A96E" />
+
       {/* Head */}
-      <ellipse cx="32" cy="18" rx="8" ry="9" fill="#FAF6F0" />
-      {/* Head top (brown cap) */}
-      <path d="M24,16 Q24,10 32,9 Q40,10 40,16 Q36,14 32,14 Q28,14 24,16 Z" fill="#2C1810" />
+      <ellipse cx="32" cy="14" rx="6" ry="7" fill="#FAF6F0" />
+      {/* Dark cap */}
+      <path
+        d="M26,12 Q27,6 32,5 Q37,6 38,12 Q35,9 32,9 Q29,9 26,12 Z"
+        fill="#3A2519"
+      />
+
       {/* Eyes */}
-      <circle cx="28" cy="18" r="1.5" fill="#2C1810" />
-      <circle cx="36" cy="18" r="1.5" fill="#2C1810" />
-      {/* Eye shine */}
-      <circle cx="28.5" cy="17.5" r="0.5" fill="#FAF6F0" />
-      <circle cx="36.5" cy="17.5" r="0.5" fill="#FAF6F0" />
+      <circle cx="29" cy="14" r="1.3" fill="#2C1810" />
+      <circle cx="35" cy="14" r="1.3" fill="#2C1810" />
+      <circle cx="29.3" cy="13.6" r="0.4" fill="#FAF6F0" />
+      <circle cx="35.3" cy="13.6" r="0.4" fill="#FAF6F0" />
+
       {/* Beak */}
-      <path d="M30,21 L32,26 L34,21 Q32,22.5 30,21 Z" fill="#D4A030" />
-      <path d="M30.5,21.5 L32,24 L33.5,21.5 Q32,22 30.5,21.5 Z" fill="#B8860B" />
+      <path d="M30,17 L32,22 L34,17 Q32,19 30,17 Z" fill="#D4A030" />
+
       {/* Talons */}
-      <path d="M26,48 L24,54 L26,53 L28,55 L29,52 L28,48 Z" fill="#D4A030" />
-      <path d="M38,48 L40,54 L38,53 L36,55 L35,52 L36,48 Z" fill="#D4A030" />
+      <path
+        d="M26,50 L24,56 L26,55 L28,57 L29,54 L28,50 Z"
+        fill="#D4A030"
+      />
+      <path
+        d="M38,50 L40,56 L38,55 L36,57 L35,54 L36,50 Z"
+        fill="#D4A030"
+      />
     </svg>
   );
 }
 
 /**
- * Flying eagle — side-view, for animations.
- * Wings are separate elements so they can be animated.
+ * Flying eagle — side-view for animation.
+ * Wings are separate <g> elements with transform pivot points
+ * so CSS can rotate them for flapping animation.
  */
 export function FlyingEagle({
-  size = 64,
+  size = 100,
   className = "",
   style,
 }: {
@@ -71,56 +98,68 @@ export function FlyingEagle({
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 80 40"
+      viewBox="0 0 100 50"
       width={size}
       height={size * 0.5}
       className={className}
       style={style}
     >
-      {/* Upper wing */}
-      <path
-        className="eagle-wing"
-        d="M20,18 Q10,8 2,2 Q8,10 14,14 Q10,12 4,6 Q12,14 18,16 Z"
-        fill="#C9A96E"
-      />
-      <path
-        className="eagle-wing"
-        d="M56,18 Q66,8 74,2 Q68,10 62,14 Q66,12 72,6 Q64,14 58,16 Z"
-        fill="#C9A96E"
-      />
-      {/* Lower wing feathers */}
-      <path
-        className="eagle-wing"
-        d="M18,18 Q12,16 6,10 Q14,16 20,18 Z"
-        fill="#B8954F"
-      />
-      <path
-        className="eagle-wing"
-        d="M58,18 Q64,16 70,10 Q62,16 56,18 Z"
-        fill="#B8954F"
-      />
-      {/* Body */}
-      <ellipse cx="38" cy="20" rx="20" ry="7" fill="#C9A96E" />
-      {/* Body shading */}
-      <ellipse cx="38" cy="22" rx="16" ry="4" fill="#B8954F" opacity="0.4" />
-      {/* Tail */}
-      <path d="M18,18 L8,22 L10,20 L6,24 L14,20 L18,22 Z" fill="#B8954F" />
+      {/* Tail feathers */}
+      <path d="M34,28 L20,24 L14,28 L18,30 L22,34 L34,32 Z" fill="#B8954F" />
+
+      {/* Body — streamlined */}
+      <ellipse cx="52" cy="28" rx="16" ry="5" fill="#C9A96E" />
+      <ellipse cx="52" cy="30" rx="12" ry="3" fill="#B8954F" opacity="0.3" />
+
+      {/* Upper wing — pivots at shoulder (48, 26) */}
+      <g transform="translate(48, 26)">
+        <g className="eagle-wing">
+          <g transform="translate(-48, -26)">
+            <path
+              d="M48,26 L36,16 L24,6 L16,0 L22,8 L12,2 L20,12 L8,6 L18,18 L32,26 Z"
+              fill="#C9A96E"
+            />
+            <path d="M32,26 L18,18 L24,22 Z" fill="#B8954F" opacity="0.5" />
+          </g>
+        </g>
+      </g>
+
+      {/* Far wing — peeks below body, pivots at (52, 30) */}
+      <g transform="translate(52, 30)">
+        <g className="eagle-wing-far">
+          <g transform="translate(-52, -30)">
+            <path
+              d="M52,30 L42,36 L34,42 L30,46 L36,40 L28,44 L38,36 Z"
+              fill="#B8954F"
+              opacity="0.6"
+            />
+          </g>
+        </g>
+      </g>
+
       {/* Head */}
-      <ellipse cx="58" cy="17" rx="6" ry="5" fill="#FAF6F0" />
-      {/* Head top */}
-      <path d="M53,15 Q54,11 58,10 Q62,11 63,15 Q60,13 58,13 Q56,13 53,15 Z" fill="#2C1810" />
+      <ellipse cx="72" cy="24" rx="6" ry="5" fill="#FAF6F0" />
+      {/* Dark cap */}
+      <path
+        d="M67,22 Q68,17 72,15 Q76,17 77,22 Q75,19 72,19 Q69,19 67,22 Z"
+        fill="#3A2519"
+      />
       {/* Eye */}
-      <circle cx="60" cy="16" r="1.2" fill="#2C1810" />
-      <circle cx="60.3" cy="15.7" r="0.4" fill="#FAF6F0" />
-      {/* Beak */}
-      <path d="M63,17 L68,18 L63,19.5 Q64,18.5 63,17 Z" fill="#D4A030" />
-      <path d="M64,17.5 L67,18 L64,19 Z" fill="#B8860B" />
+      <circle cx="74" cy="23" r="1.2" fill="#2C1810" />
+      <circle cx="74.3" cy="22.7" r="0.4" fill="#FAF6F0" />
+      {/* Beak — hooked */}
+      <path
+        d="M77,24 L84,26 L82,28 L78,27 Q80,25 77,24 Z"
+        fill="#D4A030"
+      />
+      <path d="M78,25 L82,26.5 L80,27.5 Z" fill="#B8860B" />
     </svg>
   );
 }
 
 /**
- * Sidebar eagle — cream/gold colors for visibility on dark brown sidebar.
+ * Sidebar eagle — same natural-color eagle on a subtle light background
+ * so it pops on the dark brown sidebar.
  */
 export function SidebarEagle({
   size = 24,
@@ -130,30 +169,48 @@ export function SidebarEagle({
   className?: string;
 }) {
   return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 64 64"
-      width={size}
-      height={size}
-      className={className}
+    <span
+      className={`inline-flex items-center justify-center rounded-md ${className}`}
+      style={{
+        width: size + 8,
+        height: size + 8,
+        backgroundColor: "rgba(250, 246, 240, 0.15)",
+      }}
     >
-      {/* Wings — gold */}
-      <path d="M8,30 Q4,22 2,16 Q6,18 12,17 Q10,20 14,24 Q12,26 14,30 Z" fill="#C9A96E" />
-      <path d="M56,30 Q60,22 62,16 Q58,18 52,17 Q54,20 50,24 Q52,26 50,30 Z" fill="#C9A96E" />
-      {/* Body — cream */}
-      <path d="M24,28 Q22,32 22,40 Q24,46 32,48 Q40,46 42,40 Q42,32 40,28 Z" fill="#FAF6F0" />
-      {/* Neck */}
-      <path d="M26,24 Q26,28 24,30 L40,30 Q38,28 38,24 Z" fill="#FAF6F0" />
-      {/* Head */}
-      <ellipse cx="32" cy="18" rx="8" ry="9" fill="#FAF6F0" />
-      {/* Eyes */}
-      <circle cx="28" cy="18" r="1.5" fill="#2C1810" />
-      <circle cx="36" cy="18" r="1.5" fill="#2C1810" />
-      {/* Beak */}
-      <path d="M30,21 L32,26 L34,21 Z" fill="#C9A96E" />
-      {/* Talons */}
-      <path d="M26,48 L24,54 L28,55 L29,52 L28,48 Z" fill="#C9A96E" />
-      <path d="M38,48 L40,54 L36,55 L35,52 L36,48 Z" fill="#C9A96E" />
-    </svg>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 64 64"
+        width={size}
+        height={size}
+      >
+        {/* Left wing */}
+        <path
+          d="M24,28 L16,20 L8,10 L4,6 L6,12 L1,10 L4,18 L1,16 L6,24 L14,28 Z"
+          fill="#C9A96E"
+        />
+        {/* Right wing */}
+        <path
+          d="M40,28 L48,20 L56,10 L60,6 L58,12 L63,10 L60,18 L63,16 L58,24 L50,28 Z"
+          fill="#C9A96E"
+        />
+        {/* Body */}
+        <path
+          d="M24,28 Q22,34 23,40 Q25,48 32,50 Q39,48 41,40 Q42,34 40,28 Z"
+          fill="#C9A96E"
+        />
+        {/* Neck */}
+        <path d="M28,20 Q28,24 24,28 L40,28 Q36,24 36,20 Z" fill="#C9A96E" />
+        {/* Head */}
+        <ellipse cx="32" cy="14" rx="6" ry="7" fill="#FAF6F0" />
+        {/* Eyes */}
+        <circle cx="29" cy="14" r="1.3" fill="#2C1810" />
+        <circle cx="35" cy="14" r="1.3" fill="#2C1810" />
+        {/* Beak */}
+        <path d="M30,17 L32,22 L34,17 Z" fill="#D4A030" />
+        {/* Talons */}
+        <path d="M26,50 L24,56 L28,57 L29,54 L28,50 Z" fill="#D4A030" />
+        <path d="M38,50 L40,56 L36,57 L35,54 L36,50 Z" fill="#D4A030" />
+      </svg>
+    </span>
   );
 }
