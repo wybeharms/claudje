@@ -172,9 +172,9 @@ export default function AdminPage() {
         </h1>
         <button
           onClick={() => setTab("create")}
-          className="inline-flex items-center gap-1.5 rounded-lg bg-[var(--color-accent)] px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-[var(--color-accent-dark)]"
+          className="inline-flex items-center gap-2 rounded-lg bg-[var(--color-brown)] px-5 py-2.5 text-sm font-semibold text-white shadow-md transition-colors hover:bg-[var(--color-brown-light)]"
         >
-          <Plus className="h-3.5 w-3.5" />
+          <Plus className="h-4 w-4" />
           New organization
         </button>
       </div>
@@ -275,9 +275,9 @@ export default function AdminPage() {
           ) : (
             <button
               onClick={() => setShowAddUser(true)}
-              className="inline-flex items-center gap-1.5 rounded-lg border border-dashed border-[var(--color-border-warm)] px-4 py-2 text-sm font-medium text-[var(--color-text-muted)] transition-colors hover:border-[var(--color-accent)] hover:text-[var(--color-accent)]"
+              className="inline-flex items-center gap-2 rounded-lg bg-[var(--color-brown)] px-5 py-2.5 text-sm font-semibold text-white shadow-md transition-colors hover:bg-[var(--color-brown-light)]"
             >
-              <Plus className="h-3.5 w-3.5" />
+              <Plus className="h-4 w-4" />
               Add user
             </button>
           )}
