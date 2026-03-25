@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import ClaudjeBird from "../portal/ClaudjeBird";
 
 const NAV_LINKS = [
   { label: "How It Works", href: "#how-it-works" },
@@ -25,11 +26,12 @@ export default function Header() {
       {/* Full header */}
       <header className="relative z-50 border-b border-border-on-dark bg-brown">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-8">
-          {/* Wordmark */}
+          {/* Wordmark + eagle */}
           <a
             href="/"
-            className="font-heading text-2xl tracking-tight text-text-on-dark"
+            className="flex items-center gap-2 font-heading text-2xl tracking-tight text-text-on-dark"
           >
+            <ClaudjeBird size={24} light />
             claudje
           </a>
 
