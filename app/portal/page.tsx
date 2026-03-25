@@ -99,15 +99,11 @@ export default function DashboardPage() {
         <h1 className="mb-2 text-2xl font-bold text-[var(--color-text-primary)]" style={{ fontFamily: "var(--font-heading)" }}>
           Your first report is being prepared
         </h1>
-        <p className="mb-8 text-[var(--color-text-muted)]">
-          We&apos;re setting up your intelligence pipeline. Your first report will arrive within 24 hours.
-        </p>
+        <div className="mb-8" />
 
-        {/* Continuous welcome animation */}
+        {/* Eagle animation — flies on page, beams to competitor pills */}
         {onboarding?.competitors && onboarding.competitors.length > 0 && (
-          <div className="mb-8">
-            <WelcomeAnimation competitors={onboarding.competitors} />
-          </div>
+          <WelcomeAnimation competitors={onboarding.competitors} />
         )}
 
         {onboarding && (
@@ -118,27 +114,12 @@ export default function DashboardPage() {
                 <span className="font-medium text-[var(--color-text-primary)]">Company:</span> {onboarding.companyName}
               </p>
             )}
-            {onboarding.competitors && onboarding.competitors.length > 0 && (
-              <div className="mb-3">
-                <p className="mb-2 text-sm font-medium text-[var(--color-text-primary)]">Competitors:</p>
-                <div className="flex flex-wrap gap-2">
-                  {onboarding.competitors.map((c, i) => (
-                    <span
-                      key={i}
-                      className="rounded-full bg-[var(--color-accent)]/10 px-3 py-1 text-xs font-medium text-[var(--color-accent-dark)]"
-                    >
-                      {c.name || c.website}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            )}
             <Link
               href="/portal/settings"
               className="inline-flex items-center gap-1.5 text-sm text-[var(--color-accent)] transition-colors hover:text-[var(--color-accent-dark)]"
             >
               <Settings className="h-3.5 w-3.5" />
-              Refine your setup for better reports
+              Refine your setup or add more competitors
             </Link>
           </div>
         )}

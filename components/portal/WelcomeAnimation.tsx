@@ -1,6 +1,6 @@
 "use client";
 
-import ClaudjeBird, { MiniBird } from "./ClaudjeBird";
+import ClaudjeBird from "./ClaudjeBird";
 
 interface WelcomeAnimationProps {
   competitors: Array<{ name: string; website: string }>;
@@ -10,63 +10,84 @@ export default function WelcomeAnimation({ competitors }: WelcomeAnimationProps)
   const comps = competitors.slice(0, 5);
 
   return (
-    <div className="rounded-2xl border border-[var(--color-border-warm)] bg-white p-6 overflow-hidden">
-      <div className="relative h-56">
-        {/* Main bird — continuous orbit */}
-        <div className="absolute animate-[birdOrbit_8s_ease-in-out_infinite]">
-          <ClaudjeBird size={48} />
+    <div className="relative mb-8">
+      {/* Eagle — flies around the page continuously */}
+      <div className="relative h-52 flex items-start justify-center">
+        <div className="animate-[eagleFly_8s_ease-in-out_infinite]">
+          <div className="animate-[wingFlap_0.6s_ease-in-out_infinite]">
+            <ClaudjeBird size={64} />
+          </div>
         </div>
 
-        {/* Competitor labels with mini-birds hovering next to them */}
-        {comps.map((c, i) => {
-          const total = comps.length;
-          // Spread competitors vertically on the right side
-          const top = 12 + (i * (76 / Math.max(total - 1, 1)));
-          const left = 55 + (i % 2 === 0 ? 0 : 10);
+        {/* Scan beams — pulse every 4s from eagle position to pills */}
+        <div className="absolute inset-0 pointer-events-none">
+          {comps.map((_, i) => {
+            const total = comps.length;
+            // Fan out beams from center-top toward bottom pill positions
+            const startX = 50;
+            const startY = 15;
+            const endX = 15 + (i * (70 / Math.max(total - 1, 1)));
+            const endY = 95;
 
-          return (
-            <div
-              key={i}
-              className="absolute flex items-center gap-2"
-              style={{ top: `${top}%`, left: `${left}%` }}
-            >
-              <div
-                className="animate-[birdHover_2s_ease-in-out_infinite]"
-                style={{ animationDelay: `${i * 0.4}s` }}
+            return (
+              <svg
+                key={i}
+                className="absolute inset-0 w-full h-full animate-[beamPulse_4s_ease-in-out_infinite]"
+                style={{ animationDelay: `${i * 0.3}s` }}
               >
-                <MiniBird size={18} color="var(--color-accent)" />
-              </div>
-              <span className="rounded-full bg-[var(--color-accent)]/10 px-3 py-1 text-xs font-medium text-[var(--color-accent-dark)]">
-                {c.name || c.website}
-              </span>
-            </div>
-          );
-        })}
+                <line
+                  x1={`${startX}%`}
+                  y1={`${startY}%`}
+                  x2={`${endX}%`}
+                  y2={`${endY}%`}
+                  stroke="#C9A96E"
+                  strokeWidth="1"
+                  strokeDasharray="4 4"
+                  opacity="0.4"
+                />
+              </svg>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* Competitor pills — the "floor" being scanned */}
+      <div className="flex flex-wrap justify-center gap-2 mb-6">
+        {comps.map((c, i) => (
+          <span
+            key={i}
+            className="rounded-full bg-[var(--color-accent)]/10 px-4 py-1.5 text-sm font-medium text-[var(--color-accent-dark)] animate-[beamPulse_4s_ease-in-out_infinite]"
+            style={{ animationDelay: `${i * 0.3}s` }}
+          >
+            {c.name || c.website}
+          </span>
+        ))}
       </div>
 
       {/* Status text */}
-      <div className="text-center">
-        <p className="text-sm font-medium text-[var(--color-text-primary)]">
-          Your intelligence pipeline is being set up
-        </p>
-        <p className="mt-1 text-xs text-[var(--color-text-muted)]">
-          We&apos;re configuring your analysis — your first report will arrive within 24 hours.
-        </p>
-      </div>
+      <p className="text-center text-sm font-medium text-[var(--color-text-primary)]">
+        Claudje is on the hunt...
+      </p>
+      <p className="mt-1 text-center text-xs text-[var(--color-text-muted)]">
+        Your first report will arrive within 24 hours.
+      </p>
 
       <style jsx>{`
-        @keyframes birdOrbit {
-          0% { left: 5%; top: 40%; transform: scaleX(1); }
-          25% { left: 35%; top: 10%; transform: scaleX(1); }
-          45% { left: 50%; top: 30%; transform: scaleX(1); }
-          50% { left: 45%; top: 45%; transform: scaleX(-1); }
-          75% { left: 15%; top: 65%; transform: scaleX(-1); }
-          95% { left: 2%; top: 45%; transform: scaleX(-1); }
-          100% { left: 5%; top: 40%; transform: scaleX(1); }
+        @keyframes eagleFly {
+          0% { transform: translate(0, 0); }
+          20% { transform: translate(60px, -15px); }
+          40% { transform: translate(-40px, -25px); }
+          60% { transform: translate(30px, -5px); }
+          80% { transform: translate(-50px, -20px); }
+          100% { transform: translate(0, 0); }
         }
-        @keyframes birdHover {
-          0%, 100% { transform: translateY(0); }
-          50% { transform: translateY(-4px); }
+        @keyframes wingFlap {
+          0%, 100% { transform: scaleY(1); }
+          50% { transform: scaleY(0.92); }
+        }
+        @keyframes beamPulse {
+          0%, 60%, 100% { opacity: 0; }
+          70%, 90% { opacity: 1; }
         }
       `}</style>
     </div>

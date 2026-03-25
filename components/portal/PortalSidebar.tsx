@@ -40,7 +40,7 @@ export default function PortalSidebar({
             collapsed ? "justify-center" : "gap-2"
           }`}
         >
-          <ClaudjeBird size={24} color="#C9A96E" accentColor="#B8954F" />
+          <ClaudjeBird size={24} />
           {!collapsed && "claudje"}
         </Link>
       </div>
