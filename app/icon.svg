@@ -1,27 +1,30 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-  <rect width="32" height="32" rx="6" fill="#2C1810"/>
-  <!-- Left wing -->
-  <rect x="1" y="12" width="4" height="3" rx="0.5" fill="#C9A96E"/>
-  <rect x="3" y="10" width="4" height="3" rx="0.5" fill="#C9A96E"/>
-  <rect x="5" y="8" width="4" height="5" rx="0.5" fill="#B8954F"/>
-  <!-- Right wing -->
-  <rect x="27" y="12" width="4" height="3" rx="0.5" fill="#C9A96E"/>
-  <rect x="25" y="10" width="4" height="3" rx="0.5" fill="#C9A96E"/>
-  <rect x="23" y="8" width="4" height="5" rx="0.5" fill="#B8954F"/>
-  <!-- Body -->
-  <rect x="11" y="10" width="10" height="12" rx="1" fill="#3A2519"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <rect width="64" height="64" rx="12" fill="#2C1810"/>
+  <!-- Left wing — gold -->
+  <path d="M8,30 Q4,22 2,16 Q6,18 12,17 Q10,20 14,24 Q12,26 14,30 Z" fill="#C9A96E"/>
+  <path d="M14,30 Q16,26 18,24 L20,30 Z" fill="#B8954F"/>
+  <!-- Right wing — gold -->
+  <path d="M56,30 Q60,22 62,16 Q58,18 52,17 Q54,20 50,24 Q52,26 50,30 Z" fill="#C9A96E"/>
+  <path d="M50,30 Q48,26 46,24 L44,30 Z" fill="#B8954F"/>
+  <!-- Body — gold -->
+  <path d="M24,28 Q22,32 22,40 Q24,46 32,48 Q40,46 42,40 Q42,32 40,28 Z" fill="#C9A96E"/>
   <!-- Chest -->
-  <rect x="13" y="14" width="6" height="6" rx="0.5" fill="#4A3529"/>
-  <!-- Head -->
-  <rect x="12" y="3" width="8" height="8" rx="1" fill="#3A2519"/>
-  <!-- White head patch -->
-  <rect x="13" y="4" width="6" height="3" rx="0.5" fill="#FAF6F0"/>
+  <path d="M27,34 Q32,38 37,34 Q32,42 27,34 Z" fill="#B8954F" opacity="0.5"/>
+  <!-- Neck -->
+  <path d="M26,24 Q26,28 24,30 L40,30 Q38,28 38,24 Z" fill="#C9A96E"/>
+  <!-- Head — white -->
+  <ellipse cx="32" cy="18" rx="8" ry="9" fill="#FAF6F0"/>
+  <!-- Head top (dark cap) -->
+  <path d="M24,16 Q24,10 32,9 Q40,10 40,16 Q36,14 32,14 Q28,14 24,16 Z" fill="#3A2519"/>
   <!-- Eyes -->
-  <rect x="13.5" y="8" width="2" height="1.5" rx="0.3" fill="#C9A96E"/>
-  <rect x="16.5" y="8" width="2" height="1.5" rx="0.3" fill="#C9A96E"/>
+  <circle cx="28" cy="18" r="1.5" fill="#2C1810"/>
+  <circle cx="36" cy="18" r="1.5" fill="#2C1810"/>
+  <!-- Eye shine -->
+  <circle cx="28.5" cy="17.5" r="0.5" fill="#FAF6F0"/>
+  <circle cx="36.5" cy="17.5" r="0.5" fill="#FAF6F0"/>
   <!-- Beak -->
-  <path d="M15,10 L16,12 L17,10 Z" fill="#C9A96E"/>
+  <path d="M30,21 L32,26 L34,21 Q32,22.5 30,21 Z" fill="#D4A030"/>
   <!-- Talons -->
-  <rect x="12" y="22" width="3" height="2" rx="0.3" fill="#C9A96E"/>
-  <rect x="17" y="22" width="3" height="2" rx="0.3" fill="#C9A96E"/>
+  <path d="M26,48 L24,54 L26,53 L28,55 L29,52 L28,48 Z" fill="#D4A030"/>
+  <path d="M38,48 L40,54 L38,53 L36,55 L35,52 L36,48 Z" fill="#D4A030"/>
 </svg>
