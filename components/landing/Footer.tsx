@@ -35,6 +35,9 @@ export default function Footer() {
           <a href="#faq" className="transition-colors hover:text-text-on-dark">
             FAQ
           </a>
+          <a href="/about" className="transition-colors hover:text-text-on-dark">
+            About
+          </a>
           <a
             href="mailto:info@claudje.com"
             className="transition-colors hover:text-text-on-dark"
