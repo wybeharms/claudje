@@ -1,6 +1,5 @@
 "use client";
 
-import { useState, useEffect } from "react";
 import ClaudjeBird, { MiniBird } from "./ClaudjeBird";
 
 interface WelcomeAnimationProps {
@@ -8,88 +7,45 @@ interface WelcomeAnimationProps {
 }
 
 export default function WelcomeAnimation({ competitors }: WelcomeAnimationProps) {
-  const [phase, setPhase] = useState<"enter" | "dispatch" | "done">("enter");
-
-  useEffect(() => {
-    const t1 = setTimeout(() => setPhase("dispatch"), 800);
-    const t2 = setTimeout(() => setPhase("done"), 3500);
-    return () => {
-      clearTimeout(t1);
-      clearTimeout(t2);
-    };
-  }, []);
-
-  // Position mini-birds in a fan pattern toward competitor names
-  const competitorPositions = competitors.slice(0, 5).map((_, i) => {
-    const total = Math.min(competitors.length, 5);
-    const angle = -30 + (60 / Math.max(total - 1, 1)) * i;
-    return {
-      x: 60 + Math.cos((angle * Math.PI) / 180) * 80,
-      y: 20 + Math.sin((angle * Math.PI) / 180) * 60,
-      angle,
-      delay: i * 0.15,
-    };
-  });
+  const comps = competitors.slice(0, 5);
 
   return (
     <div className="rounded-2xl border border-[var(--color-border-warm)] bg-white p-6 overflow-hidden">
-      <div className="relative h-48">
-        {/* Main bird */}
-        <div
-          className="absolute left-8 top-16 transition-all duration-700 ease-out"
-          style={{
-            opacity: phase === "enter" ? 0 : 1,
-            transform: phase === "enter" ? "translateX(-40px) scale(0.5)" : "translateX(0) scale(1)",
-          }}
-        >
-          <ClaudjeBird size={56} />
+      <div className="relative h-56">
+        {/* Main bird — continuous orbit */}
+        <div className="absolute animate-[birdOrbit_8s_ease-in-out_infinite]">
+          <ClaudjeBird size={48} />
         </div>
 
-        {/* Mini agent birds dispatched toward competitors */}
-        {phase !== "enter" && competitorPositions.map((pos, i) => (
-          <div
-            key={i}
-            className="absolute transition-all ease-out"
-            style={{
-              left: phase === "dispatch" || phase === "done" ? `${pos.x}%` : "15%",
-              top: phase === "dispatch" || phase === "done" ? `${pos.y}%` : "45%",
-              opacity: phase === "dispatch" || phase === "done" ? 1 : 0,
-              transform: `rotate(${pos.angle * 0.3}deg)`,
-              transitionDuration: "1.2s",
-              transitionDelay: `${pos.delay + 0.3}s`,
-            }}
-          >
-            <MiniBird size={20} color="var(--color-accent)" />
-          </div>
-        ))}
+        {/* Competitor labels with mini-birds hovering next to them */}
+        {comps.map((c, i) => {
+          const total = comps.length;
+          // Spread competitors vertically on the right side
+          const top = 12 + (i * (76 / Math.max(total - 1, 1)));
+          const left = 55 + (i % 2 === 0 ? 0 : 10);
 
-        {/* Competitor name labels */}
-        {competitorPositions.map((pos, i) => (
-          <div
-            key={`label-${i}`}
-            className="absolute text-xs font-medium text-[var(--color-text-primary)] transition-all ease-out"
-            style={{
-              left: `${pos.x + 5}%`,
-              top: `${pos.y + 8}%`,
-              opacity: phase === "done" ? 1 : 0,
-              transform: phase === "done" ? "translateY(0)" : "translateY(8px)",
-              transitionDuration: "0.6s",
-              transitionDelay: `${pos.delay + 1.5}s`,
-            }}
-          >
-            {competitors[i]?.name || competitors[i]?.website}
-          </div>
-        ))}
+          return (
+            <div
+              key={i}
+              className="absolute flex items-center gap-2"
+              style={{ top: `${top}%`, left: `${left}%` }}
+            >
+              <div
+                className="animate-[birdHover_2s_ease-in-out_infinite]"
+                style={{ animationDelay: `${i * 0.4}s` }}
+              >
+                <MiniBird size={18} color="var(--color-accent)" />
+              </div>
+              <span className="rounded-full bg-[var(--color-accent)]/10 px-3 py-1 text-xs font-medium text-[var(--color-accent-dark)]">
+                {c.name || c.website}
+              </span>
+            </div>
+          );
+        })}
       </div>
 
       {/* Status text */}
-      <div
-        className="mt-2 text-center transition-opacity duration-700"
-        style={{
-          opacity: phase === "done" ? 1 : 0,
-          transitionDelay: "2s",
-        }}
-      >
+      <div className="text-center">
         <p className="text-sm font-medium text-[var(--color-text-primary)]">
           Your intelligence pipeline is being set up
         </p>
@@ -97,6 +53,22 @@ export default function WelcomeAnimation({ competitors }: WelcomeAnimationProps)
           We&apos;re configuring your analysis — your first report will arrive within 24 hours.
         </p>
       </div>
+
+      <style jsx>{`
+        @keyframes birdOrbit {
+          0% { left: 5%; top: 40%; transform: scaleX(1); }
+          25% { left: 35%; top: 10%; transform: scaleX(1); }
+          45% { left: 50%; top: 30%; transform: scaleX(1); }
+          50% { left: 45%; top: 45%; transform: scaleX(-1); }
+          75% { left: 15%; top: 65%; transform: scaleX(-1); }
+          95% { left: 2%; top: 45%; transform: scaleX(-1); }
+          100% { left: 5%; top: 40%; transform: scaleX(1); }
+        }
+        @keyframes birdHover {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(-4px); }
+        }
+      `}</style>
     </div>
   );
 }

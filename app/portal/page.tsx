@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { useSearchParams } from "next/navigation";
 import { usePortal } from "@/components/portal/PortalContext";
 import Link from "next/link";
 import { FileText, Settings, Users } from "lucide-react";
@@ -26,8 +25,6 @@ interface OnboardingData {
 
 export default function DashboardPage() {
   const { customerId, isAdmin, isViewingCustomer } = usePortal();
-  const searchParams = useSearchParams();
-  const isSetupComplete = searchParams.get("setup") === "complete";
   const [reports, setReports] = useState<Report[]>([]);
   const [onboarding, setOnboarding] = useState<OnboardingData | null>(null);
   const [loading, setLoading] = useState(true);
@@ -106,17 +103,10 @@ export default function DashboardPage() {
           We&apos;re setting up your intelligence pipeline. Your first report will arrive within 24 hours.
         </p>
 
-        {/* Welcome animation (on first visit from onboarding) or static card */}
-        {isSetupComplete && onboarding?.competitors && onboarding.competitors.length > 0 ? (
+        {/* Continuous welcome animation */}
+        {onboarding?.competitors && onboarding.competitors.length > 0 && (
           <div className="mb-8">
             <WelcomeAnimation competitors={onboarding.competitors} />
-          </div>
-        ) : (
-          <div className="mb-8 rounded-2xl border border-[var(--color-border-warm)] bg-white p-6">
-            <p className="text-sm font-medium text-[var(--color-text-primary)]">Your pipeline is being configured</p>
-            <p className="mt-1 text-xs text-[var(--color-text-muted)]">
-              We personally set up your analysis and quality-check every report.
-            </p>
           </div>
         )}
 
@@ -124,20 +114,23 @@ export default function DashboardPage() {
           <div className="rounded-2xl border border-[var(--color-border-warm)] bg-white p-6">
             <h2 className="mb-3 text-sm font-semibold text-[var(--color-text-primary)]">Your setup</h2>
             {onboarding.companyName && (
-              <p className="mb-2 text-sm text-[var(--color-text-muted)]">
+              <p className="mb-3 text-sm text-[var(--color-text-muted)]">
                 <span className="font-medium text-[var(--color-text-primary)]">Company:</span> {onboarding.companyName}
               </p>
             )}
             {onboarding.competitors && onboarding.competitors.length > 0 && (
               <div className="mb-3">
-                <p className="mb-1 text-sm font-medium text-[var(--color-text-primary)]">Competitors:</p>
-                <ul className="space-y-1">
+                <p className="mb-2 text-sm font-medium text-[var(--color-text-primary)]">Competitors:</p>
+                <div className="flex flex-wrap gap-2">
                   {onboarding.competitors.map((c, i) => (
-                    <li key={i} className="text-sm text-[var(--color-text-muted)]">
+                    <span
+                      key={i}
+                      className="rounded-full bg-[var(--color-accent)]/10 px-3 py-1 text-xs font-medium text-[var(--color-accent-dark)]"
+                    >
                       {c.name || c.website}
-                    </li>
+                    </span>
                   ))}
-                </ul>
+                </div>
               </div>
             )}
             <Link

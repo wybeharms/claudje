@@ -9,6 +9,7 @@ import {
   PanelLeftOpen,
   PanelLeftClose,
 } from "lucide-react";
+import ClaudjeBird from "./ClaudjeBird";
 
 export default function PortalSidebar({
   isAdmin,
@@ -39,7 +40,7 @@ export default function PortalSidebar({
             collapsed ? "justify-center" : "gap-2"
           }`}
         >
-          <span className="text-[var(--color-accent)] text-xl font-bold">c</span>
+          <ClaudjeBird size={24} color="#C9A96E" accentColor="#B8954F" />
           {!collapsed && "claudje"}
         </Link>
       </div>
