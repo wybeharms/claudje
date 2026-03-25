@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
 import { createCognitoUser } from "@/lib/cognito";
 import { putJsonToS3 } from "@/lib/s3";
+import { sendNotificationEmail } from "@/lib/ses";
 
 export async function POST(req: NextRequest) {
   const session = await auth();
@@ -41,6 +42,13 @@ export async function POST(req: NextRequest) {
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
     });
+
+    const notifyEmail = process.env.SES_NOTIFY_EMAIL || "beer.claudje@gmail.com";
+    sendNotificationEmail({
+      to: notifyEmail,
+      subject: `New claudje org (admin): ${companyName}`,
+      textBody: `Admin created new organization.\n\nCompany: ${companyName}\nContact: ${contactName}\nEmail: ${email}\nWebsite: ${website || "(none)"}\nOrg ID: ${orgId}\n\nNext step: run /new-customer ${orgId} in the customers repo.`,
+    }).catch(() => {});
 
     return NextResponse.json({ success: true, organizationId: orgId });
   } catch (err: unknown) {

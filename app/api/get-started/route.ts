@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { createCognitoUserWithPassword } from "@/lib/cognito";
 import { putJsonToS3 } from "@/lib/s3";
 import { getStripe } from "@/lib/stripe";
+import { sendNotificationEmail } from "@/lib/ses";
 
 const STRIPE_ENABLED = !!(
   process.env.STRIPE_SECRET_KEY && process.env.STRIPE_STARTER_PRICE_ID
@@ -112,6 +113,14 @@ export async function POST(req: NextRequest) {
       submittedAt: now,
       updatedAt: now,
     });
+
+    // 4. Notify admin
+    const notifyEmail = process.env.SES_NOTIFY_EMAIL || "beer.claudje@gmail.com";
+    sendNotificationEmail({
+      to: notifyEmail,
+      subject: `New claudje signup: ${companyName}`,
+      textBody: `New customer signed up!\n\nCompany: ${companyName}\nContact: ${contactName}\nEmail: ${email}\nWebsite: ${website}\nPlan: ${selectedPlan}\nCompetitors: ${(competitors || []).length}\nOrg ID: ${orgId}\n\nNext step: run /new-customer ${orgId} in the customers repo.`,
+    }).catch(() => {});
 
     return NextResponse.json({
       success: true,
