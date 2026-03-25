@@ -19,6 +19,10 @@ html {
   --color-gold-light: #D4BA8A;
   --color-gold-dark: #B8954F;
 
+  /* Accent aliases (used by portal components) */
+  --color-accent: #C9A96E;
+  --color-accent-dark: #B8954F;
+
   /* Silver / aluminum accent */
   --color-silver: #B0B5BC;
   --color-silver-light: #C8CCD2;
