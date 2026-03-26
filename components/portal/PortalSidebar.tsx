@@ -9,7 +9,7 @@ import {
   PanelLeftOpen,
   PanelLeftClose,
 } from "lucide-react";
-import { SidebarEagle } from "./ClaudjeBird";
+import ClaudjeBird from "./ClaudjeBird";
 
 export default function PortalSidebar({
   isAdmin,
@@ -40,7 +40,7 @@ export default function PortalSidebar({
             collapsed ? "justify-center" : "gap-2"
           }`}
         >
-          <SidebarEagle size={24} />
+          <ClaudjeBird size={24} light />
           {!collapsed && "claudje"}
         </Link>
       </div>

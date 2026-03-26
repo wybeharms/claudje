@@ -13,7 +13,7 @@ export default function WelcomeAnimation({ competitors }: WelcomeAnimationProps)
 
   // Sync pill highlights with back-and-forth flight path
   useEffect(() => {
-    const cycleDuration = 10000;
+    const cycleDuration = 5000;
     const totalTicks = comps.length * 2;
     const tickInterval = cycleDuration / totalTicks;
     let tick = 0;
@@ -71,7 +71,7 @@ export default function WelcomeAnimation({ competitors }: WelcomeAnimationProps)
 
       <style jsx global>{`
         .eagle-flight {
-          animation: eagleFly 10s ease-in-out infinite;
+          animation: eagleFly 5s ease-in-out infinite;
         }
         .eagle-bob {
           animation: eagleBob 4s ease-in-out infinite;
@@ -84,13 +84,13 @@ export default function WelcomeAnimation({ competitors }: WelcomeAnimationProps)
         }
 
         @keyframes eagleFly {
-          0%    { transform: translateX(5%) scaleX(1) scale(1); top: 25%; }
-          24%   { transform: translateX(38%) scaleX(1) scale(0.82); top: 8%; }
-          49%   { transform: translateX(75%) scaleX(1) scale(1); top: 22%; }
-          50%   { transform: translateX(75%) scaleX(-1) scale(1); top: 22%; }
-          75%   { transform: translateX(38%) scaleX(-1) scale(0.82); top: 5%; }
-          99%   { transform: translateX(5%) scaleX(-1) scale(1); top: 20%; }
-          100%  { transform: translateX(5%) scaleX(1) scale(1); top: 25%; }
+          0%    { left: 0%; transform: scaleX(1) scale(1); top: 25%; }
+          24%   { left: 40%; transform: scaleX(1) scale(0.82); top: 8%; }
+          49%   { left: 80%; transform: scaleX(1) scale(1); top: 22%; }
+          50%   { left: 80%; transform: scaleX(-1) scale(1); top: 22%; }
+          75%   { left: 40%; transform: scaleX(-1) scale(0.82); top: 5%; }
+          99%   { left: 0%; transform: scaleX(-1) scale(1); top: 20%; }
+          100%  { left: 0%; transform: scaleX(1) scale(1); top: 25%; }
         }
 
         @keyframes eagleBob {

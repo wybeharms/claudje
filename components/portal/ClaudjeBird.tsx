@@ -107,8 +107,8 @@ export function FlyingEagle({
       className={className}
       style={style}
     >
-      {/* Tail feathers */}
-      <path d="M34,28 L20,24 L14,28 L18,30 L22,34 L34,32 Z" fill="#2C1810" />
+      {/* Tail feathers — white (bald eagle) */}
+      <path d="M34,28 L20,24 L14,28 L18,30 L22,34 L34,32 Z" fill="#FFFFFF" stroke="#3A2519" strokeWidth="0.3" />
 
       {/* Body — streamlined */}
       <ellipse cx="52" cy="28" rx="16" ry="5" fill="#3A2519" />
@@ -140,8 +140,12 @@ export function FlyingEagle({
         </g>
       </g>
 
-      {/* Head — bright white with subtle outline for contrast on cream bg */}
-      <ellipse cx="72" cy="24" rx="6" ry="5" fill="#FFFFFF" stroke="#3A2519" strokeWidth="0.5" />
+      {/* Talons — orange */}
+      <path d="M46,33 L44,37 L46,36 L48,38 L47,33 Z" fill="#E86F00" />
+      <path d="M54,33 L52,37 L54,36 L56,38 L55,33 Z" fill="#E86F00" />
+
+      {/* Head — angular, aggressive profile */}
+      <path d="M66,25 L67,20 L74,19 L78,22 L78,26 Q76,29 72,29 Q67,29 66,25 Z" fill="#FFFFFF" stroke="#3A2519" strokeWidth="0.5" />
       {/* Eye */}
       <circle cx="74" cy="23" r="1.2" fill="#2C1810" />
       <circle cx="74.3" cy="22.7" r="0.4" fill="#FAF6F0" />
