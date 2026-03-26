@@ -13,7 +13,7 @@ export default function WelcomeAnimation({ competitors }: WelcomeAnimationProps)
 
   // Sync pill highlights with back-and-forth flight path
   useEffect(() => {
-    const cycleDuration = 5000;
+    const cycleDuration = 8000;
     const totalTicks = comps.length * 2;
     const tickInterval = cycleDuration / totalTicks;
     let tick = 0;
@@ -71,7 +71,7 @@ export default function WelcomeAnimation({ competitors }: WelcomeAnimationProps)
 
       <style jsx global>{`
         .eagle-flight {
-          animation: eagleFly 5s ease-in-out infinite;
+          animation: eagleFly 8s ease-in-out infinite;
         }
         .eagle-bob {
           animation: eagleBob 4s ease-in-out infinite;
