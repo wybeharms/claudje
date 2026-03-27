@@ -3,7 +3,8 @@ import { createCognitoUserWithPassword, authenticateUser, parseIdToken } from "@
 import { createAuthToken } from "@/lib/auth-token";
 import { putJsonToS3 } from "@/lib/s3";
 import { getStripe } from "@/lib/stripe";
-import { sendNotificationEmail } from "@/lib/ses";
+import { sendNotificationEmail, sendWelcomeEmail } from "@/lib/ses";
+import { deriveOrgId, checkOrgExists } from "@/lib/org";
 
 const STRIPE_ENABLED = !!(
   process.env.STRIPE_SECRET_KEY && process.env.STRIPE_STARTER_PRICE_ID
@@ -41,18 +42,22 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  // Derive organizationId from website domain
-  const orgId = website
-    .replace(/^https?:\/\//, "")
-    .replace(/^www\./, "")
-    .split("/")[0]
-    .replace(/[^a-z0-9.-]+/gi, "")
-    .toLowerCase();
+  const orgId = deriveOrgId(website);
 
   const selectedPlan = plan || "starter";
   const now = new Date().toISOString();
 
   try {
+    // Check for duplicate organization
+    const orgExists = await checkOrgExists(orgId);
+    if (orgExists) {
+      return NextResponse.json(
+        {
+          error: "An organization with this website domain already exists. Please contact support if you want to join an existing organization.",
+        },
+        { status: 409 }
+      );
+    }
     // 1. Create Cognito user with the password they chose
     await createCognitoUserWithPassword(email, password, "customer", orgId);
 
@@ -118,14 +123,20 @@ export async function POST(req: NextRequest) {
     });
 
     // 4. Notify admin
-    const notifyEmail = process.env.SES_NOTIFY_EMAIL || "beer.claudje@gmail.com";
     sendNotificationEmail({
-      to: notifyEmail,
+      to: "bharmsuva@gmail.com",
       subject: `New claudje signup: ${companyName}`,
       textBody: `New customer signed up!\n\nCompany: ${companyName}\nContact: ${contactName}\nEmail: ${email}\nWebsite: ${website}\nPlan: ${selectedPlan}\nCompetitors: ${(competitors || []).length}\nOrg ID: ${orgId}\n\nNext step: run /new-customer ${orgId} in the customers repo.`,
     }).catch(() => {});
 
-    // 5. Auto-authenticate for seamless login
+    // 5. Welcome email to customer
+    sendWelcomeEmail({
+      to: email,
+      contactName,
+      companyName,
+    }).catch(() => {});
+
+    // 6. Auto-authenticate for seamless login
     let authToken: string | null = null;
     try {
       const authResult = await authenticateUser(email, password);
