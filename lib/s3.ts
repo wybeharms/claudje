@@ -76,6 +76,16 @@ export async function getDownloadUrl(key: string): Promise<string> {
   return getSignedUrl(s3, command, { expiresIn: 3600 });
 }
 
+export async function getInlineUrl(key: string): Promise<string> {
+  const command = new GetObjectCommand({
+    Bucket: bucket,
+    Key: key,
+    ResponseContentDisposition: "inline",
+    ResponseContentType: "application/pdf",
+  });
+  return getSignedUrl(s3, command, { expiresIn: 3600 });
+}
+
 export async function listCustomerIds(): Promise<string[]> {
   const res = await s3.send(
     new ListObjectsV2Command({ Bucket: bucket, Delimiter: "/" })
