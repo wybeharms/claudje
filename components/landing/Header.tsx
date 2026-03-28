@@ -1,10 +1,17 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import ClaudjeBird from "../portal/ClaudjeBird";
 
+const LOCALES = [
+  { code: "en-US", flag: "🇺🇸", label: "English (US)", currency: "USD", symbol: "$" },
+  { code: "en-GB", flag: "🇬🇧", label: "English (UK)", currency: "GBP", symbol: "£" },
+  { code: "nl", flag: "🇳🇱", label: "Nederlands", currency: "EUR", symbol: "€" },
+  { code: "it", flag: "🇮🇹", label: "Italiano", currency: "EUR", symbol: "€" },
+  { code: "es", flag: "🇪🇸", label: "Español", currency: "EUR", symbol: "€" },
+];
+
 const NAV_LINKS = [
-  { label: "How It Works", href: "#how-it-works" },
   { label: "Pricing", href: "#pricing" },
   { label: "FAQ", href: "#faq" },
   { label: "About", href: "/about" },
@@ -12,15 +19,45 @@ const NAV_LINKS = [
 
 const CTA_HREF = "/get-started";
 
+function detectLocale(): string {
+  if (typeof navigator === "undefined") return "nl";
+  const lang = navigator.language || "nl";
+  const match = LOCALES.find(
+    (l) => l.code === lang || lang.startsWith(l.code.split("-")[0])
+  );
+  return match ? match.code : "nl";
+}
+
+export { LOCALES };
+
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [locale, setLocale] = useState("nl");
+  const [localeOpen, setLocaleOpen] = useState(false);
+  const localeRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    setLocale(detectLocale());
+  }, []);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 400);
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  useEffect(() => {
+    function handleClickOutside(e: MouseEvent) {
+      if (localeRef.current && !localeRef.current.contains(e.target as Node)) {
+        setLocaleOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  const currentLocale = LOCALES.find((l) => l.code === locale) || LOCALES[2];
 
   return (
     <>
@@ -51,6 +88,37 @@ export default function Header() {
 
           {/* Desktop CTA */}
           <div className="hidden items-center gap-4 md:flex">
+            {/* Locale selector */}
+            <div ref={localeRef} className="relative">
+              <button
+                onClick={() => setLocaleOpen(!localeOpen)}
+                className="flex items-center gap-1 rounded-md px-2 py-1 text-sm transition-colors hover:bg-white/10"
+                aria-label="Change language"
+              >
+                <span className="text-base">{currentLocale.flag}</span>
+              </button>
+              {localeOpen && (
+                <div className="absolute right-0 top-full mt-2 min-w-[160px] rounded-lg border border-white/10 bg-brown shadow-lg">
+                  {LOCALES.map((l) => (
+                    <button
+                      key={l.code}
+                      onClick={() => {
+                        setLocale(l.code);
+                        setLocaleOpen(false);
+                      }}
+                      className={`flex w-full items-center gap-2.5 px-4 py-2 text-sm whitespace-nowrap transition-colors hover:bg-white/10 first:rounded-t-lg last:rounded-b-lg ${
+                        l.code === locale
+                          ? "text-text-on-dark"
+                          : "text-text-on-dark-muted"
+                      }`}
+                    >
+                      <span className="text-base">{l.flag}</span>
+                      <span>{l.label}</span>
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
             <a
               href="/login"
               className="text-sm text-text-on-dark-muted transition-colors hover:text-text-on-dark"
@@ -99,6 +167,22 @@ export default function Header() {
         {menuOpen && (
           <nav className="border-t border-border-on-dark px-6 py-4 md:hidden">
             <div className="flex flex-col gap-4">
+              {/* Mobile locale selector */}
+              <div className="flex gap-2">
+                {LOCALES.map((l) => (
+                  <button
+                    key={l.code}
+                    onClick={() => setLocale(l.code)}
+                    className={`rounded-md px-2 py-1 text-base transition-colors ${
+                      l.code === locale
+                        ? "bg-white/10"
+                        : "opacity-50 hover:opacity-100"
+                    }`}
+                  >
+                    {l.flag}
+                  </button>
+                ))}
+              </div>
               {NAV_LINKS.map((link) => (
                 <a
                   key={link.href}

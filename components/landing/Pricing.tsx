@@ -4,31 +4,39 @@ const CTA_HREF =
 const tiers = [
   {
     name: "Starter",
-    price: "€60",
+    price: "€49",
     period: "/mo",
     features: [
       "5 competitors monitored",
-      "Weekly report",
-      "Pricing intelligence",
-      "Web monitoring",
-      "Review tracking",
+      "Biweekly report",
+      "Web & review monitoring",
     ],
     highlight: false,
   },
   {
-    name: "Pro",
-    price: "€100",
+    name: "Business",
+    price: "€99",
     period: "/mo",
     features: [
       "10 competitors monitored",
-      "Daily reports",
-      "Everything in Starter",
-      "Company registry data",
+      "Weekly report",
       "LinkedIn tracking",
+      "Price analysis",
       "Search trend analysis",
-      "Priority support",
     ],
     highlight: true,
+  },
+  {
+    name: "Pro",
+    price: "€249",
+    period: "/mo",
+    features: [
+      "15 competitors monitored",
+      "Daily, weekly, or biweekly reports",
+      "Daily price tracking",
+      "Full report customization",
+    ],
+    highlight: false,
   },
 ];
 
@@ -43,7 +51,7 @@ export default function Pricing() {
           Simple plans. No setup fees. Cancel anytime.
         </p>
 
-        <div className="mx-auto mt-12 grid max-w-3xl gap-8 md:grid-cols-2">
+        <div className="mx-auto mt-12 grid max-w-5xl gap-6 md:grid-cols-3">
           {tiers.map((tier) => (
             <div
               key={tier.name}

@@ -1,9 +1,45 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { signIn } from "next-auth/react";
 import { Plus, X } from "lucide-react";
+
+const COUNTRIES = [
+  { code: "NL", name: "Netherlands", flag: "🇳🇱" },
+  { code: "US", name: "United States", flag: "🇺🇸" },
+  { code: "GB", name: "United Kingdom", flag: "🇬🇧" },
+  { code: "DE", name: "Germany", flag: "🇩🇪" },
+  { code: "FR", name: "France", flag: "🇫🇷" },
+  { code: "BE", name: "Belgium", flag: "🇧🇪" },
+  { code: "ES", name: "Spain", flag: "🇪🇸" },
+  { code: "IT", name: "Italy", flag: "🇮🇹" },
+  { code: "AT", name: "Austria", flag: "🇦🇹" },
+  { code: "CH", name: "Switzerland", flag: "🇨🇭" },
+  { code: "SE", name: "Sweden", flag: "🇸🇪" },
+  { code: "NO", name: "Norway", flag: "🇳🇴" },
+  { code: "DK", name: "Denmark", flag: "🇩🇰" },
+  { code: "FI", name: "Finland", flag: "🇫🇮" },
+  { code: "PT", name: "Portugal", flag: "🇵🇹" },
+  { code: "IE", name: "Ireland", flag: "🇮🇪" },
+  { code: "PL", name: "Poland", flag: "🇵🇱" },
+  { code: "CA", name: "Canada", flag: "🇨🇦" },
+  { code: "AU", name: "Australia", flag: "🇦🇺" },
+  { code: "OTHER", name: "Other", flag: "🌍" },
+];
+
+function detectCountry(): string {
+  if (typeof navigator === "undefined") return "NL";
+  const lang = navigator.language || "";
+  const region = lang.split("-")[1]?.toUpperCase();
+  if (region && COUNTRIES.some((c) => c.code === region)) return region;
+  const langMap: Record<string, string> = {
+    nl: "NL", de: "DE", fr: "FR", es: "ES", it: "IT", pt: "PT",
+    sv: "SE", no: "NO", da: "DK", fi: "FI", pl: "PL",
+  };
+  const primary = lang.split("-")[0].toLowerCase();
+  return langMap[primary] || "NL";
+}
 
 const DEFAULT_MODULES = [
   { id: "pricing-products", label: "Pricing & Products" },
@@ -45,6 +81,13 @@ export default function GetStartedPage() {
   const [password, setPassword] = useState("");
   const [phone, setPhone] = useState("");
 
+  // Step 1 (extra)
+  const [country, setCountry] = useState("");
+
+  useEffect(() => {
+    setCountry(detectCountry());
+  }, []);
+
   // Step 2
   const [competitors, setCompetitors] = useState<Competitor[]>([
     { name: "", website: "" },
@@ -73,7 +116,7 @@ export default function GetStartedPage() {
   }
 
   function canProceedStep2() {
-    return competitors.some((c) => c.website.trim() !== "");
+    return competitors.some((c) => c.name.trim() !== "");
   }
 
   async function handleSubmit() {
@@ -91,11 +134,14 @@ export default function GetStartedPage() {
           phone,
           companyName,
           website: website.startsWith("http") ? website : `https://${website}`,
+          country,
           competitors: competitors
-            .filter((c) => c.website.trim())
+            .filter((c) => c.name.trim())
             .map((c) => ({
               name: c.name,
-              website: c.website.startsWith("http") ? c.website : `https://${c.website}`,
+              website: c.website.trim()
+                ? c.website.startsWith("http") ? c.website : `https://${c.website}`
+                : "",
             })),
           reportModules: DEFAULT_MODULES.map((m) => m.id),
           additionalContext: "",
@@ -266,6 +312,22 @@ export default function GetStartedPage() {
                     className="w-full rounded-lg border border-[var(--color-border-warm)] bg-[var(--color-cream)] px-4 py-2.5 text-sm outline-none transition-colors focus:border-[var(--color-accent)] focus:ring-1 focus:ring-[var(--color-accent)]"
                   />
                 </div>
+                <div>
+                  <label className="mb-1 block text-sm font-medium text-[var(--color-text-primary)]">
+                    Country
+                  </label>
+                  <select
+                    value={country}
+                    onChange={(e) => setCountry(e.target.value)}
+                    className="w-full rounded-lg border border-[var(--color-border-warm)] bg-[var(--color-cream)] px-4 py-2.5 text-sm outline-none transition-colors focus:border-[var(--color-accent)] focus:ring-1 focus:ring-[var(--color-accent)]"
+                  >
+                    {COUNTRIES.map((c) => (
+                      <option key={c.code} value={c.code}>
+                        {c.flag} {c.name}
+                      </option>
+                    ))}
+                  </select>
+                </div>
 
                 <button
                   onClick={() => setStep(2)}
@@ -284,13 +346,20 @@ export default function GetStartedPage() {
               <h2 className="mb-1 text-xl font-bold text-[var(--color-text-primary)]">
                 Your competitors
               </h2>
-              <p className="mb-6 text-sm text-[var(--color-text-muted)]">
-                Enter the competitors you want us to monitor. We&apos;ll do the rest.
+              <p className="mb-2 text-sm text-[var(--color-text-muted)]">
+                We recommend adding 5 competitors. Don&apos;t have 5? No problem, we&apos;ll find the rest.
               </p>
 
               <div className="flex flex-col gap-3">
                 {competitors.map((comp, i) => (
-                  <div key={i} className="flex gap-2">
+                  <div
+                    key={i}
+                    className={`flex gap-2 rounded-lg p-1.5 transition-colors ${
+                      comp.name.trim()
+                        ? "bg-[var(--color-accent)]/5"
+                        : "bg-transparent"
+                    }`}
+                  >
                     <input
                       type="text"
                       value={comp.name}
@@ -302,7 +371,7 @@ export default function GetStartedPage() {
                       type="text"
                       value={comp.website}
                       onChange={(e) => updateCompetitor(i, "website", e.target.value)}
-                      placeholder="competitor.com"
+                      placeholder="competitor.com (optional)"
                       className="flex-1 rounded-lg border border-[var(--color-border-warm)] bg-[var(--color-cream)] px-3 py-2.5 text-sm outline-none transition-colors focus:border-[var(--color-accent)] focus:ring-1 focus:ring-[var(--color-accent)]"
                     />
                     {competitors.length > 1 && (
@@ -363,9 +432,9 @@ export default function GetStartedPage() {
                 </p>
                 <p className="mb-1 text-xs font-medium text-[var(--color-text-muted)]">Monitoring:</p>
                 <ul className="space-y-0.5">
-                  {competitors.filter((c) => c.website.trim()).map((c, i) => (
+                  {competitors.filter((c) => c.name.trim()).map((c, i) => (
                     <li key={i} className="text-sm text-[var(--color-text-primary)]">
-                      {c.name || c.website}
+                      {c.name}{c.website.trim() ? ` (${c.website})` : ""}
                     </li>
                   ))}
                 </ul>
@@ -407,10 +476,10 @@ export default function GetStartedPage() {
                 <div className="flex items-baseline justify-between">
                   <div>
                     <p className="text-sm font-semibold text-[var(--color-text-primary)]">Starter Plan</p>
-                    <p className="text-xs text-[var(--color-text-muted)]">Up to 5 competitors, weekly reports</p>
+                    <p className="text-xs text-[var(--color-text-muted)]">Up to 5 competitors, biweekly reports</p>
                   </div>
                   <p className="text-lg font-bold text-[var(--color-text-primary)]">
-                    &euro;60<span className="text-sm font-normal text-[var(--color-text-muted)]">/mo</span>
+                    &euro;49<span className="text-sm font-normal text-[var(--color-text-muted)]">/mo</span>
                   </p>
                 </div>
               </div>
