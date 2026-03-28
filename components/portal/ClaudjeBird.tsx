@@ -1,86 +1,26 @@
+import Image from "next/image";
+
 interface ClaudjeBirdProps {
   size?: number;
   className?: string;
   style?: React.CSSProperties;
-  /** Use light (gold) fills for dark backgrounds like header/sidebar */
   light?: boolean;
 }
 
-/**
- * Standing eagle — front-facing, bent-wing pose (upper arm up, primaries down).
- * Bald eagle colors: brown body/wings, white head, gold beak/talons.
- * Set light=true for gold fills on dark backgrounds.
- */
 export default function ClaudjeBird({
   size = 48,
   className = "",
   style,
-  light = false,
 }: ClaudjeBirdProps) {
-  const wing = light ? "#C9A96E" : "#3A2519";
-  const wingDetail = light ? "#B8954F" : "#2C1810";
-  const body = light ? "#C9A96E" : "#3A2519";
-  const bodyDetail = light ? "#B8954F" : "#2C1810";
-
   return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 64 64"
+    <Image
+      src="/logo.svg"
+      alt="claudje eagle"
       width={size}
       height={size}
       className={className}
       style={style}
-    >
-      {/* Left wing — bent pose: upper arm UP, primaries angle DOWN */}
-      <path
-        d="M24,28 L18,20 L12,10 L8,16 L6,12 L3,20 L2,16 L2,24 L10,28 L18,30 Z"
-        fill={wing}
-      />
-      <path d="M18,30 L10,28 L14,28 L20,30 Z" fill={wingDetail} />
-
-      {/* Right wing — bent pose (mirrored) */}
-      <path
-        d="M40,28 L46,20 L52,10 L56,16 L58,12 L61,20 L62,16 L62,24 L54,28 L46,30 Z"
-        fill={wing}
-      />
-      <path d="M46,30 L54,28 L50,28 L44,30 Z" fill={wingDetail} />
-
-      {/* Body */}
-      <path
-        d="M24,28 Q22,34 23,40 Q25,48 32,50 Q39,48 41,40 Q42,34 40,28 Z"
-        fill={body}
-      />
-      <path
-        d="M28,34 Q32,38 36,34 Q32,42 28,34 Z"
-        fill={bodyDetail}
-        opacity="0.4"
-      />
-
-      {/* Neck */}
-      <path d="M28,20 Q28,24 24,28 L40,28 Q36,24 36,20 Z" fill={body} />
-
-      {/* Head — white (bald eagle) */}
-      <ellipse cx="32" cy="14" rx="6" ry="7" fill="#FAF6F0" />
-
-      {/* Eyes */}
-      <circle cx="29" cy="14" r="1.3" fill="#2C1810" />
-      <circle cx="35" cy="14" r="1.3" fill="#2C1810" />
-      <circle cx="29.3" cy="13.6" r="0.4" fill="#FAF6F0" />
-      <circle cx="35.3" cy="13.6" r="0.4" fill="#FAF6F0" />
-
-      {/* Beak — gold */}
-      <path d="M30,17 L32,22 L34,17 Q32,19 30,17 Z" fill="#D4A030" />
-
-      {/* Talons — gold */}
-      <path
-        d="M26,50 L24,56 L26,55 L28,57 L29,54 L28,50 Z"
-        fill="#D4A030"
-      />
-      <path
-        d="M38,50 L40,56 L38,55 L36,57 L35,54 L36,50 Z"
-        fill="#D4A030"
-      />
-    </svg>
+    />
   );
 }
 
@@ -159,27 +99,3 @@ export function FlyingEagle({
   );
 }
 
-/**
- * Sidebar eagle — brown variant (matches favicon) on near-white background
- * for visibility on the dark brown sidebar.
- */
-export function SidebarEagle({
-  size = 24,
-  className = "",
-}: {
-  size?: number;
-  className?: string;
-}) {
-  return (
-    <span
-      className={`inline-flex items-center justify-center rounded-md ${className}`}
-      style={{
-        width: size + 8,
-        height: size + 8,
-        backgroundColor: "rgba(255, 255, 255, 0.9)",
-      }}
-    >
-      <ClaudjeBird size={size} />
-    </span>
-  );
-}

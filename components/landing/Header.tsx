@@ -32,7 +32,7 @@ export default function Header() {
             href="/"
             className="flex items-center gap-2 font-heading text-2xl tracking-tight text-text-on-dark"
           >
-            <ClaudjeBird size={24} light />
+            <ClaudjeBird size={32} light className="translate-y-[1px]" />
             claudje
           </a>
 

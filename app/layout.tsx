@@ -19,6 +19,9 @@ export const metadata: Metadata = {
   title: "claudje — Competitor Intelligence for SMBs",
   description:
     "claudje monitors your competitors' pricing, reviews, web activity, and public filings — and delivers a clear AI-generated report straight to your inbox.",
+  icons: {
+    icon: "/favicon.svg",
+  },
   openGraph: {
     title: "claudje — Competitor Intelligence for SMBs",
     description:
