@@ -117,5 +117,5 @@ export async function listCustomerIds(): Promise<string[]> {
   );
   return (res.CommonPrefixes ?? [])
     .map((p) => p.Prefix?.replace(/\/$/, "") ?? "")
-    .filter((id) => id && id !== "all");
+    .filter((id) => id && id !== "all" && id !== "requests");
 }
