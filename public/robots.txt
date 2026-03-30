@@ -1,0 +1,45 @@
+# claudje.com robots.txt
+
+# Default: allow all standard crawlers
+User-agent: *
+Allow: /
+Disallow: /portal/
+Disallow: /api/
+
+# OpenAI — search & retrieval bots
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+# Anthropic — search & retrieval bots
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: Claude-User
+Allow: /
+
+# Perplexity
+User-agent: PerplexityBot
+Allow: /
+
+# Google AI
+User-agent: Google-Extended
+Allow: /
+
+# Apple AI
+User-agent: Applebot-Extended
+Allow: /
+
+# Common Crawl — block (training data aggregator)
+User-agent: CCBot
+Disallow: /
+
+Sitemap: https://claudje.com/sitemap.xml

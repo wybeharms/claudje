@@ -45,8 +45,8 @@ dev/
 │   ├── portal/                          Auth-gated area
 │   │   ├── page.tsx                       Dashboard (report list or "preparing" state)
 │   │   ├── reports/[id]/                  Individual report view
-│   │   ├── settings/                      Preferences, competitor management
-│   │   └── admin/                         Admin panel (customer switching)
+│   │   ├── settings/                      Preferences, competitors, team, billing
+│   │   └── admin/                         Admin panel (requests, customers, users, create org)
 │   └── api/                             API routes
 │       ├── auth/                          Cognito auth flows
 │       ├── get-started/                   Onboarding submission → S3 + Cognito

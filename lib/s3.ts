@@ -86,6 +86,31 @@ export async function getInlineUrl(key: string): Promise<string> {
   return getSignedUrl(s3, command, { expiresIn: 3600 });
 }
 
+// --- Report request helpers ---
+
+export interface ReportRequest {
+  id: string;
+  customerId: string;
+  companyName: string;
+  status: "pending" | "in-progress" | "delivered";
+  dueDate: string;
+  cadence: "weekly" | "biweekly" | "daily";
+  createdAt: string;
+  deliveredAt: string | null;
+}
+
+export async function listRequests(): Promise<ReportRequest[]> {
+  const objects = await listS3Objects("requests/");
+  const requests = await Promise.all(
+    objects
+      .filter((obj) => obj.key.endsWith(".json"))
+      .map((obj) => getJsonFromS3<ReportRequest>(obj.key))
+  );
+  return (requests.filter(Boolean) as ReportRequest[]).sort(
+    (a, b) => a.dueDate.localeCompare(b.dueDate)
+  );
+}
+
 export async function listCustomerIds(): Promise<string[]> {
   const res = await s3.send(
     new ListObjectsV2Command({ Bucket: bucket, Delimiter: "/" })

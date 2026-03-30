@@ -38,6 +38,9 @@ export default function Footer() {
           <a href="/about" className="transition-colors hover:text-text-on-dark">
             About
           </a>
+          <a href="/blog" className="transition-colors hover:text-text-on-dark">
+            Blog
+          </a>
           <a
             href="mailto:info@claudje.com"
             className="transition-colors hover:text-text-on-dark"

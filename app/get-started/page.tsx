@@ -1,9 +1,38 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { signIn } from "next-auth/react";
 import { Plus, X } from "lucide-react";
+
+type Plan = "starter" | "business" | "pro";
+
+const PLAN_CONFIG: Record<Plan, {
+  label: string;
+  description: string;
+  price: number;
+  maxCompetitors: number;
+}> = {
+  starter: {
+    label: "Starter Plan",
+    description: "Up to 5 competitors, biweekly reports",
+    price: 49,
+    maxCompetitors: 5,
+  },
+  business: {
+    label: "Business Plan",
+    description: "Up to 10 competitors, weekly reports",
+    price: 99,
+    maxCompetitors: 10,
+  },
+  pro: {
+    label: "Pro Plan",
+    description: "Up to 15 competitors, daily/weekly/biweekly reports",
+    price: 249,
+    maxCompetitors: 15,
+  },
+};
 
 const COUNTRIES = [
   { code: "NL", name: "Netherlands", flag: "🇳🇱" },
@@ -69,6 +98,11 @@ function getPasswordStrength(pw: string): { score: number; label: string; color:
 }
 
 export default function GetStartedPage() {
+  const searchParams = useSearchParams();
+  const planParam = searchParams.get("plan");
+  const plan: Plan =
+    planParam === "business" || planParam === "pro" ? planParam : "starter";
+
   const [step, setStep] = useState(1);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -93,8 +127,10 @@ export default function GetStartedPage() {
     { name: "", website: "" },
   ]);
 
+  const maxCompetitors = PLAN_CONFIG[plan].maxCompetitors;
+
   function addCompetitor() {
-    if (competitors.length < 5) {
+    if (competitors.length < maxCompetitors) {
       setCompetitors([...competitors, { name: "", website: "" }]);
     }
   }
@@ -146,7 +182,7 @@ export default function GetStartedPage() {
           reportModules: DEFAULT_MODULES.map((m) => m.id),
           additionalContext: "",
           uploadedFiles: [],
-          plan: "starter",
+          plan,
         }),
       });
 
@@ -347,7 +383,7 @@ export default function GetStartedPage() {
                 Your competitors
               </h2>
               <p className="mb-2 text-sm text-[var(--color-text-muted)]">
-                We recommend adding 5 competitors. Don&apos;t have 5? No problem, we&apos;ll find the rest.
+                We recommend adding {maxCompetitors} competitors. Don&apos;t have {maxCompetitors}? No problem, we&apos;ll find the rest.
               </p>
 
               <div className="flex flex-col gap-3">
@@ -385,7 +421,7 @@ export default function GetStartedPage() {
                   </div>
                 ))}
 
-                {competitors.length < 5 && (
+                {competitors.length < maxCompetitors && (
                   <button
                     onClick={addCompetitor}
                     className="flex items-center gap-1.5 text-sm text-[var(--color-accent)] transition-colors hover:text-[var(--color-accent-dark)]"
@@ -475,11 +511,11 @@ export default function GetStartedPage() {
               <div className="mb-6 rounded-xl border border-[var(--color-border-warm)] p-4">
                 <div className="flex items-baseline justify-between">
                   <div>
-                    <p className="text-sm font-semibold text-[var(--color-text-primary)]">Starter Plan</p>
-                    <p className="text-xs text-[var(--color-text-muted)]">Up to 5 competitors, biweekly reports</p>
+                    <p className="text-sm font-semibold text-[var(--color-text-primary)]">{PLAN_CONFIG[plan].label}</p>
+                    <p className="text-xs text-[var(--color-text-muted)]">{PLAN_CONFIG[plan].description}</p>
                   </div>
                   <p className="text-lg font-bold text-[var(--color-text-primary)]">
-                    &euro;49<span className="text-sm font-normal text-[var(--color-text-muted)]">/mo</span>
+                    &euro;{PLAN_CONFIG[plan].price}<span className="text-sm font-normal text-[var(--color-text-muted)]">/mo</span>
                   </p>
                 </div>
               </div>

@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { usePortal } from "@/components/portal/PortalContext";
-import { Plus, X, Save, ExternalLink } from "lucide-react";
+import { Plus, X, Save, ExternalLink, Users } from "lucide-react";
 
 const DEFAULT_MODULES = [
   { id: "pricing-products", label: "Pricing & Products" },
@@ -35,11 +35,19 @@ interface BillingData {
   trialEndsAt: string | null;
 }
 
+interface TeamMember {
+  email: string;
+  status: string;
+  createdAt: string | null;
+}
+
 export default function SettingsPage() {
   const { customerId, isAdmin } = usePortal();
-  const [tab, setTab] = useState<"company" | "competitors" | "modules" | "billing">("company");
+  const [tab, setTab] = useState<"company" | "competitors" | "modules" | "team" | "billing">("company");
   const [data, setData] = useState<SettingsData | null>(null);
   const [billing, setBilling] = useState<BillingData | null>(null);
+  const [team, setTeam] = useState<TeamMember[]>([]);
+  const [teamLoading, setTeamLoading] = useState(false);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
@@ -71,6 +79,27 @@ export default function SettingsPage() {
     }
     load();
   }, [customerId, isAdmin]);
+
+  useEffect(() => {
+    if (tab !== "team") return;
+    async function loadTeam() {
+      setTeamLoading(true);
+      try {
+        const params = new URLSearchParams();
+        if (isAdmin && customerId) params.set("customerId", customerId);
+        const res = await fetch(`/api/portal/team?${params}`);
+        if (res.ok) {
+          const json = await res.json();
+          setTeam(json.members ?? []);
+        }
+      } catch {
+        // Silently fail
+      } finally {
+        setTeamLoading(false);
+      }
+    }
+    loadTeam();
+  }, [tab, customerId, isAdmin]);
 
   async function handleSave() {
     if (!data) return;
@@ -142,6 +171,7 @@ export default function SettingsPage() {
     { id: "company" as const, label: "Company" },
     { id: "competitors" as const, label: "Competitors" },
     { id: "modules" as const, label: "Report Preferences" },
+    { id: "team" as const, label: "Team" },
     { id: "billing" as const, label: "Billing" },
   ];
 
@@ -151,7 +181,7 @@ export default function SettingsPage() {
         <h1 className="text-2xl font-bold text-[var(--color-text-primary)]" style={{ fontFamily: "var(--font-heading)" }}>
           Settings
         </h1>
-        {tab !== "billing" && (
+        {tab !== "billing" && tab !== "team" && (
           <button
             onClick={handleSave}
             disabled={saving}
@@ -280,6 +310,56 @@ export default function SettingsPage() {
               <p className="mb-2 text-xs text-[var(--color-text-muted)]">What matters most? What should we focus on?</p>
               <textarea value={data.additionalContext || ""} onChange={(e) => updateField("additionalContext", e.target.value)} rows={4} placeholder="e.g., Focus on pricing changes in gluten-free products..." className="w-full rounded-lg border border-[var(--color-border-warm)] bg-[var(--color-cream)] px-4 py-2.5 text-sm outline-none focus:border-[var(--color-accent)] focus:ring-1 focus:ring-[var(--color-accent)]" />
             </div>
+          </div>
+        )}
+
+        {/* Team Tab */}
+        {tab === "team" && (
+          <div className="flex flex-col gap-4">
+            <div className="flex items-center gap-2 mb-2">
+              <Users className="h-5 w-5 text-[var(--color-text-muted)]" />
+              <p className="text-sm text-[var(--color-text-muted)]">
+                Gebruikers met toegang tot uw organisatie.
+              </p>
+            </div>
+            {teamLoading ? (
+              <div className="flex items-center justify-center py-8">
+                <div className="h-6 w-6 animate-spin rounded-full border-2 border-[var(--color-accent)] border-t-transparent" />
+              </div>
+            ) : team.length === 0 ? (
+              <p className="text-center text-sm text-[var(--color-text-muted)] py-8">Geen teamleden gevonden.</p>
+            ) : (
+              <div className="rounded-xl border border-[var(--color-border-warm)] overflow-hidden">
+                <table className="w-full text-sm">
+                  <thead>
+                    <tr className="border-b border-[var(--color-border-warm)] bg-[var(--color-cream)]">
+                      <th className="px-4 py-2 text-left font-medium text-[var(--color-text-muted)]">Email</th>
+                      <th className="px-4 py-2 text-left font-medium text-[var(--color-text-muted)]">Status</th>
+                      <th className="px-4 py-2 text-left font-medium text-[var(--color-text-muted)]">Lid sinds</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {team.map((m) => (
+                      <tr key={m.email} className="border-b border-[var(--color-border-warm)] last:border-0">
+                        <td className="px-4 py-2.5 text-[var(--color-text-primary)]">{m.email}</td>
+                        <td className="px-4 py-2.5">
+                          <span className={`rounded-full px-2 py-0.5 text-xs font-medium ${
+                            m.status === "CONFIRMED"
+                              ? "bg-green-100 text-green-700"
+                              : "bg-yellow-100 text-yellow-700"
+                          }`}>
+                            {m.status === "CONFIRMED" ? "Actief" : "Uitgenodigd"}
+                          </span>
+                        </td>
+                        <td className="px-4 py-2.5 text-[var(--color-text-muted)]">
+                          {m.createdAt ? new Date(m.createdAt).toLocaleDateString("nl-NL") : "—"}
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            )}
           </div>
         )}
 

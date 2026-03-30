@@ -1,0 +1,45 @@
+# claudje
+
+> claudje is an AI-powered competitor intelligence service for SMBs. It monitors competitors' pricing, reviews, web activity, and public filings, then delivers a structured weekly report straight to your inbox. Plans start at EUR 60/mo.
+
+claudje deploys a team of specialized AI agents — each handling a different research domain — to systematically analyze publicly available competitor data. Unlike generic AI chatbots that summarize the first page of Google, claudje cross-references real data from multiple sources (Google Maps reviews, Chamber of Commerce filings, LinkedIn activity, pricing pages, and more) into one comprehensive report.
+
+Founded by Berend Harms (BBA University of Amsterdam, MSc Innovation, Technology and Entrepreneurship at Bocconi). Based in the Netherlands and Italy.
+
+## Key Pages
+
+- [Home](https://claudje.com/): Main landing page with product overview, how it works, pricing, and FAQ
+- [About](https://claudje.com/about): Company background, team, and mission
+- [Pricing](https://claudje.com/#pricing): Two plans — Starter (EUR 60/mo, 5 competitors, weekly reports) and Pro (EUR 100/mo, 10 competitors, daily reports)
+- [Get Started](https://claudje.com/get-started): Sign up for a 14-day free trial
+
+## What claudje Monitors
+
+- Competitor pricing and product changes
+- Google Maps and online review scores
+- Website and digital activity changes
+- Company registry and public filings (KVK / Chamber of Commerce)
+- LinkedIn and social media activity
+- Search trends and market positioning
+
+## Industries Served
+
+claudje works for any industry where competitors have a web presence, including retail and e-commerce, hospitality, professional services, automotive, healthcare and dental, and construction and trade.
+
+## Blog
+
+- [What Is Competitor Monitoring](https://claudje.com/blog/what-is-competitor-monitoring): Explains competitor monitoring, what it covers, manual vs. automated approaches, and how SMBs can get started
+- [How to Monitor Competitor Pricing](https://claudje.com/blog/how-to-monitor-competitor-pricing): Step-by-step guide to tracking competitor pricing, common pitfalls, and how AI-powered pricing intelligence works
+- [Competitor Intelligence Tools for Small Business](https://claudje.com/blog/competitor-intelligence-tools-small-business): Honest comparison of free methods, SEO tools, enterprise platforms, and AI-powered services for SMBs
+
+## FAQ
+
+- How does claudje collect data? AI agents analyze publicly available information only — websites, pricing pages, review platforms, company registries, social media, and search trends. No scraping of private data.
+- When do I get my first report? Within 24 hours of sharing your competitor list.
+- Is this legal? Yes. claudje only analyzes publicly available information — the same data anyone could find by visiting competitor websites or checking the Chamber of Commerce.
+- How is this different from ChatGPT? claudje uses specialized sub-agents with paid tool access for each research domain. A chatbot summarizes one page of Google; claudje cross-references real data from multiple sources.
+
+## Contact
+
+- Email: info@claudje.com
+- LinkedIn: https://www.linkedin.com/in/berend-harms-905609209/

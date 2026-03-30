@@ -163,6 +163,94 @@ claudje.com — Concurrentie-inzichten voor het MKB`;
   }
 }
 
+export async function sendInviteEmail(params: {
+  to: string;
+  tempPassword: string;
+  orgName: string;
+}): Promise<void> {
+  const { to, tempPassword, orgName } = params;
+
+  const html = `<!DOCTYPE html>
+<html>
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"></head>
+<body style="margin:0;padding:0;background:#FAF6F0;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;">
+  <table width="100%" cellpadding="0" cellspacing="0" style="background:#FAF6F0;padding:32px 16px;">
+    <tr><td align="center">
+      <table width="600" cellpadding="0" cellspacing="0" style="background:#ffffff;border-radius:12px;overflow:hidden;box-shadow:0 2px 8px rgba(44,24,16,0.08);">
+        <tr><td style="background:#2C1810;padding:32px 40px;">
+          <span style="font-size:24px;font-weight:700;color:#FAF6F0;letter-spacing:-0.5px;">claudje</span>
+        </td></tr>
+        <tr><td style="background:#C9A96E;height:3px;"></td></tr>
+        <tr><td style="padding:40px;">
+          <p style="font-size:20px;font-weight:600;color:#2C1810;margin:0 0 24px;">
+            U bent uitgenodigd voor ${esc(orgName)} op claudje
+          </p>
+          <p style="font-size:15px;color:#3A2519;line-height:1.6;margin:0 0 16px;">
+            Er is een account voor u aangemaakt. Log in met onderstaande gegevens en stel vervolgens uw eigen wachtwoord in.
+          </p>
+          <table cellpadding="0" cellspacing="0" style="background:#FAF6F0;border-radius:8px;padding:16px 24px;margin:0 0 24px;width:100%;">
+            <tr><td>
+              <p style="font-size:13px;color:#7A6B5E;margin:0 0 4px;">Email</p>
+              <p style="font-size:15px;color:#2C1810;font-weight:600;margin:0 0 12px;">${esc(to)}</p>
+              <p style="font-size:13px;color:#7A6B5E;margin:0 0 4px;">Tijdelijk wachtwoord</p>
+              <p style="font-size:15px;color:#2C1810;font-weight:600;margin:0;font-family:monospace;">${esc(tempPassword)}</p>
+            </td></tr>
+          </table>
+          <table cellpadding="0" cellspacing="0" style="margin:0 0 32px;">
+            <tr><td style="background:#2C1810;border-radius:8px;padding:14px 32px;">
+              <a href="https://claudje.com/login" style="color:#FAF6F0;text-decoration:none;font-size:15px;font-weight:600;">
+                Inloggen
+              </a>
+            </td></tr>
+          </table>
+          <p style="font-size:13px;color:#7A6B5E;line-height:1.5;margin:0;">
+            Heeft u vragen? Antwoord gerust op deze email.
+          </p>
+        </td></tr>
+        <tr><td style="padding:0 40px;"><div style="border-top:1px solid #F0E8DC;"></div></td></tr>
+        <tr><td style="padding:24px 40px 32px;">
+          <p style="font-size:12px;color:#B0A89E;margin:0;">
+            claudje.com — Concurrentie-inzichten voor het MKB
+          </p>
+        </td></tr>
+      </table>
+    </td></tr>
+  </table>
+</body>
+</html>`;
+
+  const text = `U bent uitgenodigd voor ${orgName} op claudje
+
+Er is een account voor u aangemaakt. Log in met onderstaande gegevens en stel vervolgens uw eigen wachtwoord in.
+
+Email: ${to}
+Tijdelijk wachtwoord: ${tempPassword}
+
+Inloggen: https://claudje.com/login
+
+Vragen? Antwoord gerust op deze email.
+
+claudje.com — Concurrentie-inzichten voor het MKB`;
+
+  try {
+    await ses.send(
+      new SendEmailCommand({
+        Source: `claudje <${fromEmail}>`,
+        Destination: { ToAddresses: [to] },
+        Message: {
+          Subject: { Data: `Uw claudje account — ${orgName}` },
+          Body: {
+            Html: { Data: html },
+            Text: { Data: text },
+          },
+        },
+      })
+    );
+  } catch (err) {
+    console.error("[SES] Failed to send invite email:", err);
+  }
+}
+
 function esc(str: string): string {
   return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 }

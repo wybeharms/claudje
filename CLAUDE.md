@@ -57,11 +57,40 @@ Login link in header → `/login`
         └── meta.json           ← report metadata
 ```
 
-## Key Patterns (from Claudester)
+## Key Patterns
 - Auth: NextAuth v5 Credentials provider → Cognito AdminInitiateAuth → HMAC-signed auth token (60s expiry)
 - Onboarding auto-login: signup API authenticates user immediately after Cognito creation, returns authToken, client calls signIn() — user lands directly in portal
 - S3: lib/s3.ts with getJson, putJson, getText, getUploadUrl, getDownloadUrl helpers
 - Portal: PortalShell (sidebar + header + content), PortalContext (customerId, role, isAdmin)
 - Admin: customer context switching via localStorage
+
+## User & Org Management
+
+### Roles
+- `admin` — Berend + Wybe. Cognito `custom:customer_id` = `"all"`
+- `customer` — regular users. `custom:customer_id` = their org ID
+
+### Organizations
+An org = an S3 folder (`{orgId}/onboarding/context.json`) + a shared `custom:customer_id` value.
+Multiple Cognito users with the same `customer_id` share access to the same org data.
+`orgId` is derived from the website domain via `lib/org.ts` (e.g. `www.acme.nl` → `acme.nl`).
+
+### User creation paths
+1. **Self-signup** (`/get-started`) — creates new org + Cognito user with chosen password. Auto-login.
+2. **Admin-created** (`/portal/admin`) — admin creates user via admin page. Cognito user gets random temp password (FORCE_CHANGE_PASSWORD state). Branded invite email sent via SES with temp password + login link. On first login, user sets their own password.
+
+### Admin page (`/portal/admin`)
+- **Requests tab** — report request queue with status management (pending/in-progress/delivered)
+- **Customers tab** — list all orgs with plan, status, report count. Click to switch context.
+- **Users tab** — list all Cognito users. Add user to existing org (dropdown selector). Delete users.
+- **New organization** — create org + first user + S3 context. Sends invite email + admin notification.
+
+### Customer settings (`/portal/settings`)
+- Company, Competitors, Report Preferences, **Team** (read-only list of org members), Billing
+
+### Emails (lib/ses.ts)
+- `sendWelcomeEmail` — sent to customer after self-signup
+- `sendInviteEmail` — sent to admin-created users with temp password + login link
+- `sendNotificationEmail` — plain-text admin notification on new signups/org creation
 
 @AGENTS.md

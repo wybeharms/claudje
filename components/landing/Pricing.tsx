@@ -1,9 +1,7 @@
-const CTA_HREF =
-  "/get-started";
-
 const tiers = [
   {
     name: "Starter",
+    slug: "starter",
     price: "€49",
     period: "/mo",
     features: [
@@ -15,6 +13,7 @@ const tiers = [
   },
   {
     name: "Business",
+    slug: "business",
     price: "€99",
     period: "/mo",
     features: [
@@ -28,6 +27,7 @@ const tiers = [
   },
   {
     name: "Pro",
+    slug: "pro",
     price: "€249",
     period: "/mo",
     features: [
@@ -82,7 +82,7 @@ export default function Pricing() {
                 ))}
               </ul>
               <a
-                href={CTA_HREF}
+                href={`/get-started?plan=${tier.slug}`}
                 className={`mt-6 block rounded-lg py-2.5 text-center text-sm font-medium transition-colors ${
                   tier.highlight
                     ? "btn-shimmer text-brown"

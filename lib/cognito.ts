@@ -78,7 +78,10 @@ export async function createCognitoUser(
   email: string,
   role: string,
   customerId: string
-): Promise<CognitoUser> {
+): Promise<{ user: CognitoUser; tempPassword: string }> {
+  const tempPassword =
+    "Tmp!" + crypto.randomUUID().replace(/-/g, "").slice(0, 16);
+
   const res = await cognito.send(
     new AdminCreateUserCommand({
       UserPoolId: USER_POOL_ID,
@@ -89,10 +92,23 @@ export async function createCognitoUser(
         { Name: "custom:role", Value: role },
         { Name: "custom:customer_id", Value: customerId },
       ],
-      DesiredDeliveryMediums: ["EMAIL"],
+      MessageAction: "SUPPRESS",
     })
   );
-  return parseUser(res.User ?? ({} as UserType));
+
+  await cognito.send(
+    new AdminSetUserPasswordCommand({
+      UserPoolId: USER_POOL_ID,
+      Username: email,
+      Password: tempPassword,
+      Permanent: false,
+    })
+  );
+
+  return {
+    user: parseUser(res.User ?? ({} as UserType)),
+    tempPassword,
+  };
 }
 
 export async function createCognitoUserWithPassword(

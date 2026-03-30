@@ -5,6 +5,7 @@ import {
   createCognitoUser,
   deleteCognitoUser,
 } from "@/lib/cognito";
+import { sendInviteEmail } from "@/lib/ses";
 
 export async function GET() {
   const session = await auth();
@@ -31,7 +32,19 @@ export async function POST(req: NextRequest) {
   }
 
   try {
-    const user = await createCognitoUser(email, role || "customer", customerId);
+    const { user, tempPassword } = await createCognitoUser(
+      email,
+      role || "customer",
+      customerId
+    );
+
+    // Send branded invite email (non-blocking)
+    sendInviteEmail({
+      to: email,
+      tempPassword,
+      orgName: customerId,
+    }).catch(() => {});
+
     return NextResponse.json({ success: true, user });
   } catch (err: unknown) {
     const message =

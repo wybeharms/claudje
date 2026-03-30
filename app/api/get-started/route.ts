@@ -73,10 +73,12 @@ export async function POST(req: NextRequest) {
       });
       stripeCustomerId = stripeCustomer.id;
 
-      const priceId =
-        selectedPlan === "pro"
-          ? process.env.STRIPE_PRO_PRICE_ID!
-          : process.env.STRIPE_STARTER_PRICE_ID!;
+      const priceMap: Record<string, string | undefined> = {
+        starter: process.env.STRIPE_STARTER_PRICE_ID,
+        business: process.env.STRIPE_BUSINESS_PRICE_ID,
+        pro: process.env.STRIPE_PRO_PRICE_ID,
+      };
+      const priceId = priceMap[selectedPlan] || process.env.STRIPE_STARTER_PRICE_ID!;
 
       const session = await getStripe().checkout.sessions.create({
         customer: stripeCustomer.id,
