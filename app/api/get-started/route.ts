@@ -124,21 +124,45 @@ export async function POST(req: NextRequest) {
       updatedAt: now,
     });
 
-    // 4. Notify admin
+    // 4. Create first report request
+    const cadenceMap: Record<string, "biweekly" | "weekly" | "daily"> = {
+      starter: "biweekly",
+      business: "weekly",
+      pro: "daily",
+    };
+    const cadence = cadenceMap[selectedPlan] || "biweekly";
+    const daysUntilDue = cadence === "daily" ? 1 : cadence === "weekly" ? 7 : 14;
+    const dueDate = new Date(Date.now() + daysUntilDue * 24 * 60 * 60 * 1000);
+    // Skip weekends for daily cadence
+    if (cadence === "daily" && dueDate.getUTCDay() === 6) dueDate.setUTCDate(dueDate.getUTCDate() + 2);
+    if (cadence === "daily" && dueDate.getUTCDay() === 0) dueDate.setUTCDate(dueDate.getUTCDate() + 1);
+    const dueDateStr = dueDate.toISOString().slice(0, 10);
+    await putJsonToS3(`requests/${orgId}-${dueDateStr}.json`, {
+      id: `${orgId}-${dueDateStr}`,
+      customerId: orgId,
+      companyName,
+      status: "pending",
+      dueDate: dueDateStr,
+      cadence,
+      createdAt: now,
+      deliveredAt: null,
+    });
+
+    // 5. Notify admin
     sendNotificationEmail({
       to: "bharmsuva@gmail.com",
       subject: `New claudje signup: ${companyName}`,
       textBody: `New customer signed up!\n\nCompany: ${companyName}\nContact: ${contactName}\nEmail: ${email}\nWebsite: ${website}\nPlan: ${selectedPlan}\nCompetitors: ${(competitors || []).length}\nOrg ID: ${orgId}\n\nNext step: run /new-customer ${orgId} in the customers repo.`,
     }).catch(() => {});
 
-    // 5. Welcome email to customer
+    // 6. Welcome email to customer
     sendWelcomeEmail({
       to: email,
       contactName,
       companyName,
     }).catch(() => {});
 
-    // 6. Auto-authenticate for seamless login
+    // 7. Auto-authenticate for seamless login
     let authToken: string | null = null;
     try {
       const authResult = await authenticateUser(email, password);
