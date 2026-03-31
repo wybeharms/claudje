@@ -20,7 +20,7 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  const orgId = deriveOrgId(website || companyName);
+  const orgId = deriveOrgId(website || "", companyName);
 
   try {
     // Check for duplicate organization

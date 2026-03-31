@@ -619,8 +619,8 @@ describe("POST /api/get-started", () => {
 
     for (const input of testCases) {
       // Both flows now use deriveOrgId, so this is guaranteed
-      const id = deriveOrgId(input);
-      expect(id).toBe(deriveOrgId(input));
+      const id = deriveOrgId(input, "fallback");
+      expect(id).toBe(deriveOrgId(input, "fallback"));
     }
   });
 });

@@ -29,9 +29,9 @@ export async function POST(req: NextRequest) {
     phone,
   } = body;
 
-  if (!email || !password || !companyName || !website || !contactName) {
+  if (!email || !password || !companyName || !contactName) {
     return NextResponse.json(
-      { error: "Required fields: contactName, email, password, companyName, website" },
+      { error: "Required fields: contactName, email, password, companyName" },
       { status: 400 }
     );
   }
@@ -43,7 +43,7 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  const orgId = deriveOrgId(website);
+  const orgId = deriveOrgId(website || "", companyName);
 
   const selectedPlan = plan || "starter";
   const now = new Date().toISOString();

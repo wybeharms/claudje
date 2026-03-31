@@ -73,7 +73,13 @@ Login link in header → `/login`
 ### Organizations
 An org = an S3 folder (`{orgId}/onboarding/context.json`) + a shared `custom:customer_id` value.
 Multiple Cognito users with the same `customer_id` share access to the same org data.
-`orgId` is derived from the website domain via `lib/org.ts` (e.g. `www.acme.nl` → `acme.nl`).
+
+**orgId derivation** (`lib/org.ts`):
+- If company website is provided: derived from domain (e.g. `www.acme.nl` → `acme.nl`)
+- If no website: derived from company name (e.g. `Acme Bakery` → `acme-bakery`)
+- Website is optional during signup to keep onboarding friction low
+
+**Deduplication**: Before creating an org, both signup and admin flows call `checkOrgExists(orgId)` which checks for an existing `{orgId}/onboarding/context.json` in S3. Returns 409 if the org already exists. This prevents two companies with the same name (or same website) from colliding.
 
 ### User creation paths
 1. **Self-signup** (`/get-started`) — creates new org + Cognito user with chosen password. Auto-login.
