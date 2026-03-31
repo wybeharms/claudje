@@ -125,6 +125,8 @@ export default function GetStartedPage() {
   // Step 2
   const [competitors, setCompetitors] = useState<Competitor[]>([
     { name: "", website: "" },
+    { name: "", website: "" },
+    { name: "", website: "" },
   ]);
 
   const maxCompetitors = PLAN_CONFIG[plan].maxCompetitors;
@@ -225,7 +227,7 @@ export default function GetStartedPage() {
 
   return (
     <div className="min-h-screen bg-[var(--color-cream)] px-4 py-12">
-      <div className="mx-auto max-w-lg">
+      <div className="mx-auto max-w-xl">
         <div className="mb-8 text-center">
           <Link href="/" className="text-2xl font-bold tracking-tight text-[var(--color-text-primary)]" style={{ fontFamily: "var(--font-heading)" }}>
             claudje
@@ -259,53 +261,57 @@ export default function GetStartedPage() {
               </p>
 
               <div className="flex flex-col gap-4">
-                <div>
-                  <label className="mb-1 block text-sm font-medium text-[var(--color-text-primary)]">
-                    Your name
-                  </label>
-                  <input
-                    type="text"
-                    value={contactName}
-                    onChange={(e) => setContactName(e.target.value)}
-                    placeholder="Jan de Vries"
-                    className="w-full rounded-lg border border-[var(--color-border-warm)] bg-[var(--color-cream)] px-4 py-2.5 text-sm outline-none transition-colors focus:border-[var(--color-accent)] focus:ring-1 focus:ring-[var(--color-accent)]"
-                  />
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <label className="mb-1 block text-sm font-medium text-[var(--color-text-primary)]">
+                      Your name
+                    </label>
+                    <input
+                      type="text"
+                      value={contactName}
+                      onChange={(e) => setContactName(e.target.value)}
+                      placeholder="Jan de Vries"
+                      className="w-full rounded-lg border border-[var(--color-border-warm)] bg-[var(--color-cream)] px-4 py-2.5 text-sm outline-none transition-colors focus:border-[var(--color-accent)] focus:ring-1 focus:ring-[var(--color-accent)]"
+                    />
+                  </div>
+                  <div>
+                    <label className="mb-1 block text-sm font-medium text-[var(--color-text-primary)]">
+                      Email
+                    </label>
+                    <input
+                      type="email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      placeholder="jan@acmebakery.nl"
+                      className="w-full rounded-lg border border-[var(--color-border-warm)] bg-[var(--color-cream)] px-4 py-2.5 text-sm outline-none transition-colors focus:border-[var(--color-accent)] focus:ring-1 focus:ring-[var(--color-accent)]"
+                    />
+                  </div>
                 </div>
-                <div>
-                  <label className="mb-1 block text-sm font-medium text-[var(--color-text-primary)]">
-                    Email
-                  </label>
-                  <input
-                    type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    placeholder="jan@acmebakery.nl"
-                    className="w-full rounded-lg border border-[var(--color-border-warm)] bg-[var(--color-cream)] px-4 py-2.5 text-sm outline-none transition-colors focus:border-[var(--color-accent)] focus:ring-1 focus:ring-[var(--color-accent)]"
-                  />
-                </div>
-                <div>
-                  <label className="mb-1 block text-sm font-medium text-[var(--color-text-primary)]">
-                    Company name
-                  </label>
-                  <input
-                    type="text"
-                    value={companyName}
-                    onChange={(e) => setCompanyName(e.target.value)}
-                    placeholder="Acme Bakery"
-                    className="w-full rounded-lg border border-[var(--color-border-warm)] bg-[var(--color-cream)] px-4 py-2.5 text-sm outline-none transition-colors focus:border-[var(--color-accent)] focus:ring-1 focus:ring-[var(--color-accent)]"
-                  />
-                </div>
-                <div>
-                  <label className="mb-1 block text-sm font-medium text-[var(--color-text-primary)]">
-                    Company website
-                  </label>
-                  <input
-                    type="text"
-                    value={website}
-                    onChange={(e) => setWebsite(e.target.value)}
-                    placeholder="acmebakery.nl"
-                    className="w-full rounded-lg border border-[var(--color-border-warm)] bg-[var(--color-cream)] px-4 py-2.5 text-sm outline-none transition-colors focus:border-[var(--color-accent)] focus:ring-1 focus:ring-[var(--color-accent)]"
-                  />
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <label className="mb-1 block text-sm font-medium text-[var(--color-text-primary)]">
+                      Company name
+                    </label>
+                    <input
+                      type="text"
+                      value={companyName}
+                      onChange={(e) => setCompanyName(e.target.value)}
+                      placeholder="Acme Bakery"
+                      className="w-full rounded-lg border border-[var(--color-border-warm)] bg-[var(--color-cream)] px-4 py-2.5 text-sm outline-none transition-colors focus:border-[var(--color-accent)] focus:ring-1 focus:ring-[var(--color-accent)]"
+                    />
+                  </div>
+                  <div>
+                    <label className="mb-1 block text-sm font-medium text-[var(--color-text-primary)]">
+                      Company website
+                    </label>
+                    <input
+                      type="text"
+                      value={website}
+                      onChange={(e) => setWebsite(e.target.value)}
+                      placeholder="acmebakery.nl"
+                      className="w-full rounded-lg border border-[var(--color-border-warm)] bg-[var(--color-cream)] px-4 py-2.5 text-sm outline-none transition-colors focus:border-[var(--color-accent)] focus:ring-1 focus:ring-[var(--color-accent)]"
+                    />
+                  </div>
                 </div>
                 <div>
                   <label className="mb-1 block text-sm font-medium text-[var(--color-text-primary)]">
@@ -336,33 +342,35 @@ export default function GetStartedPage() {
                     </div>
                   )}
                 </div>
-                <div>
-                  <label className="mb-1 block text-sm font-medium text-[var(--color-text-primary)]">
-                    Phone number <span className="font-normal text-[var(--color-text-muted)]">(optional)</span>
-                  </label>
-                  <input
-                    type="tel"
-                    value={phone}
-                    onChange={(e) => setPhone(e.target.value)}
-                    placeholder="+31 6 12345678"
-                    className="w-full rounded-lg border border-[var(--color-border-warm)] bg-[var(--color-cream)] px-4 py-2.5 text-sm outline-none transition-colors focus:border-[var(--color-accent)] focus:ring-1 focus:ring-[var(--color-accent)]"
-                  />
-                </div>
-                <div>
-                  <label className="mb-1 block text-sm font-medium text-[var(--color-text-primary)]">
-                    Country
-                  </label>
-                  <select
-                    value={country}
-                    onChange={(e) => setCountry(e.target.value)}
-                    className="w-full rounded-lg border border-[var(--color-border-warm)] bg-[var(--color-cream)] px-4 py-2.5 text-sm outline-none transition-colors focus:border-[var(--color-accent)] focus:ring-1 focus:ring-[var(--color-accent)]"
-                  >
-                    {COUNTRIES.map((c) => (
-                      <option key={c.code} value={c.code}>
-                        {c.flag} {c.name}
-                      </option>
-                    ))}
-                  </select>
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <label className="mb-1 block text-sm font-medium text-[var(--color-text-primary)]">
+                      Phone number <span className="font-normal text-[var(--color-text-muted)]">(optional)</span>
+                    </label>
+                    <input
+                      type="tel"
+                      value={phone}
+                      onChange={(e) => setPhone(e.target.value)}
+                      placeholder="+31 6 12345678"
+                      className="w-full rounded-lg border border-[var(--color-border-warm)] bg-[var(--color-cream)] px-4 py-2.5 text-sm outline-none transition-colors focus:border-[var(--color-accent)] focus:ring-1 focus:ring-[var(--color-accent)]"
+                    />
+                  </div>
+                  <div>
+                    <label className="mb-1 block text-sm font-medium text-[var(--color-text-primary)]">
+                      Country
+                    </label>
+                    <select
+                      value={country}
+                      onChange={(e) => setCountry(e.target.value)}
+                      className="w-full rounded-lg border border-[var(--color-border-warm)] bg-[var(--color-cream)] px-4 py-2.5 text-sm outline-none transition-colors focus:border-[var(--color-accent)] focus:ring-1 focus:ring-[var(--color-accent)]"
+                    >
+                      {COUNTRIES.map((c) => (
+                        <option key={c.code} value={c.code}>
+                          {c.flag} {c.name}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
                 </div>
 
                 <button
@@ -383,7 +391,7 @@ export default function GetStartedPage() {
                 Your competitors
               </h2>
               <p className="mb-2 text-sm text-[var(--color-text-muted)]">
-                We recommend adding {maxCompetitors} competitors. Don&apos;t have {maxCompetitors}? No problem, we&apos;ll find the rest.
+                Add your main competitors. Don&apos;t have 3? No problem, we&apos;ll find the rest.
               </p>
 
               <div className="flex flex-col gap-3">
@@ -456,12 +464,12 @@ export default function GetStartedPage() {
               <h2 className="mb-1 text-xl font-bold text-[var(--color-text-primary)]">
                 Review & start trial
               </h2>
-              <p className="mb-6 text-sm text-[var(--color-text-muted)]">
+              <p className="mb-4 text-sm text-[var(--color-text-muted)]">
                 Your card won&apos;t be charged for 14 days. Cancel anytime.
               </p>
 
               {/* Summary */}
-              <div className="mb-6 rounded-xl bg-[var(--color-cream)] p-4">
+              <div className="mb-3 rounded-xl bg-[var(--color-cream)] p-4">
                 <p className="mb-2 text-sm">
                   <span className="font-medium text-[var(--color-text-primary)]">{companyName}</span>
                   <span className="text-[var(--color-text-muted)]"> ({website})</span>
@@ -491,12 +499,12 @@ export default function GetStartedPage() {
                 </div>
               </div>
 
-              <p className="mb-6 text-xs text-[var(--color-text-muted)]">
+              <p className="mb-3 text-xs text-[var(--color-text-muted)]">
                 This is your starting point — you can customize everything from your dashboard.
               </p>
 
               {/* Human in the loop */}
-              <div className="mb-6 flex items-center gap-3 rounded-xl bg-[var(--color-accent)]/5 p-4">
+              <div className="mb-4 flex items-center gap-3 rounded-xl bg-[var(--color-accent)]/5 p-3">
                 <div className="flex h-8 w-8 items-center justify-center rounded-full bg-[var(--color-accent)]/10">
                   <svg className="h-4 w-4 text-[var(--color-accent)]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
@@ -508,7 +516,7 @@ export default function GetStartedPage() {
               </div>
 
               {/* Pricing */}
-              <div className="mb-6 rounded-xl border border-[var(--color-border-warm)] p-4">
+              <div className="mb-4 rounded-xl border border-[var(--color-border-warm)] p-4">
                 <div className="flex items-baseline justify-between">
                   <div>
                     <p className="text-sm font-semibold text-[var(--color-text-primary)]">{PLAN_CONFIG[plan].label}</p>
@@ -540,9 +548,6 @@ export default function GetStartedPage() {
                 </button>
               </div>
 
-              <p className="mt-3 text-center text-xs text-[var(--color-text-muted)]">
-                Your card won&apos;t be charged for 14 days. Cancel anytime.
-              </p>
             </>
           )}
         </div>

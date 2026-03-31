@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createCognitoUserWithPassword, authenticateUser, parseIdToken } from "@/lib/cognito";
+import { UsernameExistsException } from "@aws-sdk/client-cognito-identity-provider";
 import { createAuthToken } from "@/lib/auth-token";
 import { putJsonToS3 } from "@/lib/s3";
 import { getStripe } from "@/lib/stripe";
@@ -59,7 +60,23 @@ export async function POST(req: NextRequest) {
       );
     }
     // 1. Create Cognito user with the password they chose
-    await createCognitoUserWithPassword(email, password, "customer", orgId);
+    try {
+      await createCognitoUserWithPassword(email, password, "customer", orgId);
+    } catch (cognitoErr: unknown) {
+      if (cognitoErr instanceof UsernameExistsException) {
+        // Retry scenario: previous attempt created user but failed later.
+        // Verify password matches before continuing.
+        const authCheck = await authenticateUser(email, password);
+        if (!("success" in authCheck)) {
+          return NextResponse.json(
+            { error: "An account with this email already exists. Please sign in or use a different email." },
+            { status: 409 }
+          );
+        }
+      } else {
+        throw cognitoErr;
+      }
+    }
 
     let stripeCustomerId = "";
     let checkoutUrl = "";
@@ -80,6 +97,9 @@ export async function POST(req: NextRequest) {
       };
       const priceId = priceMap[selectedPlan] || process.env.STRIPE_STARTER_PRICE_ID!;
 
+      const baseUrl = (process.env.NEXTAUTH_URL || "").replace(/\/+$/, "");
+      const siteUrl = /^https?:\/\//.test(baseUrl) ? baseUrl : `https://${baseUrl}`;
+
       const session = await getStripe().checkout.sessions.create({
         customer: stripeCustomer.id,
         mode: "subscription",
@@ -89,8 +109,8 @@ export async function POST(req: NextRequest) {
           trial_period_days: 14,
           metadata: { organizationId: orgId },
         },
-        success_url: `${process.env.NEXTAUTH_URL}/portal?setup=complete`,
-        cancel_url: `${process.env.NEXTAUTH_URL}/get-started?cancelled=true`,
+        success_url: `${siteUrl}/portal?setup=complete`,
+        cancel_url: `${siteUrl}/get-started?cancelled=true`,
         metadata: { organizationId: orgId },
       });
       checkoutUrl = session.url || "";

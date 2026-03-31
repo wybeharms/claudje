@@ -53,9 +53,12 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "No Stripe customer" }, { status: 400 });
   }
 
+  const baseUrl = (process.env.NEXTAUTH_URL || "").replace(/\/+$/, "");
+  const siteUrl = /^https?:\/\//.test(baseUrl) ? baseUrl : `https://${baseUrl}`;
+
   const portalSession = await getStripe().billingPortal.sessions.create({
     customer: stripeCustomerId,
-    return_url: `${process.env.NEXTAUTH_URL}/portal/settings`,
+    return_url: `${siteUrl}/portal/settings`,
   });
 
   return NextResponse.json({ url: portalSession.url });
