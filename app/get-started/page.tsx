@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { signIn } from "next-auth/react";
-import { Plus, X } from "lucide-react";
+import { Eye, EyeOff, Plus, X } from "lucide-react";
 
 type Plan = "starter" | "business" | "pro";
 
@@ -113,6 +113,7 @@ export default function GetStartedPage() {
   const [companyName, setCompanyName] = useState("");
   const [website, setWebsite] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [phone, setPhone] = useState("");
 
   // Step 1 (extra)
@@ -150,7 +151,7 @@ export default function GetStartedPage() {
   }
 
   function canProceedStep1() {
-    return contactName && email && companyName && website && password.length >= 8;
+    return contactName && email && companyName && password.length >= 8;
   }
 
   function canProceedStep2() {
@@ -317,14 +318,23 @@ export default function GetStartedPage() {
                   <label className="mb-1 block text-sm font-medium text-[var(--color-text-primary)]">
                     Password
                   </label>
-                  <input
-                    type="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    placeholder="Minimum 8 characters"
-                    minLength={8}
-                    className="w-full rounded-lg border border-[var(--color-border-warm)] bg-[var(--color-cream)] px-4 py-2.5 text-sm outline-none transition-colors focus:border-[var(--color-accent)] focus:ring-1 focus:ring-[var(--color-accent)]"
-                  />
+                  <div className="relative">
+                    <input
+                      type={showPassword ? "text" : "password"}
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      placeholder="Minimum 8 characters"
+                      minLength={8}
+                      className="w-full rounded-lg border border-[var(--color-border-warm)] bg-[var(--color-cream)] px-4 py-2.5 pr-10 text-sm outline-none transition-colors focus:border-[var(--color-accent)] focus:ring-1 focus:ring-[var(--color-accent)]"
+                    />
+                    <button
+                      type="button"
+                      onClick={() => setShowPassword(!showPassword)}
+                      className="absolute right-3 top-1/2 -translate-y-1/2 text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)]"
+                    >
+                      {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                    </button>
+                  </div>
                   {password && (
                     <div className="mt-2">
                       <div className="h-1.5 w-full rounded-full bg-[var(--color-cream-dark)]">
@@ -511,7 +521,7 @@ export default function GetStartedPage() {
                   </svg>
                 </div>
                 <p className="text-xs text-[var(--color-text-muted)]">
-                  We personally set up your intelligence pipeline and ensure every report meets our quality bar.
+                  We set up your market research pipeline using the most advanced AI agents.
                 </p>
               </div>
 
