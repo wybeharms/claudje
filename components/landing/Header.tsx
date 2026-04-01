@@ -130,7 +130,7 @@ export default function Header() {
               href={CTA_HREF}
               className="btn-shimmer rounded-lg px-5 py-2 text-sm font-medium text-brown transition-colors"
             >
-              Get Started
+              Free Trial
             </a>
           </div>
 
@@ -198,7 +198,7 @@ export default function Header() {
                 href={CTA_HREF}
                 className="btn-shimmer rounded-lg px-5 py-2 text-center text-sm font-medium text-brown"
               >
-                Get Started
+                Free Trial
               </a>
             </div>
           </nav>
@@ -228,7 +228,7 @@ export default function Header() {
             href={CTA_HREF}
             className="btn-shimmer rounded-full px-5 py-2 text-sm font-medium text-brown"
           >
-            Get Started
+            Free Trial
           </a>
         </nav>
       </div>

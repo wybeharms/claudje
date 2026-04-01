@@ -4,11 +4,11 @@ import { useEffect, useRef, useState } from "react";
 import { FlyingEagle } from "../portal/ClaudjeBird";
 
 const sampleCompetitors = [
-  "Competitor A",
-  "Competitor B",
-  "Competitor C",
-  "Competitor D",
-  "Competitor E",
+  "Baker's Delight",
+  "SmileDental",
+  "DrainMasters",
+  "FitZone",
+  "GreenClean",
 ];
 
 export default function WhoItsFor() {
@@ -35,7 +35,7 @@ export default function WhoItsFor() {
   // Sync pill highlights with eagle flight once visible
   useEffect(() => {
     if (!visible) return;
-    const cycleDuration = 6400;
+    const cycleDuration = 8320;
     const totalTicks = sampleCompetitors.length * 2;
     const tickInterval = cycleDuration / totalTicks;
     let tick = 0;
@@ -57,7 +57,7 @@ export default function WhoItsFor() {
   }, [visible]);
 
   return (
-    <section ref={sectionRef} className="bg-cream px-6 py-20 lg:px-8">
+    <section ref={sectionRef} className="bg-cream-dark px-6 py-20 lg:px-8">
       <div className="mx-auto max-w-3xl text-center">
         <h2
           className={`font-heading text-3xl transition-all duration-700 md:text-4xl ${
@@ -93,7 +93,7 @@ export default function WhoItsFor() {
               key={name}
               className={`rounded-full px-4 py-1.5 text-sm font-medium transition-all duration-700 ease-in-out ${
                 i === activeIndex
-                  ? "scale-110 bg-gold text-white shadow-lg shadow-gold/25"
+                  ? "scale-110 silver-metallic text-brown shadow-lg shadow-silver/25"
                   : "scale-100 bg-gold/10 text-gold-dark"
               }`}
             >
@@ -104,15 +104,15 @@ export default function WhoItsFor() {
 
         {/* Body copy */}
         <div
-          className={`mx-auto mt-10 max-w-lg transition-all duration-700 delay-700 ${
+          className={`mx-auto mt-10 max-w-2xl transition-all duration-700 delay-700 ${
             visible ? "translate-y-0 opacity-100" : "translate-y-6 opacity-0"
           }`}
         >
-          <p className="text-sm leading-relaxed text-text-muted">
+          <p className="text-base leading-relaxed text-text-muted">
             You know AI can give you an edge. You just don&rsquo;t have the
             time, tools, or team to use it consistently.
           </p>
-          <p className="mt-3 text-sm leading-relaxed text-text-muted">
+          <p className="mt-3 text-base leading-relaxed text-text-muted">
             claudje does it for you. Real competitor intelligence, reviewed by a
             real analyst, delivered to your inbox. Starting at &euro;49/month.
           </p>
@@ -120,7 +120,7 @@ export default function WhoItsFor() {
             href="/get-started"
             className="mt-6 inline-block rounded-lg bg-brown px-6 py-2.5 text-sm font-medium text-text-on-dark transition-colors hover:bg-brown/90"
           >
-            Get Started
+            Start Monitoring
           </a>
         </div>
       </div>

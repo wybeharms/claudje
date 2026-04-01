@@ -59,6 +59,11 @@ body {
   background: var(--color-gold-light);
 }
 
+/* Silver metallic accent */
+.silver-metallic {
+  background: linear-gradient(145deg, #8E939A 0%, #C0C4CA 30%, #E2E5E9 50%, #C0C4CA 70%, #8E939A 100%);
+}
+
 /* Report carousel page turn */
 @keyframes pageSlideOut {
   0% { transform: translateX(0); opacity: 1; }

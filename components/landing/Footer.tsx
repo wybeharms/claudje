@@ -16,7 +16,7 @@ export default function Footer() {
           href={CTA_HREF}
           className="btn-shimmer mt-6 inline-block rounded-lg px-8 py-3 text-base font-semibold text-brown transition-colors"
         >
-          Get Started
+          Start Your Free Trial
         </a>
       </div>
 

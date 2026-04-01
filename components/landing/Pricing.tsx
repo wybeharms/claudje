@@ -42,7 +42,7 @@ const tiers = [
 
 export default function Pricing() {
   return (
-    <section id="pricing" className="bg-brown px-6 py-20 text-text-on-dark lg:px-8">
+    <section id="pricing" className="bg-brown px-6 py-24 text-text-on-dark lg:px-8">
       <div className="mx-auto max-w-4xl">
         <h2 className="text-center font-heading text-3xl md:text-4xl">
           Pricing
@@ -58,7 +58,7 @@ export default function Pricing() {
               className={`flex flex-col rounded-xl p-6 ${
                 tier.highlight
                   ? "border-2 border-gold bg-white/10"
-                  : "border border-border-on-dark bg-white/5"
+                  : "border border-silver/30 bg-white/5"
               }`}
             >
               <h3 className="text-2xl font-semibold">{tier.name}</h3>
@@ -76,7 +76,11 @@ export default function Pricing() {
                     key={feature}
                     className="text-sm leading-relaxed text-text-on-dark-muted"
                   >
-                    <span className="mr-2 text-gold">+</span>
+                    <span
+                      className={`mr-2 ${tier.highlight ? "text-gold" : "text-silver-light"}`}
+                    >
+                      +
+                    </span>
                     {feature}
                   </li>
                 ))}
@@ -86,10 +90,10 @@ export default function Pricing() {
                 className={`mt-6 block rounded-lg py-2.5 text-center text-sm font-medium transition-colors ${
                   tier.highlight
                     ? "btn-shimmer text-brown"
-                    : "border border-border-on-dark text-text-on-dark hover:bg-white/5"
+                    : "border border-silver/30 text-text-on-dark hover:bg-white/5"
                 }`}
               >
-                Get Started
+                {tier.highlight ? "Start Free Trial" : "Select Plan"}
               </a>
             </div>
           ))}

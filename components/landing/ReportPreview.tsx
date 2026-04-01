@@ -177,7 +177,7 @@ export default function ReportPreview() {
   return (
     <section
       id="report-preview"
-      className="bg-cream-dark px-6 py-20 lg:px-8"
+      className="bg-cream px-6 py-20 lg:px-8"
     >
       <div className="mx-auto max-w-5xl">
         <h2 className="text-center font-heading text-3xl md:text-4xl">
@@ -260,6 +260,36 @@ export default function ReportPreview() {
           </div>
         </div>
 
+        {/* Report screenshot placeholder */}
+        <div className="mt-12 text-center">
+          <p className="text-lg font-medium text-brown">
+            Here&apos;s what you&apos;ll receive
+          </p>
+          <p className="mt-2 text-base text-text-muted">
+            A complete competitor intelligence report, delivered to your inbox.
+          </p>
+          <div className="mx-auto mt-6 max-w-lg overflow-hidden rounded-xl border border-border-warm bg-white shadow-lg">
+            <div className="flex aspect-[4/3] flex-col items-center justify-center gap-3 bg-cream/50 p-8">
+              <svg
+                className="h-12 w-12 text-silver"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909M3.75 21h16.5A2.25 2.25 0 0 0 22.5 18.75V5.25A2.25 2.25 0 0 0 20.25 3H3.75A2.25 2.25 0 0 0 1.5 5.25v13.5A2.25 2.25 0 0 0 3.75 21Z"
+                />
+              </svg>
+              <p className="text-sm text-text-muted">
+                Report screenshot coming soon
+              </p>
+            </div>
+          </div>
+        </div>
+
         {/* Source icons */}
         <div className="mx-auto mt-12 max-w-3xl">
           <p className="mb-4 text-center text-xs font-medium text-text-muted">
@@ -271,7 +301,7 @@ export default function ReportPreview() {
                 key={source.name}
                 className="flex w-16 flex-col items-center gap-1.5"
               >
-                <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-cream text-text-muted">
+                <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-silver/15 text-silver-dark">
                   {source.icon}
                 </div>
                 <span className="text-center text-[11px] leading-tight text-text-muted">

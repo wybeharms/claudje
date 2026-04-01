@@ -23,7 +23,7 @@ export default function Hero() {
               href={CTA_HREF}
               className="btn-shimmer rounded-lg px-8 py-3 text-center text-base font-semibold text-brown transition-colors"
             >
-              Get Started
+              Start Your Free Trial
             </a>
             <a
               href="#report-preview"
