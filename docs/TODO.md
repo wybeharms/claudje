@@ -25,18 +25,14 @@ a token flow until there are 50+ customers.
 - [x] Welcome email sent to customer (`sendWelcomeEmail` in `get-started/route.ts`)
 - [x] Admin notification sent to Berend (`sendNotificationEmail` in `get-started/route.ts`)
 
-### Email 3: Report delivery (Berend triggers manually)
+### Email 3: Report delivery (automatic on S3 push)
 
-Sent when a report is ready (~24 hours after onboarding, then weekly).
-Contains the actual PDF report as attachment or download link.
-
-- [ ] Create endpoint `app/api/portal/reports/notify/route.ts`
-  - Accepts customer ID + report ID
-  - Fetches customer email from onboarding context
-  - Sends email with PDF download link (presigned S3 URL)
-  - Admin-only or secured with API key
-- [ ] Design email template (include report week, download link, portal link)
-- [ ] Add step to Berend's `/push-report` workflow to call this endpoint
+- [x] `notifyCustomer()` in `customers/engine/lib/s3.mjs` — branded HTML email
+  - Fires automatically at the end of `pushReportToS3()`
+  - Reads customer email from `onboarding/context.json`
+  - Sends "Uw concurrentierapport is klaar" with link to portal report page
+  - Also sends admin confirmation to Berend
+  - Delivery via SES sandbox → Google Apps Script forwarding
 
 ### Email 4: User invite (admin-created users)
 
@@ -166,7 +162,7 @@ Customers can see their team. No self-join flow — admin adds users.
 | 1 | Google Workspace setup | Wybe | — | Not started |
 | 2 | SES domain verification + production access | Berend | #1 | Not started |
 | 3 | Portal simplification (PDF preview + week nav) | Dev | — | Not started |
-| 4 | Report delivery email | Dev | #2 | Not started |
+| 4 | Report delivery email | Dev | — | **Done** (in customers/ repo) |
 | 5 | User & org management | Dev | — | **Done** |
 
 Portal simplification (#3) can start immediately in parallel with the
