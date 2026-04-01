@@ -51,6 +51,8 @@ export default function SettingsPage() {
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
+  const [showCancelConfirm, setShowCancelConfirm] = useState(false);
+  const [cancelling, setCancelling] = useState(false);
 
   useEffect(() => {
     async function load() {
@@ -126,6 +128,23 @@ export default function SettingsPage() {
     if (res.ok) {
       const { url } = await res.json();
       window.location.href = url;
+    }
+  }
+
+  async function handleCancelSubscription() {
+    setCancelling(true);
+    try {
+      const params = new URLSearchParams();
+      if (isAdmin && customerId) params.set("customerId", customerId);
+      const res = await fetch(`/api/portal/billing?${params}`, { method: "DELETE" });
+      if (res.ok) {
+        setBilling((prev) => prev ? { ...prev, subscriptionStatus: "cancelled" } : prev);
+        setShowCancelConfirm(false);
+      }
+    } catch {
+      // Silently fail
+    } finally {
+      setCancelling(false);
     }
   }
 
@@ -384,6 +403,42 @@ export default function SettingsPage() {
               <ExternalLink className="h-3.5 w-3.5" />
               Manage billing on Stripe
             </button>
+
+            {billing.subscriptionStatus !== "cancelled" && (
+              <div className="border-t border-[var(--color-border-warm)] pt-4">
+                {!showCancelConfirm ? (
+                  <button
+                    onClick={() => setShowCancelConfirm(true)}
+                    className="text-xs text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] transition-colors"
+                  >
+                    Abonnement opzeggen
+                  </button>
+                ) : (
+                  <div className="flex items-center gap-3">
+                    <p className="text-xs text-[var(--color-text-muted)]">Weet u het zeker?</p>
+                    <button
+                      onClick={handleCancelSubscription}
+                      disabled={cancelling}
+                      className="text-xs font-medium text-red-500 hover:text-red-700 transition-colors disabled:opacity-50"
+                    >
+                      {cancelling ? "Bezig..." : "Ja, opzeggen"}
+                    </button>
+                    <button
+                      onClick={() => setShowCancelConfirm(false)}
+                      className="text-xs text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] transition-colors"
+                    >
+                      Nee, toch niet
+                    </button>
+                  </div>
+                )}
+              </div>
+            )}
+
+            {billing.subscriptionStatus === "cancelled" && (
+              <p className="border-t border-[var(--color-border-warm)] pt-4 text-xs text-[var(--color-text-muted)]">
+                Uw abonnement is opgezegd.
+              </p>
+            )}
           </div>
         )}
       </div>

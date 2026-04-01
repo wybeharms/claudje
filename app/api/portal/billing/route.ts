@@ -63,3 +63,38 @@ export async function POST(req: NextRequest) {
 
   return NextResponse.json({ url: portalSession.url });
 }
+
+export async function DELETE(req: NextRequest) {
+  const session = await auth();
+  if (!session?.user) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
+
+  const role = session.user.role ?? "customer";
+  const isAdmin = role === "admin";
+  let customerId = session.user.customerId ?? "";
+  if (isAdmin) {
+    const param = req.nextUrl.searchParams.get("customerId");
+    if (param) customerId = param;
+  }
+
+  if (!customerId) {
+    return NextResponse.json({ error: "No customer ID" }, { status: 400 });
+  }
+
+  const context = await getJsonFromS3<Record<string, unknown>>(
+    `${customerId}/onboarding/context.json`
+  );
+
+  const stripeSubscriptionId = context?.stripeSubscriptionId as string;
+  if (!stripeSubscriptionId) {
+    return NextResponse.json({ error: "No active subscription" }, { status: 400 });
+  }
+
+  const subscription = await getStripe().subscriptions.cancel(stripeSubscriptionId);
+
+  return NextResponse.json({
+    status: subscription.status,
+    cancelledAt: new Date().toISOString(),
+  });
+}
