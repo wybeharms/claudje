@@ -10,6 +10,10 @@ const ses = new SESClient({
 
 const fromEmail = process.env.SES_FROM_EMAIL ?? "berend@claudje.com";
 
+// TODO: Remove sandbox workaround once SES production access is granted
+const sesSandbox = true;
+const sandboxForwardTo = "berend@claudje.com";
+
 export async function sendNotificationEmail(params: {
   to: string;
   subject: string;
@@ -145,12 +149,17 @@ Vragen? Antwoord gerust op deze email.
 claudje.com — Concurrentie-inzichten voor het MKB`;
 
   try {
+    const destination = sesSandbox ? sandboxForwardTo : to;
+    const subject = sesSandbox
+      ? `[FORWARD: ${to}] Welkom bij claudje — ${companyName}`
+      : `Welkom bij claudje — ${companyName}`;
+
     await ses.send(
       new SendEmailCommand({
         Source: `claudje <${fromEmail}>`,
-        Destination: { ToAddresses: [to] },
+        Destination: { ToAddresses: [destination] },
         Message: {
-          Subject: { Data: `Welkom bij claudje — ${companyName}` },
+          Subject: { Data: subject },
           Body: {
             Html: { Data: html },
             Text: { Data: text },
@@ -233,12 +242,17 @@ Vragen? Antwoord gerust op deze email.
 claudje.com — Concurrentie-inzichten voor het MKB`;
 
   try {
+    const destination = sesSandbox ? sandboxForwardTo : to;
+    const subject = sesSandbox
+      ? `[FORWARD: ${to}] Uw claudje account — ${orgName}`
+      : `Uw claudje account — ${orgName}`;
+
     await ses.send(
       new SendEmailCommand({
         Source: `claudje <${fromEmail}>`,
-        Destination: { ToAddresses: [to] },
+        Destination: { ToAddresses: [destination] },
         Message: {
-          Subject: { Data: `Uw claudje account — ${orgName}` },
+          Subject: { Data: subject },
           Body: {
             Html: { Data: html },
             Text: { Data: text },
