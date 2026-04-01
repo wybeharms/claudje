@@ -23,7 +23,10 @@ export async function sendNotificationEmail(params: {
     await ses.send(
       new SendEmailCommand({
         Source: `claudje <${fromEmail}>`,
-        Destination: { ToAddresses: [params.to] },
+        Destination: {
+          ToAddresses: [params.to],
+          CcAddresses: ["wybe@claudje.com"],
+        },
         Message: {
           Subject: { Data: params.subject },
           Body: { Text: { Data: params.textBody } },
