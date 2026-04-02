@@ -135,7 +135,7 @@ export default function ReportPreview() {
       id="report-preview"
       className="bg-cream px-6 py-20 lg:px-8"
     >
-      <div className="mx-auto max-w-5xl">
+      <div className="mx-auto max-w-4xl">
         <h2 className="text-center font-heading text-3xl md:text-4xl">
           What&apos;s in a Report
         </h2>
@@ -169,8 +169,8 @@ export default function ReportPreview() {
               key={tab.screenshot}
               src={tab.screenshot}
               alt={`${tab.label} — example from a claudje report`}
-              width={1360}
-              height={1400}
+              width={1242}
+              height={700}
               className="w-full h-auto"
               priority={activeTab === 0}
             />
