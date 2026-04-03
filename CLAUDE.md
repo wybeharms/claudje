@@ -57,6 +57,20 @@ Login link in header → `/login`
         └── meta.json           ← report metadata
 ```
 
+## Stripe Billing
+
+Shares the CWH International Stripe account (`acct_1TH4nd0KWzRjLMUk`) with Claudester. Each app has its own products, webhook endpoint, and portal configuration.
+
+**Signup flow**: 3-step onboarding wizard (company + competitors + plan) > Cognito user + Stripe customer created > redirect to Stripe Checkout (14-day trial, card required) > return to `/portal?setup=complete`.
+
+**Plans**: Starter (EUR 49/mo), Business (EUR 99/mo), Pro (EUR 249/mo). Price IDs in env vars.
+
+**Portal configuration**: Uses the default config `bpc_1TH8160KWzRjLMUk...` (claudje-only plans). No config ID passed in code (Stripe uses default).
+
+**Webhook**: `https://claudje.com/api/stripe/webhook` handles 4 events: `checkout.session.completed`, `invoice.payment_succeeded`, `customer.subscription.updated`, `customer.subscription.deleted`.
+
+**Env vars**: `STRIPE_SECRET_KEY`, `STRIPE_WEBHOOK_SECRET`, `STRIPE_STARTER_PRICE_ID`, `STRIPE_BUSINESS_PRICE_ID`, `STRIPE_PRO_PRICE_ID`.
+
 ## Key Patterns
 - Auth: NextAuth v5 Credentials provider → Cognito AdminInitiateAuth → HMAC-signed auth token (60s expiry)
 - Onboarding auto-login: signup API authenticates user immediately after Cognito creation, returns authToken, client calls signIn() — user lands directly in portal
