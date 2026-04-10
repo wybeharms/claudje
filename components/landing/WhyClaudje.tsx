@@ -178,8 +178,8 @@ export default function WhyClaudje() {
             }}
           >
             <p className="mb-4 text-center text-base leading-relaxed text-text-muted">
-              claudje deploys <strong>specialized agents</strong> with{" "}
-              <strong>paid tool access</strong>. They pull verified data from 9+
+              claudje deploys a <strong>managed agent</strong> with{" "}
+              <strong>paid tool access</strong>. It pulls verified data from
               professional sources a chatbot can&rsquo;t reach.
             </p>
 
