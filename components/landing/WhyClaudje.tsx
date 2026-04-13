@@ -67,7 +67,7 @@ export default function WhyClaudje() {
   return (
     <section className="bg-cream-dark px-6 py-24 lg:px-8">
       <div className="mx-auto max-w-5xl">
-        <h2 className="text-center font-heading text-3xl md:text-4xl">
+        <h2 className="text-center font-heading text-2xl md:text-3xl">
           &ldquo;But can&rsquo;t ChatGPT do this?&rdquo;
         </h2>
 
@@ -96,7 +96,7 @@ export default function WhyClaudje() {
               className="opacity-60"
             />
           </div>
-          <p className="mt-4 text-base leading-relaxed text-text-muted">
+          <p className="mt-4 text-sm leading-relaxed text-text-primary md:text-base">
             claudje uses <strong>the same AI</strong> that powers ChatGPT and
             Claude.
           </p>
@@ -114,7 +114,7 @@ export default function WhyClaudje() {
               willChange: "transform, opacity",
             }}
           >
-            <p className="mb-4 text-center text-base leading-relaxed text-text-muted">
+            <p className="mb-4 text-center text-sm leading-relaxed text-text-muted md:text-base">
               When you ask a chatbot to research a competitor, it searches the
               web, skims the top results, and gives you a summary.{" "}
               <strong>That&rsquo;s it.</strong>
@@ -177,9 +177,9 @@ export default function WhyClaudje() {
               willChange: "transform, opacity",
             }}
           >
-            <p className="mb-4 text-center text-base leading-relaxed text-text-muted">
-              claudje deploys a <strong>managed agent</strong> with{" "}
-              <strong>paid tool access</strong>. It pulls verified data from
+            <p className="mb-4 text-center text-sm leading-relaxed text-text-muted md:text-base">
+              claudje deploys <strong>managed agents</strong> with{" "}
+              <strong>paid tool access</strong>. They pull verified data from
               professional sources a chatbot can&rsquo;t reach.
             </p>
 
@@ -259,7 +259,7 @@ export default function WhyClaudje() {
               </div>
               <div className="mt-auto flex flex-wrap gap-1.5 pt-4">
                 <span className="rounded-full bg-gold/10 px-2.5 py-0.5 text-[11px] font-medium text-gold-dark">
-                  9+ verified sources
+                  Verified sources
                 </span>
                 <span className="rounded-full bg-gold/10 px-2.5 py-0.5 text-[11px] font-medium text-gold-dark">
                   Analyst-reviewed

@@ -60,7 +60,7 @@ export default function WhoItsFor() {
     <section ref={sectionRef} className="bg-cream-dark px-6 py-20 lg:px-8">
       <div className="mx-auto max-w-3xl text-center">
         <h2
-          className={`font-heading text-3xl transition-all duration-700 md:text-4xl ${
+          className={`font-heading text-2xl transition-all duration-700 md:text-3xl ${
             visible ? "translate-y-0 opacity-100" : "translate-y-6 opacity-0"
           }`}
         >
@@ -108,11 +108,11 @@ export default function WhoItsFor() {
             visible ? "translate-y-0 opacity-100" : "translate-y-6 opacity-0"
           }`}
         >
-          <p className="text-base leading-relaxed text-text-muted">
+          <p className="text-sm leading-relaxed text-text-muted md:text-base">
             You know AI can give you an edge. You just don&rsquo;t have the
             time, tools, or team to use it consistently.
           </p>
-          <p className="mt-3 text-base leading-relaxed text-text-muted">
+          <p className="mt-3 text-sm leading-relaxed text-text-muted md:text-base">
             claudje does it for you. Real competitor intelligence, reviewed by a
             real analyst, delivered to your inbox. Starting at &euro;49/month.
           </p>

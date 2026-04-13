@@ -48,8 +48,8 @@ export default function FAQ() {
       <div className="mx-auto max-w-4xl">
         <div className="grid gap-10 md:grid-cols-[1fr_2fr] md:gap-12">
           <div>
-            <h2 className="font-heading text-3xl md:text-4xl">FAQ</h2>
-            <p className="mt-3 text-text-muted">
+            <h2 className="font-heading text-2xl md:text-3xl">FAQ</h2>
+            <p className="mt-3 text-sm text-text-muted md:text-base">
               Common questions about claudje.
             </p>
           </div>
@@ -86,7 +86,7 @@ export default function FAQ() {
                   }`}
                 >
                   <div className="overflow-hidden">
-                    <p className="pb-4 text-base leading-relaxed text-text-muted">
+                    <p className="pb-4 text-sm leading-relaxed text-text-muted md:text-base">
                       {item.answer}
                     </p>
                   </div>

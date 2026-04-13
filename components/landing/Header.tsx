@@ -4,16 +4,19 @@ import { useState, useEffect, useRef } from "react";
 import ClaudjeBird from "../portal/ClaudjeBird";
 
 const LOCALES = [
-  { code: "en-US", flag: "🇺🇸", label: "English (US)", currency: "USD", symbol: "$" },
-  { code: "en-GB", flag: "🇬🇧", label: "English (UK)", currency: "GBP", symbol: "£" },
-  { code: "nl", flag: "🇳🇱", label: "Nederlands", currency: "EUR", symbol: "€" },
-  { code: "it", flag: "🇮🇹", label: "Italiano", currency: "EUR", symbol: "€" },
-  { code: "es", flag: "🇪🇸", label: "Español", currency: "EUR", symbol: "€" },
+  { code: "en-US", flag: "\u{1F1FA}\u{1F1F8}", label: "English (US)", currency: "USD", symbol: "$" },
+  { code: "en-GB", flag: "\u{1F1EC}\u{1F1E7}", label: "English (UK)", currency: "GBP", symbol: "\u00A3" },
+  { code: "nl", flag: "\u{1F1F3}\u{1F1F1}", label: "Nederlands", currency: "EUR", symbol: "\u20AC" },
+  { code: "it", flag: "\u{1F1EE}\u{1F1F9}", label: "Italiano", currency: "EUR", symbol: "\u20AC" },
+  { code: "es", flag: "\u{1F1EA}\u{1F1F8}", label: "Espa\u00F1ol", currency: "EUR", symbol: "\u20AC" },
 ];
 
 const NAV_LINKS = [
-  { label: "Pricing", href: "#pricing" },
-  { label: "FAQ", href: "#faq" },
+  { label: "Product", href: "/product" },
+  { label: "Technology", href: "/technology" },
+];
+
+const ABOUT_LINKS = [
   { label: "About", href: "/about" },
   { label: "Blog", href: "/blog" },
 ];
@@ -36,7 +39,11 @@ export default function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [locale, setLocale] = useState("nl");
   const [localeOpen, setLocaleOpen] = useState(false);
+  const [aboutOpen, setAboutOpen] = useState(false);
+  const [pillAboutOpen, setPillAboutOpen] = useState(false);
   const localeRef = useRef<HTMLDivElement>(null);
+  const aboutRef = useRef<HTMLDivElement>(null);
+  const pillAboutRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     setLocale(detectLocale());
@@ -52,6 +59,12 @@ export default function Header() {
     function handleClickOutside(e: MouseEvent) {
       if (localeRef.current && !localeRef.current.contains(e.target as Node)) {
         setLocaleOpen(false);
+      }
+      if (aboutRef.current && !aboutRef.current.contains(e.target as Node)) {
+        setAboutOpen(false);
+      }
+      if (pillAboutRef.current && !pillAboutRef.current.contains(e.target as Node)) {
+        setPillAboutOpen(false);
       }
     }
     document.addEventListener("mousedown", handleClickOutside);
@@ -85,6 +98,38 @@ export default function Header() {
                 {link.label}
               </a>
             ))}
+
+            {/* About dropdown */}
+            <div ref={aboutRef} className="relative">
+              <button
+                onClick={() => setAboutOpen(!aboutOpen)}
+                className="flex items-center gap-1 text-sm text-text-on-dark-muted transition-colors hover:text-text-on-dark"
+              >
+                About
+                <svg
+                  className={`h-3 w-3 transition-transform ${aboutOpen ? "rotate-180" : ""}`}
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={2}
+                  stroke="currentColor"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                </svg>
+              </button>
+              {aboutOpen && (
+                <div className="absolute left-0 top-full mt-2 min-w-[120px] rounded-lg border border-white/10 bg-brown shadow-lg">
+                  {ABOUT_LINKS.map((link) => (
+                    <a
+                      key={link.href}
+                      href={link.href}
+                      className="block px-4 py-2 text-sm text-text-on-dark-muted transition-colors hover:bg-white/10 hover:text-text-on-dark first:rounded-t-lg last:rounded-b-lg"
+                    >
+                      {link.label}
+                    </a>
+                  ))}
+                </div>
+              )}
+            </div>
           </nav>
 
           {/* Desktop CTA */}
@@ -106,6 +151,7 @@ export default function Header() {
                       onClick={() => {
                         setLocale(l.code);
                         setLocaleOpen(false);
+                        window.dispatchEvent(new CustomEvent("locale-change", { detail: l.code }));
                       }}
                       className={`flex w-full items-center gap-2.5 px-4 py-2 text-sm whitespace-nowrap transition-colors hover:bg-white/10 first:rounded-t-lg last:rounded-b-lg ${
                         l.code === locale
@@ -173,7 +219,10 @@ export default function Header() {
                 {LOCALES.map((l) => (
                   <button
                     key={l.code}
-                    onClick={() => setLocale(l.code)}
+                    onClick={() => {
+                      setLocale(l.code);
+                      window.dispatchEvent(new CustomEvent("locale-change", { detail: l.code }));
+                    }}
                     className={`rounded-md px-2 py-1 text-base transition-colors ${
                       l.code === locale
                         ? "bg-white/10"
@@ -185,6 +234,16 @@ export default function Header() {
                 ))}
               </div>
               {NAV_LINKS.map((link) => (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  onClick={() => setMenuOpen(false)}
+                  className="text-sm text-text-on-dark-muted"
+                >
+                  {link.label}
+                </a>
+              ))}
+              {ABOUT_LINKS.map((link) => (
                 <a
                   key={link.href}
                   href={link.href}
@@ -218,11 +277,44 @@ export default function Header() {
             <a
               key={link.href}
               href={link.href}
-              className="rounded-full px-4 py-2 text-sm text-text-primary transition-colors hover:bg-black/5"
+              className="rounded-full px-3 py-2 text-sm text-text-primary transition-colors hover:bg-black/5"
             >
               {link.label}
             </a>
           ))}
+
+          {/* About dropdown in pill */}
+          <div ref={pillAboutRef} className="relative">
+            <button
+              onClick={() => setPillAboutOpen(!pillAboutOpen)}
+              className="flex items-center gap-1 rounded-full px-3 py-2 text-sm text-text-primary transition-colors hover:bg-black/5"
+            >
+              About
+              <svg
+                className={`h-3 w-3 transition-transform ${pillAboutOpen ? "rotate-180" : ""}`}
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={2}
+                stroke="currentColor"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+              </svg>
+            </button>
+            {pillAboutOpen && (
+              <div className="absolute left-0 top-full mt-2 min-w-[120px] rounded-lg border border-border-warm bg-white shadow-lg">
+                {ABOUT_LINKS.map((link) => (
+                  <a
+                    key={link.href}
+                    href={link.href}
+                    className="block px-4 py-2 text-sm text-text-muted transition-colors hover:bg-cream hover:text-text-primary first:rounded-t-lg last:rounded-b-lg"
+                  >
+                    {link.label}
+                  </a>
+                ))}
+              </div>
+            )}
+          </div>
+
           <div className="mx-1 h-5 w-px bg-border-warm" />
           <a
             href={CTA_HREF}

@@ -9,11 +9,11 @@ export default function Hero() {
       <div className="mx-auto grid max-w-7xl items-center gap-8 md:grid-cols-2 md:gap-10">
         {/* Left text */}
         <div className="pl-2 md:pl-8 lg:pl-14">
-          <h1 className="font-heading text-4xl leading-tight text-text-on-dark md:text-5xl lg:text-[3rem]">
+          <h1 className="font-heading text-3xl leading-tight text-text-on-dark md:text-4xl lg:text-[2.75rem]">
             Know What Your Competitors Are Doing.{" "}
             <span className="text-gold">Every&nbsp;Week.</span>
           </h1>
-          <p className="mt-6 max-w-lg text-base leading-relaxed text-text-on-dark-muted">
+          <p className="mt-6 max-w-lg text-sm leading-relaxed text-text-on-dark-muted md:text-base">
             <em>claudje</em> watches your competitors so you can race ahead.
             <br />
             All in one clear report, straight to your inbox.
@@ -21,13 +21,13 @@ export default function Hero() {
           <div className="mt-8 flex flex-col gap-4 sm:flex-row">
             <a
               href={CTA_HREF}
-              className="btn-shimmer rounded-lg px-8 py-3 text-center text-base font-semibold text-brown transition-colors"
+              className="btn-shimmer rounded-lg px-8 py-3 text-center text-sm font-semibold text-brown transition-colors md:text-base"
             >
               Start Your Free Trial
             </a>
             <a
               href="#report-preview"
-              className="rounded-lg border border-text-on-dark-muted px-8 py-3 text-center text-base font-medium text-text-on-dark transition-colors hover:border-text-on-dark hover:bg-white/5"
+              className="rounded-lg border border-text-on-dark-muted px-8 py-3 text-center text-sm font-medium text-text-on-dark transition-colors hover:border-text-on-dark hover:bg-white/5 md:text-base"
             >
               See what&apos;s in a report
             </a>

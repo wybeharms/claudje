@@ -6,15 +6,15 @@ export default function Footer() {
     <footer className="bg-brown text-text-on-dark">
       {/* Final CTA band */}
       <div className="border-b border-border-on-dark px-6 py-16 text-center lg:px-8">
-        <h2 className="font-heading text-2xl md:text-3xl">
+        <h2 className="font-heading text-xl md:text-2xl">
           Ready to know what your competitors are up&nbsp;to?
         </h2>
-        <p className="mt-3 text-text-on-dark-muted">
+        <p className="mt-3 text-sm text-text-on-dark-muted md:text-base">
           Start getting competitor reports in your inbox this week.
         </p>
         <a
           href={CTA_HREF}
-          className="btn-shimmer mt-6 inline-block rounded-lg px-8 py-3 text-base font-semibold text-brown transition-colors"
+          className="btn-shimmer mt-6 inline-block rounded-lg px-8 py-3 text-sm font-semibold text-brown transition-colors md:text-base"
         >
           Start Your Free Trial
         </a>
@@ -25,15 +25,15 @@ export default function Footer() {
         <a href="/" className="font-heading text-lg text-text-on-dark">
           claudje
         </a>
-        <nav className="flex gap-6">
-          <a href="#how-it-works" className="transition-colors hover:text-text-on-dark">
-            How It Works
+        <nav className="flex flex-wrap justify-center gap-6">
+          <a href="/product" className="transition-colors hover:text-text-on-dark">
+            Product
+          </a>
+          <a href="/technology" className="transition-colors hover:text-text-on-dark">
+            Technology
           </a>
           <a href="#pricing" className="transition-colors hover:text-text-on-dark">
             Pricing
-          </a>
-          <a href="#faq" className="transition-colors hover:text-text-on-dark">
-            FAQ
           </a>
           <a href="/about" className="transition-colors hover:text-text-on-dark">
             About
