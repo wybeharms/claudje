@@ -3,8 +3,11 @@
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import ClaudjeBird from "../portal/ClaudjeBird";
+import { useI18n } from "@/context/I18nContext";
 
 export default function WhyClaudje() {
+  const { messages } = useI18n();
+  const t = messages.whyClaudje;
   const introRef = useRef<HTMLDivElement>(null);
   const [introVisible, setIntroVisible] = useState(false);
   const cardsRef = useRef<HTMLDivElement>(null);
@@ -68,7 +71,7 @@ export default function WhyClaudje() {
     <section className="bg-cream-dark px-6 py-24 lg:px-8">
       <div className="mx-auto max-w-5xl">
         <h2 className="text-center font-heading text-2xl md:text-3xl">
-          &ldquo;But can&rsquo;t ChatGPT do this?&rdquo;
+          {t.title}
         </h2>
 
         {/* Intro */}
@@ -97,8 +100,9 @@ export default function WhyClaudje() {
             />
           </div>
           <p className="mt-4 text-sm leading-relaxed text-text-primary md:text-base">
-            claudje uses <strong>the same AI</strong> that powers ChatGPT and
-            Claude.
+            {t.introBefore}
+            <strong>{t.introHighlight}</strong>
+            {t.introAfter}
           </p>
         </div>
 
@@ -115,9 +119,8 @@ export default function WhyClaudje() {
             }}
           >
             <p className="mb-4 text-center text-sm leading-relaxed text-text-muted md:text-base">
-              When you ask a chatbot to research a competitor, it searches the
-              web, skims the top results, and gives you a summary.{" "}
-              <strong>That&rsquo;s it.</strong>
+              {t.chatbotIntroBefore}
+              <strong>{t.chatbotIntroHighlight}</strong>
             </p>
 
             {/* Fake ChatGPT card */}
@@ -133,35 +136,25 @@ export default function WhyClaudje() {
                   </svg>
                 </div>
                 <span className="text-xs font-medium text-text-muted/60">
-                  ChatGPT
+                  {t.fakeChatLabel}
                 </span>
               </div>
               <div className="flex-1 space-y-2.5 text-[13px] leading-relaxed text-text-muted/50">
                 <p>
-                  Here&rsquo;s what I found about{" "}
-                  <strong className="text-text-muted/60">Competitor X</strong>:
+                  {t.fakeFoundAbout}
+                  <strong className="text-text-muted/60">{t.fakeCompetitorName}</strong>
+                  {t.fakeFoundColon}
                 </p>
-                <p>
-                  They appear to be a mid-sized company in your space. Based on
-                  their website, they offer similar services and seem to focus on
-                  the European market.
-                </p>
-                <p>
-                  Their pricing isn&rsquo;t publicly listed, but based on similar
-                  companies, I&rsquo;d estimate they charge around &euro;50-100
-                  per month.
-                </p>
-                <p className="italic text-text-muted/40">
-                  Note: I don&rsquo;t have access to real-time data, so some of
-                  this information may be outdated.
-                </p>
+                <p>{t.fakeSummary}</p>
+                <p>{t.fakePricing}</p>
+                <p className="italic text-text-muted/40">{t.fakeDisclaimer}</p>
               </div>
               <div className="mt-auto flex flex-wrap gap-1.5 pt-4">
                 <span className="rounded-full bg-silver/10 px-2.5 py-0.5 text-[11px] text-silver-dark">
-                  Estimates only
+                  {t.chatBadgeEstimates}
                 </span>
                 <span className="rounded-full bg-silver/10 px-2.5 py-0.5 text-[11px] text-silver-dark">
-                  One-time snapshot
+                  {t.chatBadgeSnapshot}
                 </span>
               </div>
             </div>
@@ -178,9 +171,11 @@ export default function WhyClaudje() {
             }}
           >
             <p className="mb-4 text-center text-sm leading-relaxed text-text-muted md:text-base">
-              claudje deploys <strong>managed agents</strong> with{" "}
-              <strong>paid tool access</strong>. They pull verified data from
-              professional sources a chatbot can&rsquo;t reach.
+              {t.claudjeIntroBefore}
+              <strong>{t.claudjeIntroHighlight1}</strong>
+              {t.claudjeIntroMiddle}
+              <strong>{t.claudjeIntroHighlight2}</strong>
+              {t.claudjeIntroAfter}
             </p>
 
             {/* claudje card */}
@@ -197,7 +192,7 @@ export default function WhyClaudje() {
                   </svg>
                 </div>
                 <span className="text-xs font-medium text-brown">
-                  claudje report
+                  {t.claudjeReportLabel}
                 </span>
                 </div>
                 <ClaudjeBird size={28} className="opacity-60" />
@@ -211,10 +206,11 @@ export default function WhyClaudje() {
                     </svg>
                     <div className="flex-1">
                       <p className="text-text-primary">
-                        <strong className="text-brown">Competitor X</strong> raised prices by 12% on Mar 15.
+                        <strong className="text-brown">{t.pricingItemBold}</strong>
+                        {t.pricingItemRest}
                       </p>
                       <div className="mt-1.5 flex items-center gap-2">
-                        <span className="text-[11px] text-gold">[pricing API]</span>
+                        <span className="text-[11px] text-gold">{t.pricingSource}</span>
                         <span className="inline-flex items-center rounded-full bg-red-50 px-1.5 py-0.5 text-[10px] font-medium text-red-700">↑ +12%</span>
                       </div>
                     </div>
@@ -228,12 +224,10 @@ export default function WhyClaudje() {
                       <path strokeLinecap="round" strokeLinejoin="round" d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z" />
                     </svg>
                     <div className="flex-1">
-                      <p className="text-text-primary">
-                        3 new job postings on LinkedIn: 2 sales reps + 1 product manager. Likely expanding into enterprise.
-                      </p>
+                      <p className="text-text-primary">{t.hiringItem}</p>
                       <div className="mt-1.5 flex items-center gap-2">
-                        <span className="text-[11px] text-gold">[LinkedIn]</span>
-                        <span className="inline-flex items-center rounded-full bg-green-50 px-1.5 py-0.5 text-[10px] font-medium text-green-700">+3 new</span>
+                        <span className="text-[11px] text-gold">{t.hiringSource}</span>
+                        <span className="inline-flex items-center rounded-full bg-green-50 px-1.5 py-0.5 text-[10px] font-medium text-green-700">{t.hiringBadge}</span>
                       </div>
                     </div>
                   </div>
@@ -246,11 +240,9 @@ export default function WhyClaudje() {
                       <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 18L9 11.25l4.306 4.307a11.95 11.95 0 015.814-5.519l2.74-1.22m0 0l-5.94-2.28m5.94 2.28l-2.28 5.941" />
                     </svg>
                     <div className="flex-1">
-                      <p className="text-text-primary">
-                        Website traffic up 23% MoM. Top source shifted from organic to Meta paid ads.
-                      </p>
+                      <p className="text-text-primary">{t.trafficItem}</p>
                       <div className="mt-1.5 flex items-center gap-2">
-                        <span className="text-[11px] text-gold">[SimilarWeb]</span>
+                        <span className="text-[11px] text-gold">{t.trafficSource}</span>
                         <span className="inline-flex items-center rounded-full bg-green-50 px-1.5 py-0.5 text-[10px] font-medium text-green-700">↑ +23%</span>
                       </div>
                     </div>
@@ -259,13 +251,13 @@ export default function WhyClaudje() {
               </div>
               <div className="mt-auto flex flex-wrap gap-1.5 pt-4">
                 <span className="rounded-full bg-gold/10 px-2.5 py-0.5 text-[11px] font-medium text-gold-dark">
-                  Verified sources
+                  {t.claudjeBadgeSources}
                 </span>
                 <span className="rounded-full bg-gold/10 px-2.5 py-0.5 text-[11px] font-medium text-gold-dark">
-                  Analyst-reviewed
+                  {t.claudjeBadgeAnalyst}
                 </span>
                 <span className="rounded-full bg-gold/10 px-2.5 py-0.5 text-[11px] font-medium text-gold-dark">
-                  Updated automatically
+                  {t.claudjeBadgeUpdated}
                 </span>
               </div>
             </div>

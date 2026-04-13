@@ -2,32 +2,12 @@
 
 import { useEffect, useRef, useState, useCallback } from "react";
 import TerminalAnimation from "./TerminalAnimation";
-
-const steps = [
-  {
-    number: "1",
-    title: "Tell Us Who to Watch",
-    description:
-      "Name up to 5, 10, or 50 competitors. Any industry.",
-  },
-  {
-    number: "2",
-    title: "We Manage Your Agents",
-    description:
-      "claudje deploys managed agents that monitor websites, reviews, LinkedIn, and pricing. They pull verified data from professional sources.",
-  },
-  {
-    number: "3",
-    title: "You Get a Clear Report",
-    description:
-      "What changed, what it means, and what to watch. In your inbox, weekly or daily.",
-  },
-];
+import { useI18n } from "@/context/I18nContext";
 
 const TYPING_NAMES = ["Baker's Delight", "SmileDental", "DrainMasters", "FitZone", "GreenClean"];
 
 /** Typing animation for Step 1 */
-function TypingInput({ active }: { active: boolean }) {
+function TypingInput({ active, label }: { active: boolean; label: string }) {
   const [text, setText] = useState("");
   const [nameIdx, setNameIdx] = useState(0);
   const [phase, setPhase] = useState<"typing" | "pause" | "deleting">("typing");
@@ -60,7 +40,7 @@ function TypingInput({ active }: { active: boolean }) {
 
   return (
     <div className="mt-3 inline-flex items-center rounded-lg border border-border-warm bg-white px-3 py-2 shadow-sm">
-      <span className="text-xs text-text-muted mr-1">Competitor:</span>
+      <span className="text-xs text-text-muted mr-1">{label}</span>
       <span className="text-xs font-medium text-text-primary">{text}</span>
       <span className="ml-px animate-pulse text-xs text-gold">|</span>
     </div>
@@ -68,6 +48,13 @@ function TypingInput({ active }: { active: boolean }) {
 }
 
 export default function HowItWorks() {
+  const { messages } = useI18n();
+  const t = messages.howItWorks;
+  const steps = [
+    { number: "1", title: t.step1Title, description: t.step1Desc },
+    { number: "2", title: t.step2Title, description: t.step2Desc },
+    { number: "3", title: t.step3Title, description: t.step3Desc },
+  ];
   const stepRefs = useRef<(HTMLDivElement | null)[]>([]);
   const [visible, setVisible] = useState<boolean[]>([false, false, false]);
 
@@ -99,9 +86,9 @@ export default function HowItWorks() {
   return (
     <section id="how-it-works" className="bg-cream px-6 py-16 lg:px-8">
       <div className="mx-auto max-w-5xl">
-        <h2 className="text-center font-heading text-2xl md:text-3xl">How It Works</h2>
+        <h2 className="text-center font-heading text-2xl md:text-3xl">{t.title}</h2>
         <p className="mt-3 text-center text-sm text-text-muted md:text-base">
-          Three steps. No software to install.
+          {t.subtitle}
         </p>
 
         {/* Staggered timeline */}
@@ -134,7 +121,7 @@ export default function HowItWorks() {
                       <p className="mt-2 text-sm leading-relaxed text-text-muted">
                         {step.description}
                       </p>
-                      {i === 0 && <TypingInput active={visible[0]} />}
+                      {i === 0 && <TypingInput active={visible[0]} label={t.typingLabel} />}
                       {i === 1 && <TerminalAnimation active={visible[1]} />}
                     </div>
                   </div>
@@ -152,7 +139,7 @@ export default function HowItWorks() {
                           </p>
                           {i === 0 && (
                             <div className="flex justify-end">
-                              <TypingInput active={visible[0]} />
+                              <TypingInput active={visible[0]} label={t.typingLabel} />
                             </div>
                           )}
                         </>
@@ -199,11 +186,9 @@ export default function HowItWorks() {
             />
           </svg>
           <p className="text-sm text-text-muted md:text-base">
-            Every report is{" "}
-            <span className="font-medium text-brown">
-              reviewed by an analyst
-            </span>{" "}
-            before delivery. AI does the heavy lifting, we ensure quality.
+            {t.analystBefore}
+            <span className="font-medium text-brown">{t.analystHighlight}</span>
+            {t.analystAfter}
           </p>
         </div>
 
@@ -213,13 +198,13 @@ export default function HowItWorks() {
             href="/product"
             className="text-sm text-gold-dark transition-colors hover:text-brown"
           >
-            See what&apos;s in a report &rarr;
+            {t.learnMoreReport} &rarr;
           </a>
           <a
             href="/technology"
             className="text-sm text-gold-dark transition-colors hover:text-brown"
           >
-            How our agents work &rarr;
+            {t.learnMoreAgents} &rarr;
           </a>
         </div>
       </div>

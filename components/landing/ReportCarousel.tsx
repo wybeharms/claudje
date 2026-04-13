@@ -1,187 +1,184 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, type ReactNode } from "react";
+import { useI18n } from "@/context/I18nContext";
+import type { Messages } from "@/lib/translations";
 
-/* ── Report page data ───────────────────────────────────── */
+/* ── Page builders ──────────────────────────────────────── */
 
-const pages = [
-  {
-    id: "cover",
-    render: () => (
-      <div className="flex h-full flex-col">
-        <div className="flex flex-1 flex-col justify-between p-6">
-          <div>
-            <div className="h-0.5 w-16 bg-gold" />
-            <h3 className="mt-5 text-2xl font-extrabold uppercase tracking-wide text-brown">
-              Market Report
-            </h3>
-            <p className="mt-1 text-sm text-gold-dark">
-              Pricing Intelligence &amp; Competitor Analysis
-            </p>
-            <div className="mt-5 h-px w-full bg-gold/30" />
-            <p className="mt-5 text-xs font-medium uppercase tracking-wider text-text-muted">
-              Prepared for
-            </p>
-            <p className="mt-1 font-heading text-xl text-gold-dark">
-              Your Company
-            </p>
-            <p className="mt-3 text-xs text-text-muted">
-              March 2026 | Week 13
-            </p>
-            <p className="mt-1 text-xs text-text-muted">
-              5 competitors analysed | 48 data points
-            </p>
+type ReportPage = { id: string; render: () => ReactNode };
+
+function buildPages(t: Messages["reportCarousel"]): ReportPage[] {
+  return [
+    {
+      id: "cover",
+      render: () => (
+        <div className="flex h-full flex-col">
+          <div className="flex flex-1 flex-col justify-between p-6">
+            <div>
+              <div className="h-0.5 w-16 bg-gold" />
+              <h3 className="mt-5 text-2xl font-extrabold uppercase tracking-wide text-brown">
+                {t.coverTitle}
+              </h3>
+              <p className="mt-1 text-sm text-gold-dark">{t.coverSubtitle}</p>
+              <div className="mt-5 h-px w-full bg-gold/30" />
+              <p className="mt-5 text-xs font-medium uppercase tracking-wider text-text-muted">
+                {t.coverPreparedFor}
+              </p>
+              <p className="mt-1 font-heading text-xl text-gold-dark">
+                {t.coverCompany}
+              </p>
+              <p className="mt-3 text-xs text-text-muted">{t.coverDate}</p>
+              <p className="mt-1 text-xs text-text-muted">{t.coverMeta}</p>
+            </div>
           </div>
         </div>
-      </div>
-    ),
-  },
-  {
-    id: "metrics",
-    render: () => (
-      <div className="p-6">
-        <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-gold-dark">
-          Summary
-        </p>
-        <div className="mt-3 h-px w-full bg-gold/30" />
-        <h4 className="mt-4 text-sm font-bold text-brown">Key Figures</h4>
-        <div className="mt-3 grid grid-cols-2 gap-2">
-          {[
-            { value: "5", label: "Competitors" },
-            { value: "48", label: "Data points" },
-            { value: "12", label: "Price changes" },
-            { value: "3rd", label: "Market position" },
-          ].map((stat) => (
-            <div
-              key={stat.label}
-              className="rounded-md bg-cream-dark/80 px-3 py-2.5 text-center"
-            >
-              <p className="text-lg font-bold text-brown">{stat.value}</p>
-              <p className="mt-0.5 text-[10px] text-text-muted">
-                {stat.label}
-              </p>
-            </div>
-          ))}
-        </div>
-        <h4 className="mt-5 text-sm font-bold text-brown">Key Findings</h4>
-        <ul className="mt-2 space-y-1.5">
-          {[
-            "Top competitor raised prices by 8%",
-            "New entrant detected in your area",
-          ].map((finding) => (
-            <li
-              key={finding}
-              className="flex items-start gap-2 text-xs leading-relaxed text-text-muted"
-            >
-              <span className="mt-0.5 text-gold-dark">&#x2022;</span>
-              {finding}
-            </li>
-          ))}
-        </ul>
-      </div>
-    ),
-  },
-  {
-    id: "pricing",
-    render: () => (
-      <div className="p-6">
-        <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-gold-dark">
-          Pricing Intelligence
-        </p>
-        <div className="mt-3 h-px w-full bg-gold/30" />
-        <table className="mt-4 w-full text-xs">
-          <thead>
-            <tr className="text-left text-text-muted">
-              <th className="pb-2 font-medium">Competitor</th>
-              <th className="pb-2 font-medium">Price</th>
-              <th className="pb-2 font-medium">Change</th>
-            </tr>
-          </thead>
-          <tbody className="text-brown">
+      ),
+    },
+    {
+      id: "metrics",
+      render: () => (
+        <div className="p-6">
+          <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-gold-dark">
+            {t.summaryEyebrow}
+          </p>
+          <div className="mt-3 h-px w-full bg-gold/30" />
+          <h4 className="mt-4 text-sm font-bold text-brown">{t.keyFigures}</h4>
+          <div className="mt-3 grid grid-cols-2 gap-2">
             {[
-              { name: "Competitor A", price: "€4.50", change: "+€0.30" },
-              { name: "Competitor B", price: "€4.20", change: "" },
-              { name: "Your Company", price: "€4.10", change: "" },
-              { name: "Competitor C", price: "€3.95", change: "-€0.15" },
-              { name: "Competitor D", price: "€3.80", change: "+€0.10" },
-            ].map((row) => (
-              <tr
-                key={row.name}
-                className={`border-t border-border-warm ${row.name === "Your Company" ? "font-semibold text-gold-dark" : ""}`}
+              { value: "5", label: t.statCompetitors },
+              { value: "48", label: t.statDataPoints },
+              { value: "12", label: t.statPriceChanges },
+              { value: "3rd", label: t.statMarketPosition },
+            ].map((stat) => (
+              <div
+                key={stat.label}
+                className="rounded-md bg-cream-dark/80 px-3 py-2.5 text-center"
               >
-                <td className="py-1.5">{row.name}</td>
-                <td className="py-1.5">{row.price}</td>
-                <td className="py-1.5">
-                  <span
-                    className={
-                      row.change.startsWith("+")
-                        ? "text-green-600"
-                        : row.change.startsWith("-")
-                          ? "text-red-500"
-                          : "text-text-muted"
-                    }
-                  >
-                    {row.change || "\u2014"}
-                  </span>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-    ),
-  },
-  {
-    id: "activity",
-    render: () => (
-      <div className="p-6">
-        <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-gold-dark">
-          Web &amp; Review Monitoring
-        </p>
-        <div className="mt-3 h-px w-full bg-gold/30" />
-        <div className="mt-4 space-y-3">
-          {[
-            {
-              icon: "globe",
-              title: "Website Changes",
-              detail: "Competitor A launched a new promotions page.",
-            },
-            {
-              icon: "star",
-              title: "Review Alerts",
-              detail: "Competitor B dropped to 3.9 stars (slow service).",
-            },
-            {
-              icon: "trend",
-              title: "Search Trends",
-              detail: "Competitor C brand searches up 22%.",
-            },
-          ].map((item) => (
-            <div key={item.title} className="flex gap-3">
-              <div className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded bg-gold/15 text-gold-dark">
-                {item.icon === "globe" && (
-                  <svg className="h-3 w-3" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor"><circle cx="12" cy="12" r="10" /><path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z" /></svg>
-                )}
-                {item.icon === "star" && (
-                  <svg className="h-3 w-3" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor"><path d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z" /></svg>
-                )}
-                {item.icon === "trend" && (
-                  <svg className="h-3 w-3" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor"><path d="M2.25 18L9 11.25l4.306 4.307a11.95 11.95 0 015.814-5.519l2.74-1.22m0 0l-5.94-2.28m5.94 2.28l-2.28 5.941" /></svg>
-                )}
-              </div>
-              <div>
-                <p className="text-xs font-semibold text-brown">{item.title}</p>
-                <p className="mt-0.5 text-[11px] leading-relaxed text-text-muted">
-                  {item.detail}
+                <p className="text-lg font-bold text-brown">{stat.value}</p>
+                <p className="mt-0.5 text-[10px] text-text-muted">
+                  {stat.label}
                 </p>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
+          <h4 className="mt-5 text-sm font-bold text-brown">{t.keyFindings}</h4>
+          <ul className="mt-2 space-y-1.5">
+            {[t.finding1, t.finding2].map((finding) => (
+              <li
+                key={finding}
+                className="flex items-start gap-2 text-xs leading-relaxed text-text-muted"
+              >
+                <span className="mt-0.5 text-gold-dark">&#x2022;</span>
+                {finding}
+              </li>
+            ))}
+          </ul>
         </div>
-      </div>
-    ),
-  },
-];
+      ),
+    },
+    {
+      id: "pricing",
+      render: () => (
+        <div className="p-6">
+          <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-gold-dark">
+            {t.pricingEyebrow}
+          </p>
+          <div className="mt-3 h-px w-full bg-gold/30" />
+          <table className="mt-4 w-full text-xs">
+            <thead>
+              <tr className="text-left text-text-muted">
+                <th className="pb-2 font-medium">{t.columnCompetitor}</th>
+                <th className="pb-2 font-medium">{t.columnPrice}</th>
+                <th className="pb-2 font-medium">{t.columnChange}</th>
+              </tr>
+            </thead>
+            <tbody className="text-brown">
+              {[
+                { name: "Competitor A", price: "€4.50", change: "+€0.30", isYou: false },
+                { name: "Competitor B", price: "€4.20", change: "", isYou: false },
+                { name: t.yourCompany, price: "€4.10", change: "", isYou: true },
+                { name: "Competitor C", price: "€3.95", change: "-€0.15", isYou: false },
+                { name: "Competitor D", price: "€3.80", change: "+€0.10", isYou: false },
+              ].map((row) => (
+                <tr
+                  key={row.name}
+                  className={`border-t border-border-warm ${row.isYou ? "font-semibold text-gold-dark" : ""}`}
+                >
+                  <td className="py-1.5">{row.name}</td>
+                  <td className="py-1.5">{row.price}</td>
+                  <td className="py-1.5">
+                    <span
+                      className={
+                        row.change.startsWith("+")
+                          ? "text-green-600"
+                          : row.change.startsWith("-")
+                            ? "text-red-500"
+                            : "text-text-muted"
+                      }
+                    >
+                      {row.change || "\u2014"}
+                    </span>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      ),
+    },
+    {
+      id: "activity",
+      render: () => (
+        <div className="p-6">
+          <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-gold-dark">
+            {t.activityEyebrow}
+          </p>
+          <div className="mt-3 h-px w-full bg-gold/30" />
+          <div className="mt-4 space-y-3">
+            {[
+              {
+                icon: "globe",
+                title: t.activityWebsiteTitle,
+                detail: t.activityWebsiteDetail,
+              },
+              {
+                icon: "star",
+                title: t.activityReviewsTitle,
+                detail: t.activityReviewsDetail,
+              },
+              {
+                icon: "trend",
+                title: t.activitySearchTitle,
+                detail: t.activitySearchDetail,
+              },
+            ].map((item) => (
+              <div key={item.title} className="flex gap-3">
+                <div className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded bg-gold/15 text-gold-dark">
+                  {item.icon === "globe" && (
+                    <svg className="h-3 w-3" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor"><circle cx="12" cy="12" r="10" /><path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z" /></svg>
+                  )}
+                  {item.icon === "star" && (
+                    <svg className="h-3 w-3" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor"><path d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z" /></svg>
+                  )}
+                  {item.icon === "trend" && (
+                    <svg className="h-3 w-3" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor"><path d="M2.25 18L9 11.25l4.306 4.307a11.95 11.95 0 015.814-5.519l2.74-1.22m0 0l-5.94-2.28m5.94 2.28l-2.28 5.941" /></svg>
+                  )}
+                </div>
+                <div>
+                  <p className="text-xs font-semibold text-brown">{item.title}</p>
+                  <p className="mt-0.5 text-[11px] leading-relaxed text-text-muted">
+                    {item.detail}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      ),
+    },
+  ];
+}
 
 /* ── Arrow icon ──────────────────────────────────────────── */
 
@@ -206,6 +203,10 @@ function ChevronIcon({ direction }: { direction: "left" | "right" }) {
 /* ── Carousel component ──────────────────────────────────── */
 
 export default function ReportCarousel() {
+  const { messages } = useI18n();
+  const t = messages.reportCarousel;
+  const pages = buildPages(t);
+
   const [current, setCurrent] = useState(0);
   const [next, setNext] = useState<number | null>(null);
   const [flipping, setFlipping] = useState(false);
@@ -228,11 +229,11 @@ export default function ReportCarousel() {
 
   const goNext = useCallback(() => {
     flip((current + 1) % pages.length, "next");
-  }, [current, flip]);
+  }, [current, flip, pages.length]);
 
   const goPrev = useCallback(() => {
     flip((current - 1 + pages.length) % pages.length, "prev");
-  }, [current, flip]);
+  }, [current, flip, pages.length]);
 
   const goTo = useCallback(
     (index: number) => {
@@ -256,7 +257,7 @@ export default function ReportCarousel() {
         {/* Left arrow */}
         <button
           onClick={goPrev}
-          aria-label="Previous page"
+          aria-label={t.prevPage}
           className="rounded-full p-2 text-text-on-dark-muted transition-colors hover:bg-white/10 hover:text-text-on-dark"
         >
           <ChevronIcon direction="left" />
@@ -296,7 +297,7 @@ export default function ReportCarousel() {
         {/* Right arrow */}
         <button
           onClick={goNext}
-          aria-label="Next page"
+          aria-label={t.nextPage}
           className="rounded-full p-2 text-text-on-dark-muted transition-colors hover:bg-white/10 hover:text-text-on-dark"
         >
           <ChevronIcon direction="right" />
@@ -310,7 +311,7 @@ export default function ReportCarousel() {
             <button
               key={p.id}
               onClick={() => goTo(i)}
-              aria-label={`Page ${i + 1}`}
+              aria-label={`${t.pageLabel} ${i + 1}`}
               className={`h-2 rounded-full transition-all duration-300 ${
                 i === (next ?? current)
                   ? "w-6 bg-gold"

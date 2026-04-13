@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { DM_Serif_Display, Plus_Jakarta_Sans } from "next/font/google";
+import { I18nProvider } from "@/context/I18nContext";
 import "./globals.css";
 
 const dmSerif = DM_Serif_Display({
@@ -124,7 +125,7 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
-        {children}
+        <I18nProvider>{children}</I18nProvider>
       </body>
     </html>
   );

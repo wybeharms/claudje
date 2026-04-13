@@ -5,6 +5,7 @@ import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { signIn } from "next-auth/react";
 import { Eye, EyeOff, Plus, X } from "lucide-react";
+import { useI18n } from "@/context/I18nContext";
 
 type Plan = "starter" | "business" | "pro";
 
@@ -98,6 +99,7 @@ function getPasswordStrength(pw: string): { score: number; label: string; color:
 }
 
 export default function GetStartedPage() {
+  const { formatPrice } = useI18n();
   const searchParams = useSearchParams();
   const planParam = searchParams.get("plan");
   const plan: Plan =
@@ -533,7 +535,7 @@ export default function GetStartedPage() {
                     <p className="text-xs text-[var(--color-text-muted)]">{PLAN_CONFIG[plan].description}</p>
                   </div>
                   <p className="text-lg font-bold text-[var(--color-text-primary)]">
-                    &euro;{PLAN_CONFIG[plan].price}<span className="text-sm font-normal text-[var(--color-text-muted)]">/mo</span>
+                    {formatPrice(PLAN_CONFIG[plan].price)}<span className="text-sm font-normal text-[var(--color-text-muted)]">/mo</span>
                   </p>
                 </div>
               </div>

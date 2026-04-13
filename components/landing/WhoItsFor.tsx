@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { FlyingEagle } from "../portal/ClaudjeBird";
+import { useI18n } from "@/context/I18nContext";
 
 const sampleCompetitors = [
   "Baker's Delight",
@@ -12,6 +13,8 @@ const sampleCompetitors = [
 ];
 
 export default function WhoItsFor() {
+  const { messages, formatPrice } = useI18n();
+  const t = messages.whoItsFor;
   const sectionRef = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
   const [activeIndex, setActiveIndex] = useState(-1);
@@ -64,7 +67,7 @@ export default function WhoItsFor() {
             visible ? "translate-y-0 opacity-100" : "translate-y-6 opacity-0"
           }`}
         >
-          Your competitors are moving. Are you watching?
+          {t.title}
         </h2>
 
         {/* Flying eagle animation */}
@@ -109,18 +112,18 @@ export default function WhoItsFor() {
           }`}
         >
           <p className="text-sm leading-relaxed text-text-muted md:text-base">
-            You know AI can give you an edge. You just don&rsquo;t have the
-            time, tools, or team to use it consistently.
+            {t.body1}
           </p>
           <p className="mt-3 text-sm leading-relaxed text-text-muted md:text-base">
-            claudje does it for you. Real competitor intelligence, reviewed by a
-            real analyst, delivered to your inbox. Starting at &euro;49/month.
+            {t.body2Before}
+            {formatPrice(49)}
+            {t.body2After}
           </p>
           <a
             href="/get-started"
             className="mt-6 inline-block rounded-lg bg-brown px-6 py-2.5 text-sm font-medium text-text-on-dark transition-colors hover:bg-brown/90"
           >
-            Start Monitoring
+            {t.cta}
           </a>
         </div>
       </div>

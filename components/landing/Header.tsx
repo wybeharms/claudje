@@ -2,52 +2,32 @@
 
 import { useState, useEffect, useRef } from "react";
 import ClaudjeBird from "../portal/ClaudjeBird";
-
-const LOCALES = [
-  { code: "en-US", flag: "\u{1F1FA}\u{1F1F8}", label: "English (US)", currency: "USD", symbol: "$" },
-  { code: "en-GB", flag: "\u{1F1EC}\u{1F1E7}", label: "English (UK)", currency: "GBP", symbol: "\u00A3" },
-  { code: "nl", flag: "\u{1F1F3}\u{1F1F1}", label: "Nederlands", currency: "EUR", symbol: "\u20AC" },
-  { code: "it", flag: "\u{1F1EE}\u{1F1F9}", label: "Italiano", currency: "EUR", symbol: "\u20AC" },
-  { code: "es", flag: "\u{1F1EA}\u{1F1F8}", label: "Espa\u00F1ol", currency: "EUR", symbol: "\u20AC" },
-];
-
-const NAV_LINKS = [
-  { label: "Product", href: "/product" },
-  { label: "Technology", href: "/technology" },
-];
-
-const ABOUT_LINKS = [
-  { label: "About", href: "/about" },
-  { label: "Blog", href: "/blog" },
-];
+import { useI18n } from "@/context/I18nContext";
+import type { LocaleCode } from "@/lib/i18n";
 
 const CTA_HREF = "/get-started";
 
-function detectLocale(): string {
-  if (typeof navigator === "undefined") return "nl";
-  const lang = navigator.language || "nl";
-  const match = LOCALES.find(
-    (l) => l.code === lang || lang.startsWith(l.code.split("-")[0])
-  );
-  return match ? match.code : "nl";
-}
-
-export { LOCALES };
-
 export default function Header() {
+  const { locale, localeConfig, locales, setLocale, messages } = useI18n();
+  const t = messages.header;
+
+  const navLinks = [
+    { label: t.nav.product, href: "/product" },
+    { label: t.nav.technology, href: "/technology" },
+  ];
+  const aboutLinks = [
+    { label: t.nav.about, href: "/about" },
+    { label: t.nav.blog, href: "/blog" },
+  ];
+
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [locale, setLocale] = useState("nl");
   const [localeOpen, setLocaleOpen] = useState(false);
   const [aboutOpen, setAboutOpen] = useState(false);
   const [pillAboutOpen, setPillAboutOpen] = useState(false);
   const localeRef = useRef<HTMLDivElement>(null);
   const aboutRef = useRef<HTMLDivElement>(null);
   const pillAboutRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    setLocale(detectLocale());
-  }, []);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 400);
@@ -71,8 +51,6 @@ export default function Header() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  const currentLocale = LOCALES.find((l) => l.code === locale) || LOCALES[2];
-
   return (
     <>
       {/* Full header */}
@@ -89,7 +67,7 @@ export default function Header() {
 
           {/* Desktop nav */}
           <nav className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-8 md:flex">
-            {NAV_LINKS.map((link) => (
+            {navLinks.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
@@ -105,7 +83,7 @@ export default function Header() {
                 onClick={() => setAboutOpen(!aboutOpen)}
                 className="flex items-center gap-1 text-sm text-text-on-dark-muted transition-colors hover:text-text-on-dark"
               >
-                About
+                {t.nav.aboutMenu}
                 <svg
                   className={`h-3 w-3 transition-transform ${aboutOpen ? "rotate-180" : ""}`}
                   fill="none"
@@ -118,7 +96,7 @@ export default function Header() {
               </button>
               {aboutOpen && (
                 <div className="absolute left-0 top-full mt-2 min-w-[120px] rounded-lg border border-white/10 bg-brown shadow-lg">
-                  {ABOUT_LINKS.map((link) => (
+                  {aboutLinks.map((link) => (
                     <a
                       key={link.href}
                       href={link.href}
@@ -139,19 +117,18 @@ export default function Header() {
               <button
                 onClick={() => setLocaleOpen(!localeOpen)}
                 className="flex items-center gap-1 rounded-md px-2 py-1 text-sm transition-colors hover:bg-white/10"
-                aria-label="Change language"
+                aria-label={t.languageLabel}
               >
-                <span className="text-base">{currentLocale.flag}</span>
+                <span className="text-base">{localeConfig.flag}</span>
               </button>
               {localeOpen && (
                 <div className="absolute right-0 top-full mt-2 min-w-[160px] rounded-lg border border-white/10 bg-brown shadow-lg">
-                  {LOCALES.map((l) => (
+                  {locales.map((l) => (
                     <button
                       key={l.code}
                       onClick={() => {
-                        setLocale(l.code);
+                        setLocale(l.code as LocaleCode);
                         setLocaleOpen(false);
-                        window.dispatchEvent(new CustomEvent("locale-change", { detail: l.code }));
                       }}
                       className={`flex w-full items-center gap-2.5 px-4 py-2 text-sm whitespace-nowrap transition-colors hover:bg-white/10 first:rounded-t-lg last:rounded-b-lg ${
                         l.code === locale
@@ -170,13 +147,13 @@ export default function Header() {
               href="/login"
               className="text-sm text-text-on-dark-muted transition-colors hover:text-text-on-dark"
             >
-              Login
+              {t.login}
             </a>
             <a
               href={CTA_HREF}
               className="btn-shimmer rounded-lg px-5 py-2 text-sm font-medium text-brown transition-colors"
             >
-              Free Trial
+              {t.ctaTrial}
             </a>
           </div>
 
@@ -216,13 +193,10 @@ export default function Header() {
             <div className="flex flex-col gap-4">
               {/* Mobile locale selector */}
               <div className="flex gap-2">
-                {LOCALES.map((l) => (
+                {locales.map((l) => (
                   <button
                     key={l.code}
-                    onClick={() => {
-                      setLocale(l.code);
-                      window.dispatchEvent(new CustomEvent("locale-change", { detail: l.code }));
-                    }}
+                    onClick={() => setLocale(l.code as LocaleCode)}
                     className={`rounded-md px-2 py-1 text-base transition-colors ${
                       l.code === locale
                         ? "bg-white/10"
@@ -233,7 +207,7 @@ export default function Header() {
                   </button>
                 ))}
               </div>
-              {NAV_LINKS.map((link) => (
+              {navLinks.map((link) => (
                 <a
                   key={link.href}
                   href={link.href}
@@ -243,7 +217,7 @@ export default function Header() {
                   {link.label}
                 </a>
               ))}
-              {ABOUT_LINKS.map((link) => (
+              {aboutLinks.map((link) => (
                 <a
                   key={link.href}
                   href={link.href}
@@ -257,7 +231,7 @@ export default function Header() {
                 href={CTA_HREF}
                 className="btn-shimmer rounded-lg px-5 py-2 text-center text-sm font-medium text-brown"
               >
-                Free Trial
+                {t.ctaTrial}
               </a>
             </div>
           </nav>
@@ -273,7 +247,7 @@ export default function Header() {
         }`}
       >
         <nav className="flex items-center gap-1 rounded-full border border-border-silver bg-white/80 px-2 py-2 shadow-lg shadow-black/10 backdrop-blur-md">
-          {NAV_LINKS.map((link) => (
+          {navLinks.map((link) => (
             <a
               key={link.href}
               href={link.href}
@@ -289,7 +263,7 @@ export default function Header() {
               onClick={() => setPillAboutOpen(!pillAboutOpen)}
               className="flex items-center gap-1 rounded-full px-3 py-2 text-sm text-text-primary transition-colors hover:bg-black/5"
             >
-              About
+              {t.nav.aboutMenu}
               <svg
                 className={`h-3 w-3 transition-transform ${pillAboutOpen ? "rotate-180" : ""}`}
                 fill="none"
@@ -302,7 +276,7 @@ export default function Header() {
             </button>
             {pillAboutOpen && (
               <div className="absolute left-0 top-full mt-2 min-w-[120px] rounded-lg border border-border-warm bg-white shadow-lg">
-                {ABOUT_LINKS.map((link) => (
+                {aboutLinks.map((link) => (
                   <a
                     key={link.href}
                     href={link.href}
@@ -320,7 +294,7 @@ export default function Header() {
             href={CTA_HREF}
             className="btn-shimmer rounded-full px-5 py-2 text-sm font-medium text-brown"
           >
-            Free Trial
+            {t.ctaTrial}
           </a>
         </nav>
       </div>

@@ -1,56 +1,22 @@
 "use client";
 
 import { useState } from "react";
-
-const items = [
-  {
-    question: "How does claudje collect competitor data?",
-    answer:
-      "claudje uses AI to analyze publicly available information: websites, pricing pages, review platforms, company registries, social media profiles, and search trends. No scraping of private data, no hacking. Just structured analysis of what's already out there.",
-  },
-  {
-    question: "When will I get my first report?",
-    answer:
-      "Within 24 hours of sharing your competitor list. We set up monitoring, run the first analysis, and deliver a complete report to your inbox.",
-  },
-  {
-    question: "Can I change which competitors I track?",
-    answer:
-      "Yes, anytime. Swap competitors in or out by emailing us. Changes take effect with the next report cycle.",
-  },
-  {
-    question: "Is this legal?",
-    answer:
-      "Absolutely. claudje only analyzes publicly available information. The same data anyone could find by visiting your competitors' websites, reading their reviews, or checking the Chamber of Commerce. We just do it systematically and deliver the insights to you.",
-  },
-  {
-    question: "What format are the reports in?",
-    answer:
-      "Reports are delivered to your inbox as structured emails with data tables and AI-generated summaries for each category. You also get access to a portal where you can view past reports, change your competitors, and manage your preferences.",
-  },
-  {
-    question: "How is this different from using ChatGPT?",
-    answer:
-      "claudje uses the same AI models as ChatGPT and Claude, but deploys a team of specialized sub-agents with their own skills and paid tool access. Each agent handles a different part of the research: Google Maps reviews, Chamber of Commerce filings, LinkedIn activity, and more. A chatbot summarizes the first page of Google.\n\nclaudje cross-references real data from multiple sources into one complete report.",
-  },
-  {
-    question: "How do I cancel?",
-    answer:
-      "Email us anytime. No contracts, no lock-in. Monitoring stops at the end of your current billing period.",
-  },
-];
+import { useI18n } from "@/context/I18nContext";
 
 export default function FAQ() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const { messages } = useI18n();
+  const t = messages.faq;
+  const items = t.items;
 
   return (
     <section id="faq" className="bg-cream px-6 py-20 lg:px-8">
       <div className="mx-auto max-w-4xl">
         <div className="grid gap-10 md:grid-cols-[1fr_2fr] md:gap-12">
           <div>
-            <h2 className="font-heading text-2xl md:text-3xl">FAQ</h2>
+            <h2 className="font-heading text-2xl md:text-3xl">{t.title}</h2>
             <p className="mt-3 text-sm text-text-muted md:text-base">
-              Common questions about claudje.
+              {t.subtitle}
             </p>
           </div>
 
