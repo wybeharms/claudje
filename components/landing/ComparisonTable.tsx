@@ -51,13 +51,13 @@ export default function ComparisonTable() {
           <table className="w-full text-left text-sm">
             <thead>
               <tr className="border-b border-border-warm bg-cream/50">
-                <th className="px-5 py-3 text-xs font-semibold text-text-muted uppercase tracking-wider">
+                <th className="px-5 py-3 text-sm font-bold text-text-primary uppercase tracking-wider">
                   Feature
                 </th>
-                <th className="px-5 py-3 text-xs font-semibold text-text-muted/60 uppercase tracking-wider">
+                <th className="px-5 py-3 text-sm font-bold text-text-muted uppercase tracking-wider">
                   Chatbot
                 </th>
-                <th className="px-5 py-3 text-xs font-semibold text-gold-dark uppercase tracking-wider">
+                <th className="px-5 py-3 text-sm font-bold text-gold-dark uppercase tracking-wider">
                   claudje
                 </th>
               </tr>

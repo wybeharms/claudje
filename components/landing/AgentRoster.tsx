@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import SubAgentSpawn from "./SubAgentSpawn";
 
 const agents = [
   {
@@ -100,8 +101,9 @@ export default function AgentRoster() {
   return (
     <section className="bg-cream-dark px-6 py-20 lg:px-8">
       <div ref={ref} className="mx-auto max-w-4xl">
-        <h2 className="text-center font-heading text-2xl md:text-3xl">
+        <h2 className="flex items-center justify-center gap-2 font-heading text-2xl md:text-3xl">
           Meet Your Agents
+          <SubAgentSpawn active={visible} />
         </h2>
         <p className="mx-auto mt-3 max-w-2xl text-center text-sm text-text-muted md:text-base">
           Eight specialized agents, each trained for a specific research task.

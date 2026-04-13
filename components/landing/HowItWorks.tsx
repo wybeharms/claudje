@@ -1,14 +1,14 @@
 "use client";
 
 import { useEffect, useRef, useState, useCallback } from "react";
-import ClaudjeBird from "../portal/ClaudjeBird";
+import TerminalAnimation from "./TerminalAnimation";
 
 const steps = [
   {
     number: "1",
     title: "Tell Us Who to Watch",
     description:
-      "Name up to 5, 10, or 15 competitors. Any industry.",
+      "Name up to 5, 10, or 50 competitors. Any industry.",
   },
   {
     number: "2",
@@ -67,72 +67,6 @@ function TypingInput({ active }: { active: boolean }) {
   );
 }
 
-/**
- * Continuous sub-agent spawn: mini mascots fly out from top-right of the
- * main mascot diagonally up-right, fading as they go. A new one spawns
- * every ~1.5s. Rendered as an overlay anchored to the title row.
- */
-function SubAgentSpawn({ active }: { active: boolean }) {
-  const [agents, setAgents] = useState<{ id: number; dx: number; dy: number; born: number }[]>([]);
-  const nextId = useRef(0);
-
-  useEffect(() => {
-    if (!active) { setAgents([]); return; }
-    const spawn = () => {
-      const id = nextId.current++;
-      // Fly up-right: random angle between -15 and -55 degrees
-      const angle = (-15 - Math.random() * 40) * (Math.PI / 180);
-      const dist = 80 + Math.random() * 40;
-      const dx = Math.cos(angle) * dist;
-      const dy = Math.sin(angle) * dist;
-      setAgents((prev) => {
-        // Remove agents older than 2.5s
-        const now = Date.now();
-        const fresh = prev.filter((a) => now - a.born < 2500);
-        return [...fresh, { id, dx, dy, born: now }];
-      });
-    };
-    spawn();
-    const interval = setInterval(spawn, 1500);
-    return () => clearInterval(interval);
-  }, [active]);
-
-  return (
-    // Origin: positioned so spawn point is at the mascot's wing tip (top-right)
-    <div className="pointer-events-none absolute -top-6 left-full -ml-3 h-32 w-40 overflow-visible">
-      {agents.map((agent) => (
-        <div
-          key={agent.id}
-          className="absolute left-0 top-4"
-          style={{
-            animation: "subAgentFlyOut 2s ease-out forwards",
-            ["--dx" as string]: `${agent.dx}px`,
-            ["--dy" as string]: `${agent.dy}px`,
-          }}
-        >
-          <ClaudjeBird size={14} />
-        </div>
-      ))}
-
-      <style jsx global>{`
-        @keyframes subAgentFlyOut {
-          0% {
-            transform: translate(0, 0) scale(0.9);
-            opacity: 0.75;
-          }
-          15% {
-            opacity: 0.65;
-          }
-          100% {
-            transform: translate(var(--dx), var(--dy)) scale(0.4);
-            opacity: 0;
-          }
-        }
-      `}</style>
-    </div>
-  );
-}
-
 export default function HowItWorks() {
   const stepRefs = useRef<(HTMLDivElement | null)[]>([]);
   const [visible, setVisible] = useState<boolean[]>([false, false, false]);
@@ -165,8 +99,8 @@ export default function HowItWorks() {
   return (
     <section id="how-it-works" className="bg-cream px-6 py-16 lg:px-8">
       <div className="mx-auto max-w-5xl">
-        <h2 className="font-heading text-2xl md:text-3xl">How It Works</h2>
-        <p className="mt-3 text-sm text-text-muted md:text-base">
+        <h2 className="text-center font-heading text-2xl md:text-3xl">How It Works</h2>
+        <p className="mt-3 text-center text-sm text-text-muted md:text-base">
           Three steps. No software to install.
         </p>
 
@@ -175,7 +109,7 @@ export default function HowItWorks() {
           {/* Vertical line */}
           <div className="absolute left-6 top-0 bottom-0 w-px bg-silver/30 md:left-1/2 md:-translate-x-px" />
 
-          <div className="space-y-4">
+          <div className="space-y-2">
             {steps.map((step, i) => {
               const isRight = i % 2 === 1;
               return (
@@ -196,19 +130,12 @@ export default function HowItWorks() {
                       {step.number}
                     </div>
                     <div className="flex-1 pt-1">
-                      <h3 className="relative inline-flex items-center gap-2 text-base font-semibold">
-                        {step.title}
-                        {i === 1 && (
-                          <>
-                            <ClaudjeBird size={28} className="translate-y-px" />
-                            <SubAgentSpawn active={visible[1]} />
-                          </>
-                        )}
-                      </h3>
+                      <h3 className="text-base font-semibold">{step.title}</h3>
                       <p className="mt-2 text-sm leading-relaxed text-text-muted">
                         {step.description}
                       </p>
                       {i === 0 && <TypingInput active={visible[0]} />}
+                      {i === 1 && <TerminalAnimation active={visible[1]} />}
                     </div>
                   </div>
 
@@ -239,18 +166,13 @@ export default function HowItWorks() {
                     <div>
                       {isRight && (
                         <>
-                          <h3 className="relative inline-flex items-center gap-2 text-base font-semibold">
+                          <h3 className="text-base font-semibold">
                             {step.title}
-                            {i === 1 && (
-                              <>
-                                <ClaudjeBird size={28} className="translate-y-px" />
-                                <SubAgentSpawn active={visible[1]} />
-                              </>
-                            )}
                           </h3>
                           <p className="mt-2 text-sm leading-relaxed text-text-muted md:text-base">
                             {step.description}
                           </p>
+                          <TerminalAnimation active={visible[1]} />
                         </>
                       )}
                     </div>
