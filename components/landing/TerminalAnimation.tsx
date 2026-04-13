@@ -4,29 +4,29 @@ import { useEffect, useRef, useState } from "react";
 
 const SCRIPT: { type: "cmd" | "output" | "pause"; text?: string; color?: string; delay?: number }[] = [
   { type: "cmd", text: "$ claudje research --competitor \"Baker's Delight\"" },
-  { type: "output", text: "● Searching Google Maps reviews...        done", color: "blue" },
-  { type: "output", text: "● Checking Chamber of Commerce filings... done", color: "blue" },
+  { type: "output", text: "● Searching Google Maps reviews...        done", color: "gray" },
+  { type: "output", text: "● Checking Chamber of Commerce filings... done", color: "gray" },
   { type: "output", text: "● Analyzing pricing pages...              done", color: "blue" },
-  { type: "output", text: "● Scanning LinkedIn activity...           done", color: "blue" },
+  { type: "output", text: "● Scanning LinkedIn activity...           done", color: "gray" },
   { type: "output", text: "● Generating report section...            done", color: "green" },
   { type: "pause", delay: 800 },
   { type: "cmd", text: "$ claudje verify --report 2026-W15" },
-  { type: "output", text: "● Cross-referencing 47 data points...     done", color: "blue" },
+  { type: "output", text: "● Cross-referencing 47 data points...     done", color: "gray" },
   { type: "output", text: "● Flagging 3 items for analyst review...  done", color: "green" },
   { type: "pause", delay: 600 },
   { type: "cmd", text: "$ claudje deliver --to inbox" },
   { type: "output", text: "● Report ready. Sent to client.", color: "gold" },
   { type: "pause", delay: 1500 },
   { type: "cmd", text: "$ claudje research --competitor \"SmileDental\"" },
-  { type: "output", text: "● Searching Google Maps reviews...        done", color: "blue" },
+  { type: "output", text: "● Searching Google Maps reviews...        done", color: "gray" },
   { type: "output", text: "● Checking Trustpilot ratings...          done", color: "blue" },
-  { type: "output", text: "● Analyzing pricing pages...              done", color: "blue" },
-  { type: "output", text: "● Scanning LinkedIn activity...           done", color: "blue" },
+  { type: "output", text: "● Analyzing pricing pages...              done", color: "gray" },
+  { type: "output", text: "● Scanning LinkedIn activity...           done", color: "gray" },
   { type: "output", text: "● Monitoring ad campaigns...              done", color: "blue" },
   { type: "output", text: "● Generating report section...            done", color: "green" },
   { type: "pause", delay: 800 },
   { type: "cmd", text: "$ claudje verify --report 2026-W15" },
-  { type: "output", text: "● Cross-referencing 52 data points...     done", color: "blue" },
+  { type: "output", text: "● Cross-referencing 52 data points...     done", color: "gray" },
   { type: "output", text: "● Flagging 1 item for analyst review...   done", color: "green" },
   { type: "pause", delay: 600 },
   { type: "cmd", text: "$ claudje deliver --to inbox" },
@@ -34,12 +34,13 @@ const SCRIPT: { type: "cmd" | "output" | "pause"; text?: string; color?: string;
   { type: "pause", delay: 1500 },
 ];
 
-const MAX_VISIBLE = 7;
+const MAX_VISIBLE = 6;
 
 const DOT_COLORS: Record<string, string> = {
   blue: "text-blue-400",
   green: "text-green-500",
   gold: "text-gold",
+  gray: "text-silver",
 };
 
 function formatLine(text: string, color?: string) {
@@ -137,7 +138,7 @@ export default function TerminalAnimation({ active }: { active: boolean }) {
         <span className="ml-2 text-[10px] text-text-muted">claudje-agent</span>
       </div>
       {/* Terminal body — fixed height, no scroll */}
-      <div className="h-[140px] overflow-hidden px-3 py-2 font-mono text-[11px] leading-relaxed">
+      <div className="h-[132px] overflow-hidden px-3 py-2 font-mono text-[11px] leading-[18px]">
         {lines.map((line) => (
           <div
             key={line.id}
