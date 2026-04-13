@@ -109,7 +109,7 @@ export default function HowItWorks() {
           {/* Vertical line */}
           <div className="absolute left-6 top-0 bottom-0 w-px bg-silver/30 md:left-1/2 md:-translate-x-px" />
 
-          <div className="space-y-2">
+          <div className="space-y-0">
             {steps.map((step, i) => {
               const isRight = i % 2 === 1;
               return (
@@ -126,7 +126,7 @@ export default function HowItWorks() {
                 >
                   {/* Mobile layout */}
                   <div className="flex items-start gap-6 md:hidden">
-                    <div className="silver-metallic relative z-10 flex h-12 w-12 shrink-0 items-center justify-center rounded-full text-lg font-bold text-brown shadow-md">
+                    <div className="silver-metallic relative z-10 flex h-12 w-12 shrink-0 items-center justify-center rounded-full text-lg font-bold text-brown/80 shadow-md">
                       {step.number}
                     </div>
                     <div className="flex-1 pt-1">
@@ -159,7 +159,7 @@ export default function HowItWorks() {
                       )}
                     </div>
 
-                    <div className="silver-metallic relative z-10 flex h-12 w-12 items-center justify-center rounded-full font-heading text-lg text-white shadow-md">
+                    <div className="silver-metallic relative z-10 flex h-12 w-12 items-center justify-center rounded-full font-heading text-lg text-brown/80 shadow-md">
                       {step.number}
                     </div>
 
