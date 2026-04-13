@@ -105,11 +105,11 @@ export default function HowItWorks() {
         </p>
 
         {/* Staggered timeline */}
-        <div className="relative mt-14">
+        <div className="relative mt-10">
           {/* Vertical line */}
           <div className="absolute left-6 top-0 bottom-0 w-px bg-silver/30 md:left-1/2 md:-translate-x-px" />
 
-          <div className="space-y-0">
+          <div className="-space-y-4 md:-space-y-6">
             {steps.map((step, i) => {
               const isRight = i % 2 === 1;
               return (
