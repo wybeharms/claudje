@@ -47,13 +47,8 @@ export default function ReportPreview() {
           </p>
         </div>
 
-        {/* "Plus more categories" hint */}
-        <p className="mt-8 text-center text-xs italic text-text-muted md:text-sm">
-          {t.plusMore}
-        </p>
-
         {/* Underlined tab switcher */}
-        <div className="mt-4 flex justify-center border-b border-border-warm">
+        <div className="mt-10 flex justify-center border-b border-border-warm">
           {views.map((v) => {
             const isActive = v.id === active;
             return (
@@ -76,6 +71,12 @@ export default function ReportPreview() {
               </button>
             );
           })}
+          <a
+            href="/product"
+            className="flex items-center gap-2 border-b-2 border-transparent px-5 py-3 text-xs text-text-muted transition-all hover:text-brown md:text-sm"
+          >
+            <span className="font-semibold">{t.plusMore}</span>
+          </a>
         </div>
 
         {/* Fragment */}
