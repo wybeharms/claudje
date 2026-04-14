@@ -37,9 +37,10 @@ export default function AboutPage() {
           <div className="flex flex-col items-center text-center">
             <div className="relative h-52 w-36 overflow-hidden rounded-lg">
               <Image
-                src="/portrait/berend.png"
+                src="/berend.jpg"
                 alt="Berend Harms"
                 fill
+                sizes="144px"
                 className="object-cover"
               />
             </div>
