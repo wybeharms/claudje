@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import ClaudjeBird from "../portal/ClaudjeBird";
 import { useI18n } from "@/context/I18nContext";
 import type { LocaleCode } from "@/lib/i18n";
+import { BOOK_CALL_URL } from "./BookCall";
 
 const CTA_HREF = "/get-started";
 
@@ -150,6 +151,14 @@ export default function Header() {
               {t.login}
             </a>
             <a
+              href={BOOK_CALL_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-sm text-text-on-dark-muted transition-colors hover:text-text-on-dark"
+            >
+              {t.nav.bookCall}
+            </a>
+            <a
               href={CTA_HREF}
               className="btn-shimmer rounded-lg px-5 py-2 text-sm font-medium text-brown transition-colors"
             >
@@ -228,6 +237,15 @@ export default function Header() {
                 </a>
               ))}
               <a
+                href={BOOK_CALL_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => setMenuOpen(false)}
+                className="text-sm text-text-on-dark-muted"
+              >
+                {t.nav.bookCall}
+              </a>
+              <a
                 href={CTA_HREF}
                 className="btn-shimmer rounded-lg px-5 py-2 text-center text-sm font-medium text-brown"
               >
@@ -289,6 +307,14 @@ export default function Header() {
             )}
           </div>
 
+          <a
+            href={BOOK_CALL_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="rounded-full px-3 py-2 text-sm text-text-primary transition-colors hover:bg-black/5"
+          >
+            {t.nav.bookCall}
+          </a>
           <div className="mx-1 h-5 w-px bg-border-warm" />
           <a
             href={CTA_HREF}

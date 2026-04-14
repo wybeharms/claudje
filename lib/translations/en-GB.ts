@@ -8,6 +8,7 @@ export const messages: Messages = {
       about: "About",
       blog: "Blog",
       aboutMenu: "About",
+      bookCall: "Book a call",
     },
     login: "Login",
     ctaTrial: "Free Trial",
@@ -137,6 +138,14 @@ export const messages: Messages = {
     ],
     ctaTrial: "Start Free Trial",
     ctaSelect: "Select Plan",
+  },
+
+  bookCall: {
+    eyebrow: "Still unsure?",
+    title: "Talk to Berend before you commit",
+    body: "15 minutes, free, no strings attached. Ask anything \u2014 about the report, the data sources, or whether Claudje is a fit for your business.",
+    cta: "Book a free 15-min call",
+    note: "Direct line to one of the founders.",
   },
 
   faq: {

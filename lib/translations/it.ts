@@ -8,6 +8,7 @@ export const messages: Messages = {
       about: "Chi siamo",
       blog: "Blog",
       aboutMenu: "Info",
+      bookCall: "Prenota una call",
     },
     login: "Accedi",
     ctaTrial: "Prova gratis",
@@ -137,6 +138,14 @@ export const messages: Messages = {
     ],
     ctaTrial: "Inizia la prova gratuita",
     ctaSelect: "Scegli il piano",
+  },
+
+  bookCall: {
+    eyebrow: "Ancora dubbi?",
+    title: "Parla con Berend prima di decidere",
+    body: "15 minuti, gratis, senza impegno. Chiedi qualsiasi cosa \u2014 sul report, sulle fonti dati o se Claudje \u00E8 adatto alla tua azienda.",
+    cta: "Prenota una call gratuita di 15 min",
+    note: "Linea diretta con uno dei fondatori.",
   },
 
   faq: {

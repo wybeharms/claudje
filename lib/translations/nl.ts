@@ -8,6 +8,7 @@ export const messages: Messages = {
       about: "Over ons",
       blog: "Blog",
       aboutMenu: "Over",
+      bookCall: "Plan gesprek",
     },
     login: "Inloggen",
     ctaTrial: "Gratis proberen",
@@ -137,6 +138,14 @@ export const messages: Messages = {
     ],
     ctaTrial: "Start gratis proefperiode",
     ctaSelect: "Kies dit plan",
+  },
+
+  bookCall: {
+    eyebrow: "Nog twijfels?",
+    title: "Praat eerst even met Berend",
+    body: "15 minuten, gratis en vrijblijvend. Stel al je vragen \u2014 over het rapport, de databronnen, of Claudje bij jouw bedrijf past.",
+    cta: "Plan een gratis gesprek van 15 min",
+    note: "Direct contact met een van de oprichters.",
   },
 
   faq: {
