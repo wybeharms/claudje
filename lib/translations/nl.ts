@@ -99,6 +99,7 @@ export const messages: Messages = {
     nextView: "Volgende weergave",
     viewLabel: "Weergave",
     fullBreakdown: "Bekijk volledige rapportopbouw",
+    plusMore: "Plus Reviews, Advertising, Strategic Recommendations — en nog veel meer",
   },
 
   whoItsFor: {

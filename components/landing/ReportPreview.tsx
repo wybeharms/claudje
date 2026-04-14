@@ -47,8 +47,13 @@ export default function ReportPreview() {
           </p>
         </div>
 
+        {/* "Plus more categories" hint */}
+        <p className="mt-8 text-center text-xs italic text-text-muted md:text-sm">
+          {t.plusMore}
+        </p>
+
         {/* Underlined tab switcher */}
-        <div className="mt-10 flex justify-center border-b border-border-warm">
+        <div className="mt-4 flex justify-center border-b border-border-warm">
           {views.map((v) => {
             const isActive = v.id === active;
             return (

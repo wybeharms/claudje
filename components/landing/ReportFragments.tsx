@@ -57,10 +57,10 @@ export function PricingFragment() {
   ];
   return (
     <Paper
-      eyebrow="Pricing snapshot \u00B7 week 16"
+      eyebrow="Pricing snapshot · week 16"
       title="A-segment entry prices"
       subtitle="Tracked weekly across 10 competitors"
-      insight="Two competitors raised prices this fortnight \u2014 you are now the cheapest in the A-segment."
+      insight="Two competitors raised prices this fortnight — you are now the cheapest in the A-segment."
     >
       <table className="w-full text-sm">
         <thead>
@@ -123,10 +123,10 @@ export function ReviewsFragment() {
   ];
   return (
     <Paper
-      eyebrow="Review tracking \u00B7 week 16"
+      eyebrow="Review tracking · week 16"
       title="Where competitors lose trust"
       subtitle="2,344 reviews scanned across Google & Trustpilot"
-      insight="End-of-contract surprises are the #1 complaint in your sector \u2014 a transparency page would differentiate you immediately."
+      insight="End-of-contract surprises are the #1 complaint in your sector — a transparency page would differentiate you immediately."
     >
       <div>
         {competitors.map((c, i) => (
@@ -189,10 +189,10 @@ export function AdsFragment() {
   const max = Math.max(...bars.map((b) => b.count), 1);
   return (
     <Paper
-      eyebrow="Ad activity \u00B7 Meta Ad Library"
+      eyebrow="Ad activity · Meta Ad Library"
       title="Who's buying attention"
       subtitle="Active ad count per competitor, last 7 days"
-      insight="7 of 10 competitors run zero paid ads. The field is nearly empty \u2014 each euro of your ad-spend stretches exceptionally far."
+      insight="7 of 10 competitors run zero paid ads. The field is nearly empty — each euro of your ad-spend stretches exceptionally far."
     >
       <div className="space-y-2.5">
         {bars.map((b) => {
@@ -244,10 +244,10 @@ export function AIFragment() {
   ];
   return (
     <Paper
-      eyebrow="AI visibility \u00B7 GEO score"
+      eyebrow="AI visibility · GEO score"
       title="Who ChatGPT recommends"
       subtitle="Mention rate across 12 AI-search queries"
-      insight="You rank #2 in your market on AI search \u2014 one technical change (an llms.txt file) could put you at #1."
+      insight="You rank #2 in your market on AI search — one technical change (an llms.txt file) could put you at #1."
     >
       <div className="space-y-2">
         {ranks.map((r, i) => (
@@ -314,10 +314,10 @@ export function RecommendationsFragment() {
   ];
   return (
     <Paper
-      eyebrow="Recommended actions \u00B7 week 16"
+      eyebrow="Recommended actions · week 16"
       title="What to do this week"
       subtitle="Drawn from the findings above, ranked by impact"
-      insight="Every report closes with 2\u20134 concrete actions, prioritized by cost and timing."
+      insight="Every report closes with 2–4 concrete actions, prioritized by cost and timing."
     >
       <div className="space-y-4">
         {actions.map((a) => (

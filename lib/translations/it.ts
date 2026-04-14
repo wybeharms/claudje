@@ -99,6 +99,7 @@ export const messages: Messages = {
     nextView: "Vista successiva",
     viewLabel: "Vista",
     fullBreakdown: "Vedi la struttura completa del report",
+    plusMore: "Più Reviews, Advertising, Strategic Recommendations — e molto altro",
   },
 
   whoItsFor: {

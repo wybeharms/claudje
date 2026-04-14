@@ -100,6 +100,7 @@ export const messages = {
     nextView: "Next view",
     viewLabel: "View",
     fullBreakdown: "See full report breakdown",
+    plusMore: "Plus Reviews, Advertising, Strategic Recommendations — and much more",
   },
 
   whoItsFor: {
