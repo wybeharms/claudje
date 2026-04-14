@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useI18n } from "@/context/I18nContext";
 
 export const BOOK_CALL_URL =
@@ -14,6 +15,16 @@ export default function BookCall() {
       <div className="mx-auto max-w-3xl">
         <div className="rounded-2xl border border-border-warm bg-white p-8 shadow-sm md:p-12">
           <div className="flex flex-col items-center text-center">
+            <div className="relative mb-5 h-24 w-24 overflow-hidden rounded-full ring-4 ring-gold/30">
+              <Image
+                src="/berend.jpg"
+                alt="Berend Harms, co-founder of Claudje"
+                fill
+                sizes="96px"
+                className="object-cover"
+                priority={false}
+              />
+            </div>
             <span className="text-xs font-semibold uppercase tracking-wider text-gold">
               {t.eyebrow}
             </span>
