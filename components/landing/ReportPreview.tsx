@@ -5,18 +5,26 @@ import { useI18n } from "@/context/I18nContext";
 import {
   AIFragment,
   AIIcon,
+  LightningIcon,
   PricingFragment,
   PricingIcon,
+  RecommendationsFragment,
 } from "./ReportFragments";
 
 type View = {
-  id: "pricing" | "ai";
+  id: "recommendations" | "pricing" | "ai";
   label: string;
   Icon: React.ComponentType<{ className?: string }>;
   render: () => ReactNode;
 };
 
 const views: View[] = [
+  {
+    id: "recommendations",
+    label: "Strategic Recommendations",
+    Icon: LightningIcon,
+    render: () => <RecommendationsFragment />,
+  },
   {
     id: "pricing",
     label: "Pricing Intelligence",
@@ -32,7 +40,7 @@ const views: View[] = [
 ];
 
 export default function ReportPreview() {
-  const [active, setActive] = useState<View["id"]>("pricing");
+  const [active, setActive] = useState<View["id"]>("recommendations");
   const activeView = views.find((v) => v.id === active) ?? views[0];
   const { messages } = useI18n();
   const t = messages.reportPreview;
@@ -73,17 +81,19 @@ export default function ReportPreview() {
           })}
           <a
             href="/product"
-            className="flex items-center gap-2 border-b-2 border-transparent px-5 py-3 text-xs text-text-muted transition-all hover:text-brown md:text-sm"
+            className="flex items-center gap-2 border-b-2 border-transparent px-5 py-3 text-xs text-text-muted transition-all hover:text-brown md:text-sm whitespace-nowrap"
           >
-            <span className="font-semibold">{t.plusMore}</span>
+            <span className="font-semibold">{t.plusMore} &rarr;</span>
           </a>
         </div>
 
         {/* Fragment */}
-        <div className="mt-8">{activeView.render()}</div>
+        <div className="mt-8 h-[420px]">
+          <div className="h-full">{activeView.render()}</div>
+        </div>
 
         {/* Link to full product page */}
-        <div className="mt-8 text-center">
+        <div className="mt-8 flex justify-center">
           <a
             href="/product"
             className="text-sm text-gold-dark transition-colors hover:text-brown"

@@ -74,16 +74,17 @@ export const messages: Messages = {
       ". Recuperano dati verificati da fonti professionali che un chatbot non pu\u00F2 raggiungere.",
 
     claudjeReportLabel: "report claudje",
-    pricingItemBold: "Concorrente X",
-    pricingItemRest: " ha aumentato i prezzi del 12% il 15 marzo.",
-    pricingSource: "[API prezzi]",
+    recommendationItem:
+      "Riduci il prezzo d'ingresso del segmento A del 5%. Due concorrenti hanno alzato i prezzi questo mese, aprendo un varco che puoi sfruttare.",
+    recommendationSource: "[analisi del report]",
+    recommendationBadge: "Quick win",
     hiringItem:
       "3 nuove offerte di lavoro su LinkedIn: 2 sales + 1 product manager. Probabile espansione verso l\u2019enterprise.",
     hiringSource: "[LinkedIn]",
     hiringBadge: "+3 nuovi",
-    trafficItem:
-      "Traffico web +23% MoM. Fonte principale spostata da organico ad annunci a pagamento Meta.",
-    trafficSource: "[SimilarWeb]",
+    pricingItemBold: "Concorrente X",
+    pricingItemRest: " ha aumentato i prezzi del 12% il 15 marzo.",
+    pricingSource: "[API prezzi]",
     claudjeBadgeSources: "Fonti verificate",
     claudjeBadgeAnalyst: "Revisionato da analista",
     claudjeBadgeUpdated: "Aggiornato automaticamente",

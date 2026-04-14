@@ -10,31 +10,33 @@ export function Paper({
   subtitle,
   insight,
   children,
+  className,
 }: {
   eyebrow: string;
   title: string;
   subtitle?: string;
   insight?: string;
   children: ReactNode;
+  className?: string;
 }) {
   return (
-    <div className="rounded-xl border border-border-warm bg-white px-6 py-7 shadow-sm md:px-10 md:py-9">
-      <div className="flex flex-col gap-1 border-b border-border-warm/60 pb-5 md:flex-row md:items-end md:justify-between md:gap-6">
+    <div className={`flex flex-col rounded-xl border border-border-warm bg-white px-5 py-5 shadow-sm md:px-8 md:py-7 ${className ?? ""}`}>
+      <div className="flex flex-col gap-1 border-b border-border-warm/60 pb-4 md:flex-row md:items-end md:justify-between md:gap-6">
         <div>
-          <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-gold-dark">
+          <p className="text-[9px] font-bold uppercase tracking-[0.2em] text-gold-dark">
             {eyebrow}
           </p>
-          <h3 className="mt-2 font-heading text-xl text-brown md:text-2xl">
+          <h3 className="mt-1.5 font-heading text-lg text-brown md:text-xl">
             {title}
           </h3>
         </div>
         {subtitle && (
-          <p className="text-xs text-text-muted md:text-right">{subtitle}</p>
+          <p className="text-[11px] text-text-muted md:text-right">{subtitle}</p>
         )}
       </div>
-      <div className="mt-6">{children}</div>
+      <div className="mt-5 flex-1">{children}</div>
       {insight && (
-        <p className="mt-6 border-t border-border-warm/60 pt-5 text-xs leading-relaxed text-text-muted">
+        <p className="mt-5 border-t border-border-warm/60 pt-4 text-[11px] leading-relaxed text-text-muted">
           <span className="mr-1 font-semibold text-gold-dark">
             Key insight&nbsp;&middot;
           </span>
@@ -61,13 +63,14 @@ export function PricingFragment() {
       title="A-segment entry prices"
       subtitle="Tracked weekly across 10 competitors"
       insight="Two competitors raised prices this fortnight — you are now the cheapest in the A-segment."
+      className="h-full"
     >
-      <table className="w-full text-sm">
+      <table className="w-full text-xs">
         <thead>
-          <tr className="text-[10px] font-semibold uppercase tracking-wider text-text-muted">
-            <th className="pb-3 text-left">Competitor</th>
-            <th className="pb-3 text-right">Entry / mo</th>
-            <th className="pb-3 text-right">&Delta; (2w)</th>
+          <tr className="text-[9px] font-semibold uppercase tracking-wider text-text-muted">
+            <th className="pb-2.5 text-left">Competitor</th>
+            <th className="pb-2.5 text-right">Entry / mo</th>
+            <th className="pb-2.5 text-right">&Delta; (2w)</th>
           </tr>
         </thead>
         <tbody>
@@ -79,21 +82,21 @@ export function PricingFragment() {
               }`}
             >
               <td
-                className={`py-3.5 ${
+                className={`py-2.5 ${
                   r.you ? "font-semibold text-brown" : "text-text-primary"
                 }`}
               >
                 {r.name}
               </td>
               <td
-                className={`py-3.5 text-right tabular-nums ${
+                className={`py-2.5 text-right tabular-nums ${
                   r.you ? "font-semibold text-brown" : "text-text-primary"
                 }`}
               >
                 {r.price}
               </td>
               <td
-                className={`py-3.5 text-right text-xs tabular-nums ${
+                className={`py-2.5 text-right text-[11px] tabular-nums ${
                   r.up ? "text-red-600" : "text-text-muted/60"
                 }`}
               >
@@ -127,18 +130,19 @@ export function ReviewsFragment() {
       title="Where competitors lose trust"
       subtitle="2,344 reviews scanned across Google & Trustpilot"
       insight="End-of-contract surprises are the #1 complaint in your sector — a transparency page would differentiate you immediately."
+      className="h-full"
     >
       <div>
         {competitors.map((c, i) => (
           <div
             key={c.name}
-            className={`flex items-start gap-4 py-3.5 ${
+            className={`flex items-start gap-4 py-2.5 ${
               i === 0 ? "" : "border-t border-border-warm/60"
             }`}
           >
             <div className="flex-1">
-              <p className="text-sm font-semibold text-brown">{c.name}</p>
-              <p className="mt-1 text-xs italic leading-relaxed text-text-muted">
+              <p className="text-xs font-semibold text-brown">{c.name}</p>
+              <p className="mt-1 text-[11px] italic leading-relaxed text-text-muted">
                 &ldquo;{c.pain}&rdquo;
               </p>
             </div>
@@ -164,10 +168,10 @@ function ScoreBadge({ label, value }: { label: string; value: number }) {
         : "text-red-600";
   return (
     <div className="text-right">
-      <p className="text-[9px] font-semibold uppercase tracking-wider text-text-muted/70">
+      <p className="text-[8px] font-semibold uppercase tracking-wider text-text-muted/70">
         {label}
       </p>
-      <p className={`text-sm font-semibold tabular-nums ${color}`}>
+      <p className={`text-xs font-semibold tabular-nums ${color}`}>
         {value.toFixed(1)}
       </p>
     </div>
@@ -193,6 +197,7 @@ export function AdsFragment() {
       title="Who's buying attention"
       subtitle="Active ad count per competitor, last 7 days"
       insight="7 of 10 competitors run zero paid ads. The field is nearly empty — each euro of your ad-spend stretches exceptionally far."
+      className="h-full"
     >
       <div className="space-y-2.5">
         {bars.map((b) => {
@@ -200,14 +205,14 @@ export function AdsFragment() {
           return (
             <div key={b.name} className="flex items-center gap-3">
               <p
-                className={`w-24 shrink-0 text-xs ${
+                className={`w-20 shrink-0 text-[11px] ${
                   b.you ? "font-semibold text-brown" : "text-text-muted"
                 }`}
               >
                 {b.name}
               </p>
               <div className="relative flex-1">
-                <div className="h-6 w-full rounded-sm bg-cream/60" />
+                <div className="h-5 w-full rounded-sm bg-cream/60" />
                 {b.count > 0 && (
                   <div
                     className={`absolute inset-y-0 left-0 rounded-sm ${
@@ -218,7 +223,7 @@ export function AdsFragment() {
                 )}
               </div>
               <p
-                className={`w-8 shrink-0 text-right text-sm tabular-nums ${
+                className={`w-8 shrink-0 text-right text-xs tabular-nums ${
                   b.you ? "font-semibold text-brown" : "text-text-primary"
                 }`}
               >
@@ -241,6 +246,7 @@ export function AIFragment() {
     { name: "Competitor 02", score: 31 },
     { name: "Competitor 03", score: 16 },
     { name: "Competitor 04", score: 7 },
+    { name: "Competitor 05", score: 3 },
   ];
   return (
     <Paper
@@ -248,31 +254,32 @@ export function AIFragment() {
       title="Who ChatGPT recommends"
       subtitle="Mention rate across 12 AI-search queries"
       insight="You rank #2 in your market on AI search — one technical change (an llms.txt file) could put you at #1."
+      className="h-full"
     >
       <div className="space-y-2">
         {ranks.map((r, i) => (
           <div
             key={r.name}
-            className={`flex items-center gap-4 rounded-md px-4 py-3 ${
+            className={`flex items-center gap-3 rounded-md px-3 py-2.5 ${
               r.you ? "bg-gold/[0.08]" : i === 0 ? "bg-cream/50" : ""
             }`}
           >
             <span
-              className={`w-5 shrink-0 text-sm font-bold tabular-nums ${
+              className={`w-4 shrink-0 text-xs font-bold tabular-nums ${
                 r.you ? "text-brown" : "text-text-muted"
               }`}
             >
               {i + 1}
             </span>
             <p
-              className={`flex-1 text-sm ${
+              className={`flex-1 text-xs ${
                 r.you ? "font-semibold text-brown" : "text-text-primary"
               }`}
             >
               {r.name}
             </p>
-            <div className="flex shrink-0 items-center gap-3">
-              <div className="relative h-1.5 w-20 overflow-hidden rounded-full bg-cream md:w-28">
+            <div className="flex shrink-0 items-center gap-2.5">
+              <div className="relative h-1.5 w-16 overflow-hidden rounded-full bg-cream md:w-24">
                 <div
                   className={`absolute inset-y-0 left-0 rounded-full ${
                     r.you ? "bg-gold" : "bg-brown/60"
@@ -281,7 +288,7 @@ export function AIFragment() {
                 />
               </div>
               <span
-                className={`w-10 text-right text-sm font-semibold tabular-nums ${
+                className={`w-9 text-right text-xs font-semibold tabular-nums ${
                   r.you ? "text-brown" : "text-text-primary"
                 }`}
               >
@@ -318,22 +325,25 @@ export function RecommendationsFragment() {
       title="What to do this week"
       subtitle="Drawn from the findings above, ranked by impact"
       insight="Every report closes with 2–4 concrete actions, prioritized by cost and timing."
+      className="h-full"
     >
-      <div className="space-y-4">
+      <div className="space-y-3">
         {actions.map((a) => (
           <div
             key={a.title}
-            className="rounded-lg border border-border-warm bg-cream/30 p-5"
+            className="rounded-lg border border-border-warm bg-cream/30 p-4"
           >
-            <span
-              className={`inline-block rounded-full px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider ${a.kindColor}`}
-            >
-              {a.kind}
-            </span>
-            <h4 className="mt-3 font-heading text-base text-brown md:text-lg">
-              {a.title}
-            </h4>
-            <p className="mt-2 text-xs leading-relaxed text-text-muted">
+            <div className="flex items-baseline gap-2">
+              <span
+                className={`shrink-0 rounded-full px-2 py-0.5 text-[9px] font-semibold uppercase tracking-wider ${a.kindColor}`}
+              >
+                {a.kind}
+              </span>
+              <h4 className="font-heading text-sm text-brown md:text-base">
+                {a.title}
+              </h4>
+            </div>
+            <p className="mt-1.5 text-[11px] leading-relaxed text-text-muted">
               {a.body}
             </p>
           </div>

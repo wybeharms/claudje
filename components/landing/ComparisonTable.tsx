@@ -83,8 +83,8 @@ export default function ComparisonTable() {
   }, []);
 
   return (
-    <section className="bg-cream-dark px-6 py-24 lg:px-8">
-      <div ref={ref} className="mx-auto max-w-4xl">
+    <section className="bg-cream-dark px-6 py-20 lg:px-8">
+      <div ref={ref} className="mx-auto max-w-3xl">
         <div className="text-center">
           <p className="text-[10px] font-semibold uppercase tracking-[0.25em] text-gold-dark">
             Why Claudje
@@ -92,7 +92,7 @@ export default function ComparisonTable() {
           <h2 className="mt-3 font-heading text-2xl md:text-3xl">
             Why Not Just Use ChatGPT?
           </h2>
-          <p className="mx-auto mt-4 max-w-xl text-sm leading-relaxed text-text-muted md:text-base">
+          <p className="mx-auto mt-3 max-w-xl text-xs leading-relaxed text-text-muted md:text-sm">
             Claudje uses the same foundation models &mdash; but wraps them in
             managed agents, paid data tools, and a human review. Here&apos;s
             what that changes in practice.
@@ -100,19 +100,19 @@ export default function ComparisonTable() {
         </div>
 
         <div
-          className={`mt-14 overflow-hidden rounded-2xl border border-border-warm bg-white shadow-sm transition-all duration-700 ${
+          className={`mt-10 overflow-hidden rounded-2xl border border-border-warm bg-white shadow-sm transition-all duration-700 ${
             visible ? "translate-y-0 opacity-100" : "translate-y-6 opacity-0"
           }`}
         >
           {/* Header bar */}
-          <div className="grid grid-cols-[1.3fr_1fr_1fr] items-center gap-4 bg-brown px-5 py-5 text-text-on-dark md:grid-cols-[1.4fr_1fr_1fr] md:px-10">
-            <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-text-on-dark-muted">
+          <div className="grid grid-cols-[1.3fr_1fr_1fr] items-center gap-3 bg-brown px-4 py-3.5 text-text-on-dark md:grid-cols-[1.4fr_1fr_1fr] md:px-8">
+            <p className="text-[9px] font-bold uppercase tracking-[0.2em] text-text-on-dark-muted">
               Capability
             </p>
-            <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-text-on-dark-muted">
+            <p className="text-[9px] font-bold uppercase tracking-[0.2em] text-text-on-dark-muted">
               ChatGPT alone
             </p>
-            <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-gold">
+            <p className="text-[9px] font-bold uppercase tracking-[0.2em] text-gold">
               Claudje
             </p>
           </div>
@@ -122,26 +122,26 @@ export default function ComparisonTable() {
             {rows.map((row, i) => (
               <div
                 key={row.feature}
-                className={`grid grid-cols-[1.3fr_1fr_1fr] items-center gap-4 border-t border-border-warm/60 px-5 py-5 transition-colors md:grid-cols-[1.4fr_1fr_1fr] md:px-10 ${
+                className={`grid grid-cols-[1.3fr_1fr_1fr] items-center gap-3 border-t border-border-warm/60 px-4 py-3 transition-colors md:grid-cols-[1.4fr_1fr_1fr] md:px-8 ${
                   i % 2 === 0 ? "bg-white" : "bg-cream/25"
                 } hover:bg-gold/[0.04]`}
               >
-                <div className="flex items-center gap-3">
+                <div className="flex items-center gap-2.5">
                   <span
-                    className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-lg ${row.tint}`}
+                    className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-lg ${row.tint}`}
                   >
-                    <row.Icon className="h-4 w-4" />
+                    <row.Icon className="h-3.5 w-3.5" />
                   </span>
-                  <p className="text-sm font-semibold text-brown">
+                  <p className="text-xs font-semibold text-brown">
                     {row.feature}
                   </p>
                 </div>
-                <div className="flex items-start gap-2 text-sm text-text-muted">
-                  <XIcon className="mt-0.5 h-3.5 w-3.5 shrink-0 text-red-400" />
+                <div className="flex items-start gap-1.5 text-xs text-text-muted">
+                  <XIcon className="mt-0.5 h-3 w-3 shrink-0 text-red-400" />
                   <span className="leading-snug">{row.chatbot}</span>
                 </div>
-                <div className="flex items-start gap-2 text-sm text-brown">
-                  <CheckIcon className="mt-0.5 h-3.5 w-3.5 shrink-0 text-gold" />
+                <div className="flex items-start gap-1.5 text-xs text-brown">
+                  <CheckIcon className="mt-0.5 h-3 w-3 shrink-0 text-gold" />
                   <span className="font-medium leading-snug">
                     {row.claudje}
                   </span>
@@ -151,7 +151,7 @@ export default function ComparisonTable() {
           </div>
         </div>
 
-        <p className="mt-8 text-center text-xs italic text-text-muted">
+        <p className="mt-6 text-center text-[11px] italic text-text-muted">
           Same models, different job. ChatGPT answers questions. Claudje runs
           your intelligence.
         </p>

@@ -74,16 +74,17 @@ export const messages: Messages = {
       ". Ze halen geverifieerde data op uit professionele bronnen waar een chatbot niet bij kan.",
 
     claudjeReportLabel: "claudje rapport",
-    pricingItemBold: "Concurrent X",
-    pricingItemRest: " heeft de prijzen op 15 maart met 12% verhoogd.",
-    pricingSource: "[prijs-API]",
+    recommendationItem:
+      "Verlaag je instapprijs A-segment met 5%. Twee concurrenten verhoogden hun prijzen deze maand, waardoor er een gat ontstaat dat je kunt pakken.",
+    recommendationSource: "[rapportanalyse]",
+    recommendationBadge: "Quick win",
     hiringItem:
       "3 nieuwe vacatures op LinkedIn: 2 sales reps + 1 product manager. Waarschijnlijk uitbreiding richting enterprise.",
     hiringSource: "[LinkedIn]",
     hiringBadge: "+3 nieuw",
-    trafficItem:
-      "Websiteverkeer +23% MoM. Belangrijkste bron verschoof van organisch naar betaalde Meta-ads.",
-    trafficSource: "[SimilarWeb]",
+    pricingItemBold: "Concurrent X",
+    pricingItemRest: " heeft de prijzen op 15 maart met 12% verhoogd.",
+    pricingSource: "[prijs-API]",
     claudjeBadgeSources: "Geverifieerde bronnen",
     claudjeBadgeAnalyst: "Door analist gecontroleerd",
     claudjeBadgeUpdated: "Automatisch bijgewerkt",

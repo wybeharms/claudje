@@ -66,6 +66,11 @@ body {
 }
 
 /* Report carousel page turn */
+@keyframes fadeIn {
+  0% { opacity: 0; transform: translateY(6px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
 @keyframes pageSlideOut {
   0% { transform: translateX(0); opacity: 1; }
   100% { transform: translateX(-40px); opacity: 0; }

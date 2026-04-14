@@ -75,16 +75,17 @@ export const messages = {
       ". They pull verified data from professional sources a chatbot can\u2019t reach.",
 
     claudjeReportLabel: "claudje report",
-    pricingItemBold: "Competitor X",
-    pricingItemRest: " raised prices by 12% on Mar 15.",
-    pricingSource: "[pricing API]",
+    recommendationItem:
+      "Lower your A-segment entry price by 5%. Two competitors raised prices this month, opening a gap you can own.",
+    recommendationSource: "[report analysis]",
+    recommendationBadge: "Quick win",
     hiringItem:
       "3 new job postings on LinkedIn: 2 sales reps + 1 product manager. Likely expanding into enterprise.",
     hiringSource: "[LinkedIn]",
     hiringBadge: "+3 new",
-    trafficItem:
-      "Website traffic up 23% MoM. Top source shifted from organic to Meta paid ads.",
-    trafficSource: "[SimilarWeb]",
+    pricingItemBold: "Competitor X",
+    pricingItemRest: " raised prices by 12% on Mar 15.",
+    pricingSource: "[pricing API]",
     claudjeBadgeSources: "Verified sources",
     claudjeBadgeAnalyst: "Analyst-reviewed",
     claudjeBadgeUpdated: "Updated automatically",
@@ -104,7 +105,7 @@ export const messages = {
   },
 
   whoItsFor: {
-    title: "Your competitors are moving. Are you watching?",
+    title: "Your Competitors Are Moving. Are You Watching?",
     body1:
       "You know AI can give you an edge. You just don\u2019t have the time, tools, or team to use it consistently.",
     body2Before:
@@ -144,7 +145,7 @@ export const messages = {
 
   bookCall: {
     eyebrow: "Still unsure?",
-    title: "Talk to Berend before you commit",
+    title: "Talk to Berend Before You Commit",
     body: "15 minutes, free, no strings attached. Ask anything — about the report, the data sources, or whether Claudje is a fit for your business.",
     cta: "Book a free 15-min call",
     note: "Direct line to one of the founders.",
@@ -193,7 +194,7 @@ export const messages = {
   },
 
   footer: {
-    ctaTitle: "Ready to know what your competitors are up to?",
+    ctaTitle: "Ready to Know What Your Competitors Are Up To?",
     ctaSubtitle: "Start getting competitor reports in your inbox this week.",
     ctaButton: "Start Your Free Trial",
     nav: {

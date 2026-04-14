@@ -198,20 +198,17 @@ export default function WhyClaudje() {
                 <ClaudjeBird size={28} className="opacity-60" />
               </div>
               <div className="flex-1 space-y-2 text-[13px] leading-relaxed">
-                {/* Pricing */}
+                {/* Recommendation */}
                 <div className="rounded-lg bg-cream/60 p-3">
                   <div className="flex items-start gap-2.5">
                     <svg className="mt-0.5 h-4 w-4 shrink-0 text-gold" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
                     </svg>
                     <div className="flex-1">
-                      <p className="text-text-primary">
-                        <strong className="text-brown">{t.pricingItemBold}</strong>
-                        {t.pricingItemRest}
-                      </p>
+                      <p className="text-text-primary">{t.recommendationItem}</p>
                       <div className="mt-1.5 flex items-center gap-2">
-                        <span className="text-[11px] text-gold">{t.pricingSource}</span>
-                        <span className="inline-flex items-center rounded-full bg-red-50 px-1.5 py-0.5 text-[10px] font-medium text-red-700">↑ +12%</span>
+                        <span className="text-[11px] text-gold">{t.recommendationSource}</span>
+                        <span className="inline-flex items-center rounded-full bg-green-50 px-1.5 py-0.5 text-[10px] font-medium text-green-700">{t.recommendationBadge}</span>
                       </div>
                     </div>
                   </div>
@@ -233,30 +230,33 @@ export default function WhyClaudje() {
                   </div>
                 </div>
 
-                {/* Traffic */}
+                {/* Pricing */}
                 <div className="rounded-lg bg-cream/60 p-3">
                   <div className="flex items-start gap-2.5">
                     <svg className="mt-0.5 h-4 w-4 shrink-0 text-gold" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 18L9 11.25l4.306 4.307a11.95 11.95 0 015.814-5.519l2.74-1.22m0 0l-5.94-2.28m5.94 2.28l-2.28 5.941" />
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
                     <div className="flex-1">
-                      <p className="text-text-primary">{t.trafficItem}</p>
+                      <p className="text-text-primary">
+                        <strong className="text-brown">{t.pricingItemBold}</strong>
+                        {t.pricingItemRest}
+                      </p>
                       <div className="mt-1.5 flex items-center gap-2">
-                        <span className="text-[11px] text-gold">{t.trafficSource}</span>
-                        <span className="inline-flex items-center rounded-full bg-green-50 px-1.5 py-0.5 text-[10px] font-medium text-green-700">↑ +23%</span>
+                        <span className="text-[11px] text-gold">{t.pricingSource}</span>
+                        <span className="inline-flex items-center rounded-full bg-red-50 px-1.5 py-0.5 text-[10px] font-medium text-red-700">↑ +12%</span>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
               <div className="mt-auto flex flex-wrap gap-1.5 pt-4">
-                <span className="rounded-full bg-gold/10 px-2.5 py-0.5 text-[11px] font-medium text-gold-dark">
+                <span className="rounded-full bg-gold/25 border border-gold/40 px-2.5 py-0.5 text-xs font-semibold text-gold-dark">
                   {t.claudjeBadgeSources}
                 </span>
-                <span className="rounded-full bg-gold/10 px-2.5 py-0.5 text-[11px] font-medium text-gold-dark">
+                <span className="rounded-full bg-gold/25 border border-gold/40 px-2.5 py-0.5 text-xs font-semibold text-gold-dark">
                   {t.claudjeBadgeAnalyst}
                 </span>
-                <span className="rounded-full bg-gold/10 px-2.5 py-0.5 text-[11px] font-medium text-gold-dark">
+                <span className="rounded-full bg-gold/25 border border-gold/40 px-2.5 py-0.5 text-xs font-semibold text-gold-dark">
                   {t.claudjeBadgeUpdated}
                 </span>
               </div>

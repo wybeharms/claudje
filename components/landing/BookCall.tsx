@@ -11,7 +11,7 @@ export default function BookCall() {
   const t = messages.bookCall;
 
   return (
-    <section id="book-call" className="bg-cream px-6 py-20 lg:px-8">
+    <section id="book-call" className="bg-cream-dark px-6 py-20 lg:px-8">
       <div className="mx-auto max-w-3xl">
         <div className="rounded-2xl border border-border-warm bg-white p-8 shadow-sm md:p-12">
           <div className="flex flex-col items-center text-center">

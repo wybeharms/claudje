@@ -6,6 +6,56 @@ import { useI18n } from "@/context/I18nContext";
 
 const TYPING_NAMES = ["Baker's Delight", "SmileDental", "DrainMasters", "FitZone", "GreenClean"];
 
+/** Mini report cover card for Step 3 */
+function MiniReportCard({ visible }: { visible: boolean }) {
+  return (
+    <div
+      className={`mt-4 inline-block w-52 overflow-hidden rounded-lg border border-border-warm bg-white shadow-md transition-all duration-700 ${
+        visible ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"
+      }`}
+    >
+      {/* Dark brown header */}
+      <div className="flex items-center gap-2 bg-brown px-3 py-2">
+        <div className="flex h-4 w-4 items-center justify-center rounded-sm bg-gold/20">
+          <svg viewBox="0 0 24 24" className="h-2.5 w-2.5 text-gold" fill="currentColor">
+            <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" />
+          </svg>
+        </div>
+        <span className="text-[9px] font-semibold tracking-wide text-cream">
+          claudje
+        </span>
+      </div>
+      {/* Report body */}
+      <div className="px-3 py-3">
+        <p className="text-[9px] font-bold text-brown">
+          Competitor Intelligence Report
+        </p>
+        <p className="mt-0.5 text-[7px] text-text-muted">
+          Company Overview &middot; Week 16
+        </p>
+        {/* Mini stats row */}
+        <div className="mt-2 flex gap-2">
+          <div className="rounded bg-brown/8 px-1.5 py-1">
+            <p className="text-[7px] font-semibold uppercase tracking-wider text-text-muted">Competitors</p>
+            <p className="text-[10px] font-bold text-brown">10</p>
+          </div>
+          <div className="rounded bg-brown/8 px-1.5 py-1">
+            <p className="text-[7px] font-semibold uppercase tracking-wider text-text-muted">Sector</p>
+            <p className="text-[10px] font-bold text-brown">Business</p>
+          </div>
+        </div>
+        {/* Fake content lines */}
+        <div className="mt-2.5 space-y-1">
+          <div className="h-1 w-full rounded-full bg-silver/25" />
+          <div className="h-1 w-11/12 rounded-full bg-silver/25" />
+          <div className="h-1 w-9/12 rounded-full bg-silver/25" />
+          <div className="h-1 w-10/12 rounded-full bg-silver/25" />
+        </div>
+      </div>
+    </div>
+  );
+}
+
 /** Typing animation for Step 1 */
 function TypingInput({ active, label }: { active: boolean; label: string }) {
   const [text, setText] = useState("");
@@ -123,13 +173,14 @@ export default function HowItWorks() {
                       </p>
                       {i === 0 && <TypingInput active={visible[0]} label={t.typingLabel} />}
                       {i === 1 && <TerminalAnimation active={visible[1]} />}
+                      {i === 2 && <MiniReportCard visible={visible[2]} />}
                     </div>
                   </div>
 
                   {/* Desktop layout — staggered */}
                   <div className="hidden items-center md:grid md:grid-cols-[1fr_auto_1fr] md:gap-x-10">
                     <div className={!isRight ? "text-right" : ""}>
-                      {!isRight && (
+                      {!isRight && i !== 2 && (
                         <>
                           <h3 className="text-base font-semibold">
                             {step.title}
@@ -143,6 +194,19 @@ export default function HowItWorks() {
                             </div>
                           )}
                         </>
+                      )}
+                      {!isRight && i === 2 && (
+                        <div className="flex items-center gap-5 text-left">
+                          <MiniReportCard visible={visible[2]} />
+                          <div className="flex-1">
+                            <h3 className="text-base font-semibold">
+                              {step.title}
+                            </h3>
+                            <p className="mt-2 text-sm leading-relaxed text-text-muted md:text-base">
+                              {step.description}
+                            </p>
+                          </div>
+                        </div>
                       )}
                     </div>
 
