@@ -242,4 +242,338 @@ export const messages: Messages = {
     nextPage: "Volgende pagina",
     pageLabel: "Pagina",
   },
+
+  product: {
+    heroTitle: "Concurrentie-intelligentie, volledig uit handen",
+    heroBody:
+      "Elke week onderzoeken je AI-agents je concurrenten op het web, in openbare registers en professionele databronnen. Een analist controleert de bevindingen. Jij krijgt een helder rapport in je inbox.",
+    heroCta: "Start je gratis proefperiode",
+  },
+
+  technology: {
+    heroTitle: "Zo werken jouw agents",
+    heroBody:
+      "Achter elk rapport zit een team van gespecialiseerde AI-agents. Elk getraind op een specifieke onderzoekstaak. Onder supervisie van een menselijke analist.",
+    humanLoopTitle: "AI doet het zware werk. Mensen borgen de kwaliteit.",
+    humanLoopBody:
+      "Elk rapport passeert een menselijke analist voordat het in je inbox belandt. Ze verifi\u00EBren, voegen context toe en halen eruit wat voor jouw bedrijf het meest telt.",
+    humanLoopAiLabel: "AI genereert",
+    humanLoopAiSub: "Data + verhaallijn",
+    humanLoopAnalystLabel: "Analist beoordeelt",
+    humanLoopAnalystSub: "Verifi\u00EBren + verfijnen",
+    humanLoopReceiveLabel: "Jij ontvangt",
+    humanLoopReceiveSub: "Betrouwbaar rapport",
+  },
+
+  about: {
+    heroTitle: "Over claudje",
+    berendRole: "Mede-oprichter",
+    berendBio:
+      "BBA van de Universiteit van Amsterdam. Momenteel bezig met een Master in Innovation, Technology and Entrepreneurship aan Bocconi. Bouwt actief aan AI-producten en is het brein achter claudje.",
+    berendLinkedinLabel: "Berend Harms op LinkedIn",
+    mission:
+      "Eind 2025 veroverde agentic AI de wereld. Diezelfde technologie dringt nu razendsnel door in alledaagse bedrijfsprocessen. claudje is gebouwd om op die verschuiving in te spelen: managed concurrentie-intelligentie, aangedreven door de beste AI-agents die er zijn.",
+    cta: "Aan de slag",
+    orReachAt: "Of neem contact op via",
+  },
+
+  blog: {
+    heroTitle: "Blog",
+    heroSubtitle:
+      "Praktische gidsen over concurrentie-intelligentie voor het MKB",
+    allPosts: "\u2190 Alle artikelen",
+    postCtaTitle: "Zin in geautomatiseerde concurrentie-intelligentie?",
+    postCtaButton: "Probeer claudje 14 dagen gratis",
+  },
+
+  comparisonTable: {
+    eyebrow: "Waarom Claudje",
+    title: "Waarom niet gewoon ChatGPT?",
+    body: "Claudje gebruikt dezelfde foundation-modellen \u2014 maar verpakt ze in managed agents, betaalde datatools en een menselijke review. Dit is wat dat in de praktijk verandert.",
+    columnCapability: "Functionaliteit",
+    columnChatbot: "ChatGPT alleen",
+    columnClaudje: "Claudje",
+    footer:
+      "Zelfde modellen, andere taak. ChatGPT beantwoordt vragen. Claudje runt je intelligence.",
+    rows: {
+      freshness: {
+        feature: "Versheid van data",
+        chatbot: "Verouderd \u2014 hooguit maanden oud",
+        claudje: "Elke week ververst",
+      },
+      sources: {
+        feature: "Bronnen",
+        chatbot: "Openbare zoekmachine",
+        claudje: "KvK, Trustpilot, Meta Ads, Firecrawl",
+      },
+      verification: {
+        feature: "Verificatie",
+        chatbot: "Geen \u2014 gaat hallucineren",
+        claudje: "Gecontroleerd door menselijke analist",
+      },
+      pricing: {
+        feature: "Prijsdata",
+        chatbot: "Uit het geheugen gegokt",
+        claudje: "Live van de bron gehaald",
+      },
+      tracking: {
+        feature: "Tracking",
+        chatbot: "Eenmalig antwoord",
+        claudje: "Continu, week op week",
+      },
+      count: {
+        feature: "Aantal concurrenten",
+        chatbot: "E\u00E9n tegelijk",
+        claudje: "Tot 15 parallel",
+      },
+      delivery: {
+        feature: "Bezorging",
+        chatbot: "Je moet het vragen",
+        claudje: "Komt vanzelf in je inbox",
+      },
+    },
+  },
+
+  dataSources: {
+    title: "Professionele databronnen",
+    subtitle:
+      "Je agents halen geverifieerde data uit professionele tools en platforms. Geen webscraping. Echte API-toegang.",
+    sources: {
+      googleMaps: {
+        name: "Google Maps",
+        description: "Beoordelingen, reviews, reactiepatronen en locatiedata.",
+      },
+      linkedin: {
+        name: "LinkedIn",
+        description: "Vacatures, groei in headcount en bedrijfsupdates.",
+      },
+      trustpilot: {
+        name: "Trustpilot",
+        description:
+          "Klantensentiment, trends in beoordelingen en klachtthema\u2019s.",
+      },
+      coc: {
+        name: "Kamer van Koophandel",
+        description:
+          "Wijzigingen in registraties, bestuurders en juridische deponeringen.",
+      },
+      similarweb: {
+        name: "SimilarWeb",
+        description:
+          "Verkeer-schattingen, belangrijkste bronnen en engagement-metrics.",
+      },
+      googleReviews: {
+        name: "Google Reviews",
+        description:
+          "Lokale beoordelingen, review-snelheid en reacties van eigenaren.",
+      },
+      g2: {
+        name: "G2",
+        description:
+          "Software-ratings, feature-vergelijkingen en kopers-sentiment.",
+      },
+      glassdoor: {
+        name: "Glassdoor",
+        description:
+          "Werknemersbeoordelingen, hiring-trends en signalen over bedrijfscultuur.",
+      },
+      seo: {
+        name: "SEO-tools",
+        description:
+          "Keyword-posities, veranderingen in backlinks en organische zichtbaarheid.",
+      },
+    },
+  },
+
+  useCases: {
+    title: "Gebouwd voor lokale en regionale bedrijven",
+    subtitle:
+      "Of je nu \u00E9\u00E9n vestiging runt of vijftig, claudje volgt de concurrenten die er voor jouw markt toe doen.",
+    verticals: {
+      retail: {
+        name: "Retail & e-commerce",
+        description:
+          "Volg prijzen, acties en productlanceringen van concurrenten, online en in lokale winkels.",
+      },
+      hospitality: {
+        name: "Horeca & hospitality",
+        description:
+          "Volg Google Maps-reviews, menuprijzen en lokale reputatie per vestiging.",
+      },
+      services: {
+        name: "Zakelijke dienstverlening",
+        description:
+          "Kijk hoe concurrenten hun diensten, prijsmodellen en klanttestimonials positioneren.",
+      },
+      health: {
+        name: "Zorg & tandartspraktijken",
+        description:
+          "Volg patientenreviews, praktijkreputatie en hoe concurrenten hun diensten vermarkten.",
+      },
+      auto: {
+        name: "Automotive & leasing",
+        description:
+          "Vergelijk voertuigprijzen, leaseaanbiedingen en dealerreviews in jouw markt.",
+      },
+      trades: {
+        name: "Klussers & installatiebedrijven",
+        description:
+          "Volg reviews en prijzen van concurrenten en hoe zij in lokale zoekresultaten verschijnen.",
+      },
+    },
+  },
+
+  reportPreviewDetailed: {
+    eyebrow: "Wat je krijgt",
+    title: "Vijf signalen, \u00E9\u00E9n rapport",
+    subtitle:
+      "Elk wekelijks rapport dekt de vijf categorie\u00EBn hieronder. Allemaal gebaseerd op echte data die we volgen \u2014 prijsdata, reviewsentiment, ad-activiteit, AI-zichtbaarheid en de acties die daaruit volgen.",
+    navLabel: "Rapportonderdelen",
+    tabs: {
+      pricing: {
+        label: "Prijs-intelligentie",
+        description: "Volg elke prijswijziging, automatisch.",
+      },
+      reviews: {
+        label: "Reviews & reputatie",
+        description: "Zie waar vertrouwen wordt gewonnen en verloren.",
+      },
+      advertising: {
+        label: "Advertentie-intelligentie",
+        description: "Wie betaalt voor aandacht \u2014 en wie niet.",
+      },
+      ai: {
+        label: "AI-vindbaarheid",
+        description: "Jouw marktpositie in antwoorden van ChatGPT.",
+      },
+      recommendations: {
+        label: "Strategische aanbevelingen",
+        description: "Wat je daar deze week concreet mee doet.",
+      },
+    },
+  },
+
+  reportFragments: {
+    keyInsight: "Belangrijkste inzicht",
+    youLabel: "Jij",
+    pricing: {
+      eyebrow: "Prijs-snapshot \u00B7 week 16",
+      title: "Instapprijzen A-segment",
+      subtitle: "Wekelijks gevolgd bij 10 concurrenten",
+      insight:
+        "Twee concurrenten hebben deze twee weken prijzen verhoogd \u2014 jij bent nu de goedkoopste in het A-segment.",
+      colCompetitor: "Concurrent",
+      colEntry: "Instap / mnd",
+      colChange: "\u0394 (2w)",
+    },
+    reviews: {
+      eyebrow: "Review-tracking \u00B7 week 16",
+      title: "Waar concurrenten vertrouwen verliezen",
+      subtitle: "2.344 reviews gescand op Google & Trustpilot",
+      insight:
+        "Verrassingen bij einde contract zijn klacht nr. 1 in jouw sector \u2014 een transparantiepagina zou je meteen onderscheiden.",
+      painCompetitor01: "Verborgen kosten bij einde contract",
+      painCompetitor02: "Hoge reparatiekosten voor kleine schade",
+      painCompetitor03: "Betwiste inhouding van borg",
+      painCompetitor04: "Onbereikbaar na ondertekening",
+    },
+    ads: {
+      eyebrow: "Ad-activiteit \u00B7 Meta Ad Library",
+      title: "Wie aandacht koopt",
+      subtitle: "Aantal actieve ads per concurrent, laatste 7 dagen",
+      insight:
+        "7 van de 10 concurrenten draaien nul betaalde ads. Het speelveld is bijna leeg \u2014 elke euro ad-spend rendeert nu uitzonderlijk hard.",
+    },
+    ai: {
+      eyebrow: "AI-zichtbaarheid \u00B7 GEO-score",
+      title: "Wie ChatGPT aanbeveelt",
+      subtitle: "Vermeldingsrate over 12 AI-zoekopdrachten",
+      insight:
+        "Je staat op #2 in je markt in AI-search \u2014 \u00E9\u00E9n technische aanpassing (een llms.txt-bestand) kan je op #1 zetten.",
+    },
+    recommendations: {
+      eyebrow: "Aanbevolen acties \u00B7 week 16",
+      title: "Wat je deze week moet doen",
+      subtitle: "Afgeleid uit de bevindingen hierboven, gerangschikt op impact",
+      insight:
+        "Elk rapport sluit af met 2\u20134 concrete acties, geprioriteerd op kosten en timing.",
+      quickWinKind: "Snelle winst",
+      quickWinTitle: "Zet een Meta-ad op je instapprijs",
+      quickWinBody:
+        "Je A-segment is nu het goedkoopste in de markt. E\u00E9n campagne op dat gat kost minder dan \u20AC200 per week en kapitaliseert op de recente prijsverhoging van Concurrent 01.",
+      strategicKind: "Strategisch",
+      strategicTitle: "Publiceer een transparantiepagina over einde contract",
+      strategicBody:
+        "De grootste klacht bij 4 concurrenten gaat over verrassingen aan het einde van het contract. \u00C9\u00E9n FAQ-pagina over depots, inspecties en eindafrekening raakt precies de grootste vertrouwenskloof in je sector.",
+    },
+  },
+
+  agentArchitecture: {
+    title: "Van concurrenten naar rapport",
+    subtitle:
+      "\u00C9\u00E9n pipeline. Volledig geautomatiseerd, met een menselijke controle voordat iets in je inbox belandt.",
+    competitorsLabel: "Concurrenten",
+    competitorsSub: "Jouw lijst",
+    agentLabel: "claudje Agent",
+    agentSub: "Scant het internet",
+    dataSourcesLabel: "Databronnen",
+    dataSourcesSub: "Betaalde professionele tools",
+    webAiLabel: "Web + AI",
+    webAiSub: "Openbare data-analyse",
+    reportLabel: "Rapport",
+    reportSub: "AI brengt het samen",
+    reportSynthesisLabel: "Rapport-synthese",
+    humanReviewLabel: "Menselijke review",
+    humanReviewSub: "Analist verifieert",
+    finalReportLabel: "Eindrapport",
+    finalReportSub: "In je inbox",
+  },
+
+  agentRoster: {
+    title: "Maak kennis met je agents",
+    subtitle:
+      "Acht gespecialiseerde agents, elk getraind op een specifieke onderzoekstaak. Ze werken parallel en dekken elke hoek van je concurrentielandschap af.",
+    agents: {
+      website: {
+        name: "Website-monitor",
+        description:
+          "Volgt wijzigingen op websites, productpagina\u2019s en prijspagina\u2019s van concurrenten.",
+      },
+      reviews: {
+        name: "Review-tracker",
+        description:
+          "Volgt Google Maps, Trustpilot, G2 en Glassdoor op wijzigingen in beoordelingen en nieuwe reviews.",
+      },
+      price: {
+        name: "Prijs-verkenner",
+        description:
+          "Legt prijzen van concurrenten vast en signaleert veranderingen bij producten en diensten.",
+      },
+      news: {
+        name: "Nieuws & media",
+        description:
+          "Vindt persberichten, nieuwsvermeldingen en mediacoverage over je concurrenten.",
+      },
+      social: {
+        name: "Social & content",
+        description:
+          "Volgt LinkedIn-activiteit, blogposts en verschuivingen in contentstrategie.",
+      },
+      ads: {
+        name: "Ad-intelligence",
+        description:
+          "Volgt Meta- en Instagram-advertentiecampagnes, creatieve veranderingen en spend-patronen.",
+      },
+      filings: {
+        name: "Openbare registers",
+        description:
+          "Haalt KvK-registraties binnen en signaleert wijzigingen in bestuurders of juridische stukken.",
+      },
+      search: {
+        name: "Zichtbaarheid in zoekresultaten",
+        description:
+          "Meet SEO-prestaties en hoe vaak concurrenten opduiken in AI-antwoorden.",
+      },
+    },
+  },
 };

@@ -242,4 +242,337 @@ export const messages: Messages = {
     nextPage: "Pagina successiva",
     pageLabel: "Pagina",
   },
+
+  product: {
+    heroTitle: "Intelligence sui concorrenti, gestita per te",
+    heroBody:
+      "Ogni settimana i tuoi agenti AI analizzano i concorrenti sul web, nei registri pubblici e nelle fonti professionali. Un analista verifica i risultati. Tu ricevi un report chiaro nella tua casella.",
+    heroCta: "Inizia la prova gratuita",
+  },
+
+  technology: {
+    heroTitle: "Come lavorano i tuoi agenti",
+    heroBody:
+      "Dietro ogni report c\u2019\u00E8 un team di agenti AI specializzati. Ognuno addestrato per un compito di ricerca preciso. Supervisionato da un analista umano.",
+    humanLoopTitle: "L\u2019AI fa il grosso del lavoro. Gli umani garantiscono la qualit\u00E0.",
+    humanLoopBody:
+      "Ogni report passa attraverso un analista umano prima di arrivare nella tua casella. Verificano l\u2019accuratezza, aggiungono contesto e mettono in evidenza ci\u00F2 che conta di pi\u00F9 per il tuo business.",
+    humanLoopAiLabel: "L\u2019AI genera",
+    humanLoopAiSub: "Dati + narrazione",
+    humanLoopAnalystLabel: "L\u2019analista revisiona",
+    humanLoopAnalystSub: "Verifica + rifinisce",
+    humanLoopReceiveLabel: "Tu ricevi",
+    humanLoopReceiveSub: "Report affidabile",
+  },
+
+  about: {
+    heroTitle: "Chi siamo",
+    berendRole: "Co-fondatore",
+    berendBio:
+      "BBA all\u2019Universit\u00E0 di Amsterdam. Attualmente sta conseguendo un Master in Innovation, Technology and Entrepreneurship alla Bocconi. Costruisce attivamente prodotti AI ed \u00E8 la mente dietro claudje.",
+    berendLinkedinLabel: "Berend Harms su LinkedIn",
+    mission:
+      "A fine 2025 l\u2019AI agentica ha conquistato il mondo. Quella stessa tecnologia si sta ora rapidamente diffondendo nei processi aziendali quotidiani. claudje \u00E8 stato costruito per cavalcare questa onda, offrendo competitor intelligence gestita e alimentata dai migliori agenti AI disponibili.",
+    cta: "Inizia ora",
+    orReachAt: "Oppure contattaci a",
+  },
+
+  blog: {
+    heroTitle: "Blog",
+    heroSubtitle: "Guide pratiche sulla competitor intelligence per le PMI",
+    allPosts: "\u2190 Tutti gli articoli",
+    postCtaTitle: "Vuoi competitor intelligence automatizzata?",
+    postCtaButton: "Prova claudje gratis per 14 giorni",
+  },
+
+  comparisonTable: {
+    eyebrow: "Perch\u00E9 Claudje",
+    title: "Perch\u00E9 non usare direttamente ChatGPT?",
+    body: "Claudje usa gli stessi foundation model \u2014 ma li integra con agenti gestiti, strumenti dati a pagamento e una revisione umana. Ecco cosa cambia in pratica.",
+    columnCapability: "Capacit\u00E0",
+    columnChatbot: "Solo ChatGPT",
+    columnClaudje: "Claudje",
+    footer:
+      "Stessi modelli, lavoro diverso. ChatGPT risponde a domande. Claudje gestisce la tua intelligence.",
+    rows: {
+      freshness: {
+        feature: "Freschezza dei dati",
+        chatbot: "Datati \u2014 nel migliore dei casi di mesi fa",
+        claudje: "Aggiornati ogni settimana",
+      },
+      sources: {
+        feature: "Fonti",
+        chatbot: "Ricerca pubblica sul web",
+        claudje: "Camera di Commercio, Trustpilot, Meta Ads, Firecrawl",
+      },
+      verification: {
+        feature: "Verifica",
+        chatbot: "Nessuna \u2014 rischio allucinazioni",
+        claudje: "Rivisto da un analista umano",
+      },
+      pricing: {
+        feature: "Dati sui prezzi",
+        chatbot: "Stimati a memoria",
+        claudje: "Estratti live dalla fonte",
+      },
+      tracking: {
+        feature: "Tracciamento",
+        chatbot: "Risposta una tantum",
+        claudje: "Continuo, settimana dopo settimana",
+      },
+      count: {
+        feature: "Numero di concorrenti",
+        chatbot: "Uno alla volta",
+        claudje: "Fino a 15 in parallelo",
+      },
+      delivery: {
+        feature: "Consegna",
+        chatbot: "Devi chiederglielo",
+        claudje: "Arriva nella tua casella",
+      },
+    },
+  },
+
+  dataSources: {
+    title: "Fonti dati professionali",
+    subtitle:
+      "I tuoi agenti estraggono dati verificati da strumenti e piattaforme professionali. Non scraping del web. Accesso API reale.",
+    sources: {
+      googleMaps: {
+        name: "Google Maps",
+        description: "Valutazioni, recensioni, tempi di risposta e dati di localizzazione.",
+      },
+      linkedin: {
+        name: "LinkedIn",
+        description: "Offerte di lavoro, crescita del personale e aggiornamenti aziendali.",
+      },
+      trustpilot: {
+        name: "Trustpilot",
+        description:
+          "Sentiment dei clienti, trend delle valutazioni e temi delle lamentele.",
+      },
+      coc: {
+        name: "Camera di Commercio",
+        description:
+          "Modifiche di registrazione, aggiornamenti sui dirigenti e depositi legali.",
+      },
+      similarweb: {
+        name: "SimilarWeb",
+        description:
+          "Stime di traffico, principali fonti e metriche di engagement.",
+      },
+      googleReviews: {
+        name: "Google Reviews",
+        description:
+          "Valutazioni locali, velocit\u00E0 delle recensioni e risposte dei titolari.",
+      },
+      g2: {
+        name: "G2",
+        description:
+          "Valutazioni software, confronti di funzionalit\u00E0 e sentiment degli acquirenti.",
+      },
+      glassdoor: {
+        name: "Glassdoor",
+        description:
+          "Valutazioni dei dipendenti, trend di assunzione e segnali sulla cultura aziendale.",
+      },
+      seo: {
+        name: "Strumenti SEO",
+        description:
+          "Posizionamento delle keyword, variazioni dei backlink e visibilit\u00E0 organica.",
+      },
+    },
+  },
+
+  useCases: {
+    title: "Pensato per aziende locali e regionali",
+    subtitle:
+      "Che tu abbia una sola sede o cinquanta, claudje segue i concorrenti che contano davvero per il tuo mercato.",
+    verticals: {
+      retail: {
+        name: "Retail & E-commerce",
+        description:
+          "Monitora prezzi, promozioni e lanci di prodotto dei concorrenti, online e nei negozi locali.",
+      },
+      hospitality: {
+        name: "Ristorazione & Hospitality",
+        description:
+          "Monitora recensioni su Google Maps, prezzi dei menu e reputazione locale per ogni sede.",
+      },
+      services: {
+        name: "Servizi professionali",
+        description:
+          "Osserva come i concorrenti posizionano i loro servizi, modelli di prezzo e testimonianze dei clienti.",
+      },
+      health: {
+        name: "Sanit\u00E0 & Odontoiatria",
+        description:
+          "Monitora le recensioni dei pazienti, la reputazione dello studio e come i concorrenti promuovono i loro servizi.",
+      },
+      auto: {
+        name: "Automotive & Leasing",
+        description:
+          "Confronta prezzi dei veicoli, offerte di leasing e recensioni delle concessionarie nel tuo mercato.",
+      },
+      trades: {
+        name: "Servizi per la casa e artigianato",
+        description:
+          "Monitora recensioni e prezzi dei concorrenti e come appaiono nei risultati di ricerca locali.",
+      },
+    },
+  },
+
+  reportPreviewDetailed: {
+    eyebrow: "Cosa ottieni",
+    title: "Cinque segnali, un unico report",
+    subtitle:
+      "Ogni report settimanale copre le cinque categorie qui sotto. Ognuna basata su dati reali che tracciamo \u2014 tabelle di prezzi, sentiment delle recensioni, attivit\u00E0 pubblicitaria, visibilit\u00E0 AI e azioni che ne derivano.",
+    navLabel: "Sezioni del report",
+    tabs: {
+      pricing: {
+        label: "Intelligence sui prezzi",
+        description: "Traccia ogni variazione di prezzo, in automatico.",
+      },
+      reviews: {
+        label: "Recensioni & reputazione",
+        description: "Vedi dove si guadagna e si perde fiducia.",
+      },
+      advertising: {
+        label: "Intelligence pubblicitaria",
+        description: "Chi paga per l\u2019attenzione \u2014 e chi no.",
+      },
+      ai: {
+        label: "Scopribilit\u00E0 su AI",
+        description: "La tua posizione di mercato nelle risposte di ChatGPT.",
+      },
+      recommendations: {
+        label: "Raccomandazioni strategiche",
+        description: "Cosa fare concretamente, questa settimana.",
+      },
+    },
+  },
+
+  reportFragments: {
+    keyInsight: "Insight chiave",
+    youLabel: "Tu",
+    pricing: {
+      eyebrow: "Snapshot prezzi \u00B7 settimana 16",
+      title: "Prezzi d\u2019ingresso segmento A",
+      subtitle: "Tracciati settimanalmente su 10 concorrenti",
+      insight:
+        "Due concorrenti hanno alzato i prezzi nelle ultime due settimane \u2014 ora sei il pi\u00F9 economico nel segmento A.",
+      colCompetitor: "Concorrente",
+      colEntry: "Ingresso / mese",
+      colChange: "\u0394 (2 sett.)",
+    },
+    reviews: {
+      eyebrow: "Tracciamento recensioni \u00B7 settimana 16",
+      title: "Dove i concorrenti perdono fiducia",
+      subtitle: "2.344 recensioni analizzate tra Google e Trustpilot",
+      insight:
+        "Le sorprese a fine contratto sono la lamentela n.1 nel tuo settore \u2014 una pagina di trasparenza ti differenzierebbe subito.",
+      painCompetitor01: "Costi nascosti a fine contratto",
+      painCompetitor02: "Spese di riparazione elevate per danni minori",
+      painCompetitor03: "Trattenute di deposito contestate",
+      painCompetitor04: "Irraggiungibili dopo la firma",
+    },
+    ads: {
+      eyebrow: "Attivit\u00E0 pubblicitaria \u00B7 Meta Ad Library",
+      title: "Chi compra attenzione",
+      subtitle: "Numero di ads attive per concorrente, ultimi 7 giorni",
+      insight:
+        "7 concorrenti su 10 non fanno alcuna inserzione pubblicitaria. Il campo \u00E8 quasi vuoto \u2014 ogni euro speso in advertising rende moltissimo.",
+    },
+    ai: {
+      eyebrow: "Visibilit\u00E0 AI \u00B7 punteggio GEO",
+      title: "Chi consiglia ChatGPT",
+      subtitle: "Tasso di menzione su 12 query AI",
+      insight:
+        "Sei #2 nel tuo mercato su AI search \u2014 una sola modifica tecnica (un file llms.txt) potrebbe portarti al #1.",
+    },
+    recommendations: {
+      eyebrow: "Azioni consigliate \u00B7 settimana 16",
+      title: "Cosa fare questa settimana",
+      subtitle: "Ricavate dai risultati sopra, ordinate per impatto",
+      insight:
+        "Ogni report si chiude con 2\u20134 azioni concrete, prioritizzate per costo e tempistica.",
+      quickWinKind: "Quick win",
+      quickWinTitle: "Lancia una Meta ad sul tuo prezzo d\u2019ingresso",
+      quickWinBody:
+        "Il tuo segmento A \u00E8 ora il pi\u00F9 economico del mercato. Una sola campagna mirata su quel gap costa meno di \u20AC200/settimana e sfrutta il recente aumento di prezzo di Concorrente 01.",
+      strategicKind: "Strategico",
+      strategicTitle: "Pubblica una pagina di trasparenza sul fine contratto",
+      strategicBody:
+        "La lamentela n.1 tra 4 concorrenti riguarda le sorprese a fine contratto. Una pagina FAQ su depositi, ispezioni e prezzo finale colpirebbe esattamente il maggior gap di fiducia nel tuo settore.",
+    },
+  },
+
+  agentArchitecture: {
+    title: "Dai concorrenti al report",
+    subtitle:
+      "Un\u2019unica pipeline. Completamente automatizzata, con un controllo umano prima che qualsiasi cosa raggiunga la tua casella.",
+    competitorsLabel: "Concorrenti",
+    competitorsSub: "La tua lista",
+    agentLabel: "Agente claudje",
+    agentSub: "Esplora internet",
+    dataSourcesLabel: "Fonti dati",
+    dataSourcesSub: "Strumenti professionali a pagamento",
+    webAiLabel: "Web + AI",
+    webAiSub: "Analisi di dati pubblici",
+    reportLabel: "Report",
+    reportSub: "L\u2019AI sintetizza",
+    reportSynthesisLabel: "Sintesi del report",
+    humanReviewLabel: "Revisione umana",
+    humanReviewSub: "L\u2019analista verifica",
+    finalReportLabel: "Report finale",
+    finalReportSub: "Nella tua casella",
+  },
+
+  agentRoster: {
+    title: "Conosci i tuoi agenti",
+    subtitle:
+      "Otto agenti specializzati, ciascuno addestrato per un compito di ricerca specifico. Lavorano in parallelo, coprendo ogni angolo del tuo panorama competitivo.",
+    agents: {
+      website: {
+        name: "Monitor siti web",
+        description:
+          "Traccia i cambiamenti sui siti dei concorrenti, sulle pagine prodotto e sulle pagine prezzi.",
+      },
+      reviews: {
+        name: "Tracker recensioni",
+        description:
+          "Monitora Google Maps, Trustpilot, G2 e Glassdoor per variazioni di valutazione e nuove recensioni.",
+      },
+      price: {
+        name: "Price Scout",
+        description:
+          "Acquisisce i prezzi dei concorrenti e segnala variazioni su prodotti e servizi.",
+      },
+      news: {
+        name: "News & Media",
+        description:
+          "Trova comunicati stampa, citazioni sui media e copertura giornalistica sui tuoi concorrenti.",
+      },
+      social: {
+        name: "Social & Content",
+        description:
+          "Osserva attivit\u00E0 LinkedIn, post di blog e cambi di strategia nei contenuti.",
+      },
+      ads: {
+        name: "Ad Intelligence",
+        description:
+          "Traccia campagne pubblicitarie su Meta e Instagram, variazioni creative e pattern di spesa.",
+      },
+      filings: {
+        name: "Registri pubblici",
+        description:
+          "Estrae registrazioni dalla Camera di Commercio e segnala cambiamenti legali o di amministratori.",
+      },
+      search: {
+        name: "Visibilit\u00E0 nei motori di ricerca",
+        description:
+          "Misura le performance SEO e con che frequenza i concorrenti compaiono nelle risposte AI.",
+      },
+    },
+  },
 };

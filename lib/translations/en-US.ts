@@ -243,6 +243,337 @@ export const messages = {
     nextPage: "Next page",
     pageLabel: "Page",
   },
+
+  product: {
+    heroTitle: "Competitor Intelligence, Managed For You",
+    heroBody:
+      "Every week, your AI agents research your competitors across the web, public records, and professional data sources. An analyst reviews the findings. You get a clear report in your inbox.",
+    heroCta: "Start Your Free Trial",
+  },
+
+  technology: {
+    heroTitle: "How Your Agents Work",
+    heroBody:
+      "Behind every report is a team of specialized AI agents. Each one trained for a specific research task. Supervised by a human analyst.",
+    humanLoopTitle: "AI Does the Heavy Lifting. Humans Ensure Quality.",
+    humanLoopBody:
+      "Every report passes through a human analyst before it reaches your inbox. They verify accuracy, add context, and highlight what matters most for your specific business.",
+    humanLoopAiLabel: "AI generates",
+    humanLoopAiSub: "Data + narrative",
+    humanLoopAnalystLabel: "Analyst reviews",
+    humanLoopAnalystSub: "Verify + refine",
+    humanLoopReceiveLabel: "You receive",
+    humanLoopReceiveSub: "Trusted report",
+  },
+
+  about: {
+    heroTitle: "About claudje",
+    berendRole: "Co-founder",
+    berendBio:
+      "BBA from the University of Amsterdam. Currently pursuing a Master\u2019s in Innovation, Technology and Entrepreneurship at Bocconi. Actively building AI products and the mastermind behind claudje.",
+    berendLinkedinLabel: "Berend Harms on LinkedIn",
+    mission:
+      "Agentic AI took the world by storm at the end of 2025. That same technology is now rapidly expanding into everyday business processes. claudje is built to capitalize on this shift, delivering managed competitor intelligence powered by the best AI agents available.",
+    cta: "Get Started",
+    orReachAt: "Or reach out at",
+  },
+
+  blog: {
+    heroTitle: "Blog",
+    heroSubtitle: "Practical guides on competitor intelligence for SMBs",
+    allPosts: "\u2190 All posts",
+    postCtaTitle: "Want automated competitor intelligence?",
+    postCtaButton: "Try claudje free for 14 days",
+  },
+
+  comparisonTable: {
+    eyebrow: "Why Claudje",
+    title: "Why Not Just Use ChatGPT?",
+    body: "Claudje uses the same foundation models \u2014 but wraps them in managed agents, paid data tools, and a human review. Here\u2019s what that changes in practice.",
+    columnCapability: "Capability",
+    columnChatbot: "ChatGPT alone",
+    columnClaudje: "Claudje",
+    footer:
+      "Same models, different job. ChatGPT answers questions. Claudje runs your intelligence.",
+    rows: {
+      freshness: {
+        feature: "Data freshness",
+        chatbot: "Stale \u2014 months old at best",
+        claudje: "Refreshed every week",
+      },
+      sources: {
+        feature: "Sources",
+        chatbot: "Public web search",
+        claudje: "KvK, Trustpilot, Meta Ads, Firecrawl",
+      },
+      verification: {
+        feature: "Verification",
+        chatbot: "None \u2014 will hallucinate",
+        claudje: "Reviewed by a human analyst",
+      },
+      pricing: {
+        feature: "Pricing data",
+        chatbot: "Guessed from memory",
+        claudje: "Live-scraped from source",
+      },
+      tracking: {
+        feature: "Tracking",
+        chatbot: "One-off answer",
+        claudje: "Continuous, week-over-week",
+      },
+      count: {
+        feature: "Competitor count",
+        chatbot: "One at a time",
+        claudje: "Up to 15 in parallel",
+      },
+      delivery: {
+        feature: "Delivery",
+        chatbot: "You have to ask",
+        claudje: "Lands in your inbox",
+      },
+    },
+  },
+
+  dataSources: {
+    title: "Professional Data Sources",
+    subtitle:
+      "Your agents pull verified data from professional tools and platforms. Not web scraping. Real API access.",
+    sources: {
+      googleMaps: {
+        name: "Google Maps",
+        description: "Ratings, reviews, response patterns, and location data.",
+      },
+      linkedin: {
+        name: "LinkedIn",
+        description: "Job postings, headcount growth, and company updates.",
+      },
+      trustpilot: {
+        name: "Trustpilot",
+        description:
+          "Customer sentiment, rating trends, and complaint themes.",
+      },
+      coc: {
+        name: "Chamber of Commerce",
+        description:
+          "Registration changes, director updates, and legal filings.",
+      },
+      similarweb: {
+        name: "SimilarWeb",
+        description: "Traffic estimates, top sources, and engagement metrics.",
+      },
+      googleReviews: {
+        name: "Google Reviews",
+        description: "Local ratings, review velocity, and owner responses.",
+      },
+      g2: {
+        name: "G2",
+        description:
+          "Software ratings, feature comparisons, and buyer sentiment.",
+      },
+      glassdoor: {
+        name: "Glassdoor",
+        description:
+          "Employee ratings, hiring trends, and company culture signals.",
+      },
+      seo: {
+        name: "SEO tools",
+        description:
+          "Keyword rankings, backlink changes, and organic visibility.",
+      },
+    },
+  },
+
+  useCases: {
+    title: "Built for Local and Regional Businesses",
+    subtitle:
+      "Whether you run one location or fifty, claudje tracks the competitors that matter to your market.",
+    verticals: {
+      retail: {
+        name: "Retail & E-commerce",
+        description:
+          "Track competitor pricing, promotions, and product launches across online and local stores.",
+      },
+      hospitality: {
+        name: "Restaurants & Hospitality",
+        description:
+          "Monitor Google Maps reviews, menu pricing, and local reputation across locations.",
+      },
+      services: {
+        name: "Professional Services",
+        description:
+          "Watch how competitors position their services, pricing models, and client testimonials.",
+      },
+      health: {
+        name: "Healthcare & Dental",
+        description:
+          "Track patient reviews, practice reputation, and how competitors market their services.",
+      },
+      auto: {
+        name: "Automotive & Leasing",
+        description:
+          "Compare vehicle pricing, lease offers, and dealership reviews across your market.",
+      },
+      trades: {
+        name: "Home & Trade Services",
+        description:
+          "Monitor competitor reviews, pricing, and how they show up in local search results.",
+      },
+    },
+  },
+
+  reportPreviewDetailed: {
+    eyebrow: "What You Get",
+    title: "Five signals, one report",
+    subtitle:
+      "Every weekly report covers the five categories below. Each one is drawn from real data we track \u2014 pricing tables, review sentiment, ad activity, AI visibility, and the actions that follow from it.",
+    navLabel: "Report sections",
+    tabs: {
+      pricing: {
+        label: "Pricing Intelligence",
+        description: "Track every price move, automatically.",
+      },
+      reviews: {
+        label: "Reviews & Reputation",
+        description: "See where trust is won and lost.",
+      },
+      advertising: {
+        label: "Advertising Intelligence",
+        description: "Who is paying for attention \u2014 and who isn\u2019t.",
+      },
+      ai: {
+        label: "AI Discoverability",
+        description: "Your market ranking inside ChatGPT answers.",
+      },
+      recommendations: {
+        label: "Strategic Recommendations",
+        description: "What to actually do about it, this week.",
+      },
+    },
+  },
+
+  reportFragments: {
+    keyInsight: "Key insight",
+    youLabel: "You",
+    pricing: {
+      eyebrow: "Pricing snapshot \u00B7 week 16",
+      title: "A-segment entry prices",
+      subtitle: "Tracked weekly across 10 competitors",
+      insight:
+        "Two competitors raised prices this fortnight \u2014 you are now the cheapest in the A-segment.",
+      colCompetitor: "Competitor",
+      colEntry: "Entry / mo",
+      colChange: "\u0394 (2w)",
+    },
+    reviews: {
+      eyebrow: "Review tracking \u00B7 week 16",
+      title: "Where competitors lose trust",
+      subtitle: "2,344 reviews scanned across Google & Trustpilot",
+      insight:
+        "End-of-contract surprises are the #1 complaint in your sector \u2014 a transparency page would differentiate you immediately.",
+      painCompetitor01: "Hidden end-of-contract costs",
+      painCompetitor02: "High repair fees for minor damage",
+      painCompetitor03: "Disputed deposit withholdings",
+      painCompetitor04: "Unreachable after sign-up",
+    },
+    ads: {
+      eyebrow: "Ad activity \u00B7 Meta Ad Library",
+      title: "Who\u2019s buying attention",
+      subtitle: "Active ad count per competitor, last 7 days",
+      insight:
+        "7 of 10 competitors run zero paid ads. The field is nearly empty \u2014 each euro of your ad-spend stretches exceptionally far.",
+    },
+    ai: {
+      eyebrow: "AI visibility \u00B7 GEO score",
+      title: "Who ChatGPT recommends",
+      subtitle: "Mention rate across 12 AI-search queries",
+      insight:
+        "You rank #2 in your market on AI search \u2014 one technical change (an llms.txt file) could put you at #1.",
+    },
+    recommendations: {
+      eyebrow: "Recommended actions \u00B7 week 16",
+      title: "What to do this week",
+      subtitle: "Drawn from the findings above, ranked by impact",
+      insight:
+        "Every report closes with 2\u20134 concrete actions, prioritized by cost and timing.",
+      quickWinKind: "Quick win",
+      quickWinTitle: "Launch a Meta ad on your entry price",
+      quickWinBody:
+        "Your A-segment is now the cheapest in the market. A single campaign targeting that gap costs under \u20AC200/week and capitalizes on Competitor 01\u2019s recent price hike.",
+      strategicKind: "Strategic",
+      strategicTitle: "Publish an end-of-contract transparency page",
+      strategicBody:
+        "The #1 complaint across 4 competitors is end-of-contract surprises. One FAQ page on depots, inspections and final pricing would target the biggest trust gap in your sector.",
+    },
+  },
+
+  agentArchitecture: {
+    title: "From Competitors to Report",
+    subtitle:
+      "One pipeline. Fully automated, with a human check before anything reaches your inbox.",
+    competitorsLabel: "Competitors",
+    competitorsSub: "Your list",
+    agentLabel: "claudje Agent",
+    agentSub: "Scouts the internet",
+    dataSourcesLabel: "Data Sources",
+    dataSourcesSub: "Paid professional tools",
+    webAiLabel: "Web + AI",
+    webAiSub: "Public data analysis",
+    reportLabel: "Report",
+    reportSub: "AI synthesizes",
+    reportSynthesisLabel: "Report Synthesis",
+    humanReviewLabel: "Human Review",
+    humanReviewSub: "Analyst verifies",
+    finalReportLabel: "Final Report",
+    finalReportSub: "In your inbox",
+  },
+
+  agentRoster: {
+    title: "Meet Your Agents",
+    subtitle:
+      "Eight specialized agents, each trained for a specific research task. They work in parallel, covering every angle of your competitive landscape.",
+    agents: {
+      website: {
+        name: "Website Monitor",
+        description:
+          "Tracks changes to competitor websites, product pages, and pricing pages.",
+      },
+      reviews: {
+        name: "Review Tracker",
+        description:
+          "Monitors Google Maps, Trustpilot, G2, and Glassdoor for rating changes and new reviews.",
+      },
+      price: {
+        name: "Price Scout",
+        description:
+          "Captures competitor pricing and flags changes across products and services.",
+      },
+      news: {
+        name: "News & Media",
+        description:
+          "Finds press releases, news mentions, and media coverage about your competitors.",
+      },
+      social: {
+        name: "Social & Content",
+        description:
+          "Watches LinkedIn activity, blog posts, and content strategy shifts.",
+      },
+      ads: {
+        name: "Ad Intelligence",
+        description:
+          "Tracks Meta and Instagram ad campaigns, creative changes, and spend patterns.",
+      },
+      filings: {
+        name: "Public Filings",
+        description:
+          "Pulls Chamber of Commerce registrations and flags legal or director changes.",
+      },
+      search: {
+        name: "Search Visibility",
+        description:
+          "Measures SEO performance and how often competitors appear in AI answers.",
+      },
+    },
+  },
 };
 
 export type Messages = typeof messages;
