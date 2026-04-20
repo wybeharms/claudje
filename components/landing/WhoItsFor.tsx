@@ -116,7 +116,7 @@ export default function WhoItsFor() {
           </p>
           <p className="mt-3 text-sm leading-relaxed text-text-muted md:text-base">
             {t.body2Before}
-            {formatPrice(49)}
+            {formatPrice(90)}
             {t.body2After}
           </p>
           <a

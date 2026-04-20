@@ -18,19 +18,19 @@ const PLAN_CONFIG: Record<Plan, {
   starter: {
     label: "Starter Plan",
     description: "Up to 5 competitors, biweekly reports",
-    price: 49,
+    price: 90,
     maxCompetitors: 5,
   },
   business: {
     label: "Business Plan",
     description: "Up to 10 competitors, weekly reports",
-    price: 99,
+    price: 149,
     maxCompetitors: 10,
   },
   pro: {
     label: "Pro Plan",
     description: "Up to 15 competitors, daily/weekly/biweekly reports",
-    price: 249,
+    price: 299,
     maxCompetitors: 15,
   },
 };
