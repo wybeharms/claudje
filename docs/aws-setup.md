@@ -12,7 +12,7 @@ Wybe owns the domain (claudje.com on Namecheap) and the Vercel deployment.
 
 | # | Resource | Type |
 |---|----------|------|
-| 1 | S3 bucket: `claudje-portal-data` | Storage |
+| 1 | S3 bucket: `claudje-data` | Storage |
 | 2 | Cognito User Pool: `claudje-users` | Auth |
 | 3 | IAM user: `wybe` | Human (console) |
 | 4 | IAM user: `claudje-dev` | Machine (dev + portal runtime) |
@@ -23,7 +23,7 @@ Wybe owns the domain (claudje.com on Namecheap) and the Vercel deployment.
 
 ## 1. S3 Bucket
 
-Create bucket: `claudje-portal-data`
+Create bucket: `claudje-data`
 - Region: eu-north-1
 - Block all public access: YES
 - Versioning: optional (not required for v1)
@@ -91,7 +91,7 @@ Berend creates three IAM users on his AWS account:
 2. **Portal runtime:** The deployed portal on Vercel uses these same credentials to authenticate users via Cognito and read/write data on S3
 
 **Policies to attach:**
-- `AmazonS3FullAccess` (or scoped to bucket `claudje-portal-data`)
+- `AmazonS3FullAccess` (or scoped to bucket `claudje-data`)
 - `AmazonCognitoPowerUser` (for AdminCreateUser, AdminInitiateAuth, etc.)
 - `AmazonSESFullAccess` (when SES is set up — for transactional and report emails)
 
@@ -122,8 +122,8 @@ Berend creates three IAM users on his AWS account:
         "s3:DeleteObject"
       ],
       "Resource": [
-        "arn:aws:s3:::claudje-portal-data",
-        "arn:aws:s3:::claudje-portal-data/*"
+        "arn:aws:s3:::claudje-data",
+        "arn:aws:s3:::claudje-data/*"
       ]
     }
   ]
@@ -188,7 +188,7 @@ AWS_ACCESS_KEY_ID=<claudje-dev access key>
 AWS_SECRET_ACCESS_KEY=<claudje-dev secret key>
 
 # S3
-S3_BUCKET_NAME=claudje-portal-data
+S3_BUCKET_NAME=claudje-data
 ```
 
 For production (Vercel), set these same values as environment variables in the Vercel dashboard.
@@ -200,7 +200,7 @@ For production (Vercel), set these same values as environment variables in the V
 AWS_REGION=eu-north-1
 AWS_ACCESS_KEY_ID=<claudje-agent access key>
 AWS_SECRET_ACCESS_KEY=<claudje-agent secret key>
-S3_BUCKET=claudje-portal-data
+S3_BUCKET=claudje-data
 ```
 
 ## 7. SES Setup (Berend — do this when ready for email)

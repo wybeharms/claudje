@@ -107,7 +107,7 @@ competitors and produce reports.
 
 **AWS (Berend's account):**
 - Cognito User Pool: `claudje-users` (custom attrs: role, customer_id, plan)
-- S3 Bucket: `claudje-portal-data` (eu-north-1)
+- S3 Bucket: `claudje-data` (eu-north-1)
 - SES: Transactional emails + report delivery (Berend manages)
 - IAM users: `wybe` (console), `claudje-dev` (portal runtime), `claudje-agent` (S3 only, research)
 
@@ -124,7 +124,7 @@ competitors and produce reports.
 The S3 bucket is the bridge between the portal and the research workspace.
 
 ```
-claudje-portal-data/
+claudje-data/
 └── {customer_id}/
     ├── onboarding/
     │   ├── context.json                 Customer info, competitors, preferences (written by portal)

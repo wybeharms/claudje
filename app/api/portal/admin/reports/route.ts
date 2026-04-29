@@ -11,7 +11,7 @@ const s3 = new S3Client({
   },
 });
 
-const bucket = process.env.S3_BUCKET_NAME ?? "claudje-portal-data";
+const bucket = process.env.S3_BUCKET_NAME ?? "claudje-data";
 
 export async function POST(req: NextRequest) {
   const session = await auth();

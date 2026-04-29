@@ -14,7 +14,7 @@ const s3 = new S3Client({
   },
 });
 
-const bucket = process.env.S3_BUCKET_NAME ?? "claudje-portal-data";
+const bucket = process.env.S3_BUCKET_NAME ?? "claudje-data";
 
 export async function getJsonFromS3<T = unknown>(key: string): Promise<T | null> {
   try {

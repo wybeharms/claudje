@@ -41,7 +41,7 @@ Login link in header → `/login`
 
 ## AWS Infrastructure
 - Cognito User Pool: `claudje-users` (custom attrs: role, customer_id, plan)
-- S3 Bucket: `claudje-portal-data` (eu-north-1)
+- S3 Bucket: `claudje-data` (eu-north-1)
 - IAM: `wybe` (console), `claudje-dev` (dev + portal runtime), `claudje-agent` (Berend's research)
 
 ## S3 Data Structure
