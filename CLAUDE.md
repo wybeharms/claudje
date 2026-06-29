@@ -11,7 +11,7 @@
 
 ## Local Folder Structure
 ```
-~/Sites/claudje/              ← parent folder (NOT a git repo)
+~/Sites/ventures/claudje/              ← parent folder (NOT a git repo)
 ├── dev/                      ← THIS REPO — portal + landing page
 └── customers/                ← separate git repo — Berend's research workspace
 ```

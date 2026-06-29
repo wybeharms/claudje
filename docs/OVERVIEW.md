@@ -21,7 +21,7 @@ Claudje consists of two git repos inside one parent folder, plus a planned
 third repo for outreach and sales.
 
 ```
-~/Sites/claudje/                         (parent folder, NOT a git repo)
+~/Sites/ventures/claudje/                         (parent folder, NOT a git repo)
 │
 ├── dev/                                 REPO 1: wybeharms/claudje
 │                                        Portal + landing page (Next.js on Vercel)
